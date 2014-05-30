@@ -1,0 +1,4 @@
+%div{:id=>@id, :class=>['paragraph', (attr :role), ('slide' if attr? 'step-option')]}
+  - if title?
+    .title=title
+  %p{:class=>(attr :position)}=content
