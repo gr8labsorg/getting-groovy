@@ -1,0 +1,7 @@
+- if attr? 'canvas-image'
+  %section{:id=>id, :class=>['slide', 'canvas-image'], :style=>"background-image: url(#{attr 'canvas-image'})"}
+    =content.chomp
+- else
+  %section.slide{:id=>id}
+    %h2=title
+    =content.chomp

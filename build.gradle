@@ -1,0 +1,92 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name 'Bintray Asciidoctor repo'
+            url 'http://dl.bintray.com/content/aalmiray/asciidoctor'
+        }
+    }
+
+    dependencies {
+        classpath 'org.asciidoctor:asciidoctor-gradle-plugin:0.7.0'
+    }
+}
+
+
+import org.asciidoctor.gradle.*
+
+apply plugin: 'asciidoctor'
+
+task workshop(type: AsciidoctorTask) {
+    dependsOn 'copyResourcesLabs'
+    options = [
+        attributes: [
+            toc2: '',
+            toclevels: 1,
+            stylesdir: './stylesheets',
+            imagesdir: './images',
+            iconsdir: './icons',
+            scriptsdir: './js',
+            sourcedir: './src/labs',
+            stylesheet: 'asciidoctor.css',
+            'source-highlighter': 'prettify',
+            doctype: 'book',
+            icons: 'font',
+            encoding: 'utf-8',
+            linkcss: true,
+            groovyVersion: '2.3.2',
+            sectanchors: '',
+            prewrap: ''
+            //sectlinks: ''
+            //'linkcss!': false
+        ]
+    ]
+}
+
+task presentation(type: AsciidoctorTask) {
+    dependsOn 'copyResourcesPresentation'
+    sourceDocumentName = file('src/asciidoc/presentation.adoc')
+    options = [
+        template_dir: "src/asciidoc/templates/deckjs/",
+    ]
+}
+
+task copyResourcesLabs(type: Copy) {
+    from('src/labs')
+    into("${buildDir}/labs")
+}
+
+task copyResourcesPresentation(type: Copy) {
+    from('src/asciidoc/images')
+    into("${buildDir}/asciidoc/images")
+}
+
+task workshopZip(type: Zip) {
+    dependsOn 'workshop', 'presentation'
+    archiveName = 'getting-groovy.zip'
+    from('build/asciidoc') {
+        into 'html'
+        exclude '.DS_Store'
+    }
+    from('src/software') {
+        into 'software'
+        exclude '.DS_Store'
+    }
+    from('src/labs') {
+        into 'labs'
+        exclude '.DS_Store'
+        exclude '*.iml'
+        exclude '.project'
+        exclude '.classpath'
+        exclude '.settings'
+        exclude 'atlassian-ide-plugin.xml'
+        exclude '.gradle'
+        exclude 'target'
+        exclude 'out'
+    }
+}
+workshopZip.dependsOn 'workshop', 'presentation'
+
+task wrapper(type: Wrapper) {
+    version = '1.12'
+}

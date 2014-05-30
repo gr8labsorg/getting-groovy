@@ -1,0 +1,11 @@
+%div{:id=>@id, :class=>['olist', (attr :style), (attr :role)]}
+  - if title?
+    .title=title
+  %ol{:class=>(attr :style), :start=>(attr :start)}
+    - content.each do |item|
+      %li{:class=>('slide' if attr? 'step-option')}
+        - if item.blocks?
+          %p=item.text
+          =item.content.chomp
+        - else
+          =item.text
