@@ -22,7 +22,7 @@ task workshop(type: AsciidoctorTask) {
     options = [
         attributes: [
             toc2: '',
-            toclevels: 1,
+            toclevels: 2,
             stylesdir: './stylesheets',
             imagesdir: './images',
             iconsdir: './icons',
@@ -35,6 +35,7 @@ task workshop(type: AsciidoctorTask) {
             encoding: 'utf-8',
             linkcss: true,
             groovyVersion: '2.3.2',
+            jvmVersion: '1.7.0_51',
             sectanchors: '',
             prewrap: ''
             //sectlinks: ''

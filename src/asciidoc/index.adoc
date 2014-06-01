@@ -1,0 +1,2816 @@
+= Getting Groovy
+
+
+
+== Groovy Language History
+
+Groovy is developed to be a feature rich Java friendly programming language. The idea is to bring features we can find in dynamic programming languages like Python, Ruby to the Java platform. The Java platform is widely supported and a lot of developers know Java.
+
+
+The Groovy web site gives one of the best definitions of Groovy: Groovy is an agile dynamic language for the Java Platform with many features that are inspired by languages like Python, Ruby and Smalltalk, making them available to Java developers using a Java-like syntax.
+
+
+Groovy is closely tied to the Java platform. This means Groovy has a perfect fit for Java developers, because we get advanced language features like closures, dynamic typing and the meta object protocol within the Java platform. Also we can reuse Java libraries in our Groovy code.        
+
+
+Groovy is often called a scripting language, but this is not quite true. We can write scripts with Groovy, but also full blown applications. Groovy is very flexible.
+
+
+== Getting Started
+
+=== Installation
+
+Groovy comes bundled as a .zip file or platform-specific installer for Windows, and Ubuntu, Debian. This section will explain how to install the zipped version, since it covers the widest breadth of platforms.
+
+
+Note: Because Groovy is Java, it requires at least Java Development Kit (JDK) 1.6 or above to be installed and the JAVA_HOME environment variable to be set. 
+
+
+To install Groovy, follow these steps:
+
+. Download the groovy binary release
+. Uncompress the zip file to +c:\gr8conf\groovy\+ (Windows) or +~/gr8conf/groovy+ (Mac/Linux).
+. Set a +GROOVY_HOME+ environment variable to the directory from the previous step.
+. Add the +[GROOVY_HOME]\bin+ directory to your system path.
+ * Windows: Use your computer's properties to set the environment variable +PATH+ and add +%GROOVY_HOME%\bin+
+ * Linux/Mac OS X: open your shell and set the +PATH+ variable
+
+ > export PATH=$PATH:$GROOVY_HOME/bin          
+
+
+To validate your installation, open a console or command prompt and type the following:
+
+----
+> groovy -version
+----
+  
+You should see something like this:
+
+[subs="attributes"]
+----
+> groovy -version
+Groovy Version: {groovyVersion} JVM: {jvmVersion}
+----
+  
+
+=== Compiling and running
+
+Groovy code is compiled to Java bytecode, just like a Java class. We use the groovyc command to compile our code. This is a joint compiler which means we can compile both Java and Groovy sources with this command. 
+
+
+Let's create a sample Java and Groovy file (+JavaObject.java+ and +RunGroovy.groovy+) and compile them.
+
+[source,java]
+----
+// File: JavaObject.java
+package org.gr8conf.java;
+
+public class JavaObject {
+  public static String javaSays() {
+    return "Hello from Java";
+  }
+}
+----
+  
+[source,groovy]
+----
+// File: RunGroovy.groovy
+package org.gr8conf.groovy
+
+println org.gr8conf.java.JavaObject.javaSays()
+----
+ 
+We use the Groovy joined compiler, +groovyc+, to compile both Java and Groovy source files.
+
+---- 
+> groovyc *.java *.groovy
+----
+  
+Once we have the compiled classes we can use the Java command to execute our code. We only need to add the JAR file +groovy-all-{groovyVersion}.jar+ from the +GROOVY_HOME/embeddable+ directory to our classpath.
+
+.Windows
+[subs="attributes"]
+----
+> java -cp %GROOVY_HOME%/embeddable/groovy-all-{groovyVersion}.jar;. org.gr8conf.groovy.RunGroovy
+----
+
+.Mac OSX / Linux
+[subs="attributes"]
+----
+> java -cp $GROOVY_HOME/embeddable/groovy-all-{groovyVersion}.jar:. org.gr8conf.groovy.RunGroovy
+----
+
+=== Groovy scripts
+
+We saw we can compile Groovy code to class files ourselves. We can also create Groovy scripts that can be executed with the +groovy+ command. These scripts are compiled to bytecode, but we don't get a class file. The bytecode is dynamically added to the JVM when we run the script.
+Let's create a simple script GroovyScript.groovy.
+
+[source,groovy]
+----
+println 'Hello ' + args[0]
+----
+
+----
+> groovy GroovyScript Java
+Hello Java
+----
+
+We can even run code without creating a source file first. This is very useful for command line scripting.
+
+
+----
+> groovy -e "println 'Hello ' + args[0]" Java
+Hello Java
+----
+
+=== Groovy Shell
+
+We can use the +groovysh+ command to experiment with Groovy features. It is easy to edit and run Groovy code without first creating a script file.
+
+  > groovysh
+  Groovy Shell ({groovyVersion}, JVM: {jvmVersion})
+  Type 'help' or '\h' for help.
+  ------------------------------------------------------------
+  groovy:000>
+
+Let's type some code.
+
+----
+groovy:000>message = "Hello Groovy"
+==> Hello Groovy
+groovy:000>println message
+Hello Groovy
+==> null
+----
+
+=== Groovy Console
+
+We can use the command +groovyConsole+ to start a graphical Groovy shell. We can type Groovy code in the textarea and execute the code and see the result.
+
+----
+> groovyConsole
+----
+
+=== Groovy Web Console
+
+http://groovyconsole.appspot.com[Groovy Web Console]
+
+=== IDE Support
+
+==== Eclipse
+
+You can install the Groovy Plugin in Eclipse. With the plugin you can run / debug Groovy code. Also we get good editor support with for example refactoring and code completion.
+
+Key features:
+
+* Syntax highlighting
+* Type inferencing
+* Compile and run Groovy classes and scripts in Eclipse
+* Outline view for Groovy files
+* Auto-completion
+* Refactoring
+* Source code formatting
+
+==== JetBrains IntelliJ IDEA
+
+IntelliJ IDEA has good Groovy support. We can run / debug Groovy code and also the editor support is good with impressive code completion even for dynamic methods and properties. Also we can extend the editor support with a DSL for our own code.
+
+IntelliJ IDEA Community Edition also has Groovy support, so it is a good way to get started, but it misses the more advanced support from the paid editions.
+
+Key features:
+
+* Groovy-aware debugger
+* Advanced mixed-language compiler
+* Context-sensitive, type inference-aware code completion
+* Smart code navigation
+* Code formatting, highlighting and folding
+* Numerous code inspections and quick-fixes
+* Support for GroovyDoc
+* Groovy appliation testing
+* Groovy-aware refactoring and import optimization
+* Griffon, Gradle, Grails, Gant support
+
+==== NetBeans
+
+NetBeans also supports Groovy, but not the latest versions. With NetBeans we can run / debug Groovy code and the editor also has code completion and refactoring support.
+
+Key features:
+
+* Syntax highlighting and code folding
+* Code completion
+* Groovy and Java project integration
+
+
+==== Text Editors
+
+At the end all Groovy code (and Java code) can be edited in text editors like Notepad or TextEdit. Some text editors have special Groovy support to for example compile or run the code from the editor.
+
+
+== Transforming
+
+The following Java code
+
+[source,java]
+----
+public class UsingJava {
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Using Java " + getName();
+    }
+
+    public static void main(String[] args) {
+        UsingJava usingJava = new UsingJava();
+        usingJava.setName("Geeks");
+        System.out.println(usingJava);
+    }
+}
+----
+
+can be transformed to the following Groovy code and still maintain the same functionality:
+
+[source,groovy]
+----
+class UsingJava {
+    String name
+
+    String toString() {
+        "Using Java $name"    
+    }
+
+    static void main(String[] args) {
+        UsingJava usingJava = new UsingJava(name: ‘Geeks’)
+        println usingJava
+    }
+}
+----
+
+
+== Types
+
+=== Basic Types
+
+Because Groovy is so closely related to Java, we can use all Java types in Groovy. So we don't experience any difference if we use a primitive type in our Groovy code compared to Java. But Groovy takes it a step further and in Groovy everything is an object. Primitive types are automatically boxed to their object counterparts. Groovy will automatically unbox the type if necessary.
+
+
+In Groovy the default type for a numeric value with a decimal point is +java.math.BigDecimal+, which is different from Java.
+
+[source,groovy]
+----
+int intValue = 42
+double doubleValue = 1.2080
+boolean booleanValue = true
+char charValue = 'G'
+
+assert intValue.class.name == "java.lang.Integer"
+assert doubleValue.class.name == "java.lang.Double"
+assert booleanValue.class.name == "java.lang.Boolean"
+assert charValue.class.name == "java.lang.Character"
+
+assert 42.0.class.name == "java.math.BigDecimal"
+
+assert 2.100000F + 0.10000F != 3.0
+assert 2.1 + 0.1 == 3.0
+
+assert 10G.class.name == "java.math.BigInteger"
+assert 10L.class.name == "java.lang.Long"
+assert 10I.class.name == "java.lang.Integer"
+
+assert 9.1D.class.name == "java.lang.Double"
+assert 9.1F.class.name == "java.lang.Float"
+assert 9.1G.class.name == "java.math.BigDecimal"
+
+// Simple method with int type parameter.
+void methodInt(int value) {
+   assert value == 42
+   assert value.class.name == "java.lang.Integer"
+}
+
+// Invoke method with int parameter.
+methodInt intValue
+----
+
+But Groovy adds some new features that we need to take into account. One of the importance features is the support for different kinds of strings in Groovy. We look into the different types of strings later on.
+
+
+=== Dynamic Types
+
+Groovy supports dynamic typing. This means we don't define the type of a variable up front, but let the context decide the type of the variable. So at run-time the type of the variable is known, but doesn't have to be known at edit or compile time.
+
+
+Dynamic typing in Groovy still means variables do have a type at a certain point in time. The variable is strongly typed, because if we misuse the type in our code we get an exception at run-time.
+
+
+We use the +def+ keyword to define a variable without a certain type.
+
+[source,groovy]
+----
+Integer intValue = 42
+def dynamicValue = 42
+
+assert intValue.class.name == "java.lang.Integer"  // Static type.
+assert dynamicValue.class.name == "java.lang.Integer"  // Dynamic, strong type.
+
+try {
+   intValue = true  // Class cast exception.
+   assert false
+} catch (Exception e) {
+   assert e != null
+}
+dynamicValue = true  // We can reassign a dynamic type.
+
+assert dynamicValue.class.name == "java.lang.Boolean"
+
+try {
+   dynamicValue.length()  // Invalid method for Boolean type.
+   assert false
+} catch (Exception e) {
+   assert e != null
+}
+----
+
+== Strings
+
+=== Basic
+
+In Java we define a string value enclosed in double quotes and a character type enclosed in single quotes. In Groovy we can define string enclosed in single quotes as well or even enclosed in slashes and “dollar” slashes. So we have four different ways to define a string value in Groovy.
+
+[source,groovy]
+----
+String singleQuotes = 'Groovy allows single quotes to create a string'
+String doubleQuotes = "Groovy also allows double quotes, just like in Java"
+String slashes = /And a third way to create a string/
+String dollarSlashes = $/And the fourth way with other escaping rules/$
+
+assert singleQuotes.class.name == "java.lang.String"
+assert doubleQuotes.class.name == /java.lang.String/
+assert slashes.class.name == 'java.lang.String'
+----
+
+=== GString
+
+Groovy also supports a more advanced string called a +GString+. A +GString+ is just like a normal string, except that it evaluates expressions (text between "+${+" and "+}+") which are embedded within the string. This is called 'interpolation'.
+
+When Groovy sees a string defined with double quotes or slashes and an embedded expression, Groovy constructs an +org.codehaus.groovy.runtime.GStringImpl+ instead of a +java.lang.String+. When the +GString+ is accessed, the expression is evaluated.
+
+[source,groovy]
+----
+String company = 'Gr8Conf'
+def message = "${company} - Groovy workshop"
+
+assert 'Gr8Conf - Groovy workshop' == message
+assert message.class.name == "org.codehaus.groovy.runtime.GStringImpl"
+
+def convert = /Welcome to '${company.toLowerCase()}'/
+
+assert "Welcome to 'gr8conf'" == convert
+assert convert.class.name == "org.codehaus.groovy.runtime.GStringImpl"
+----
+
+=== Multi-line Strings
+
+Groovy also allows us to define strings spanning multiple lines. We must enclose the string value in three single or double quotes. This can be useful to define for example SQL queries.
+
+[source,groovy]
+----
+def tableName = 'Groovy'
+def sql = """
+select count(*) from ${tableName}
+where id > 100
+"""
+
+runQuery sql
+
+void runQuery(String sql) {
+   assert sql == '''
+select count(*) from Groovy
+where id > 100
+'''
+}
+----
+
+=== Exercise
+
+[NOTE]
+====
+. Play around with different types in Groovy.
+. Try to define a GString with an expression.
+====
+
+== Regular Expressions
+
+Groovy uses Java's regular expression support, but makes it more easy with three new operators:
+
+* Define a pattern from a string with the tilde (+~+) operator.
+* Finding matches with the +=~+ operator.
+* Check if regular expression matches a value with the +==~+ operator.
+
+=== Pattern Operator
+
+We use the +~+ operator to define a regular expression pattern. This pattern is compiled and very useful if we need to re-use the pattern over and over again. If we place the operator before a string value (even GStrings) we get a pattern object.
+
+[source,groovy]
+----
+def singleQuotes =  ~'[ab]test\\d'
+assert singleQuotes.class.name == 'java.util.regex.Pattern'
+
+def doubleQuotes = ~"string\$"
+assert doubleQuotes.class.name == 'java.util.regex.Pattern'
+
+// Groovy's string slashy syntax is very useful to
+// define patterns, because we don't have to escape
+// all those backslashes.
+def slashy = ~/slashy \d+ value/
+assert slashy.class.name == 'java.util.regex.Pattern'
+
+def s = 'more'
+def curlyGString = ~"$s GString"
+assert curlyGString instanceof java.util.regex.Pattern
+
+// Using Pattern.matcher() to create new java.util.regex.Matcher.
+def last = "t"
+def testPattern = ~/t..${last}/
+assert testPattern.matcher("test").matches()
+----
+
+=== Find Operator
+
+In Groovy we use the +=~+ operator (find operator) to create a new matcher object. If the matcher has any match results we can access the results by invoking methods on the matcher object. But Groovy wouldn't by groovy if we could access the results easier. Groovy enhances the Matcher class so the data is available with an array-like syntax. If we use groups in the matcher the result can be accessed with a multidimensional array.
+
+[source,groovy]
+----
+def finder = ('groovy' =~ /gr.*/)
+assert finder instanceof java.util.regex.Matcher
+
+def cool = /gr\w{4}/  // Start with gr followed by 4 characters.
+def findCool = ('groovy, java and grails rock!' =~ /$cool/)
+assert 2 == findCool.getCount()
+assert 'groovy' == findCool[0]  // Array-like access to match results.
+assert 'grails' == findCool[1]
+
+// With grouping we get a multidimensional array.
+def group = ('groovy and grails, ruby and rails' =~ /(\w+) and (\w+)/)
+assert group.hasGroup()
+assert 2 == group.getCount()
+assert 'groovy and grails'== group[0][0]
+assert 'groovy' == group[0][1]
+assert 'grails' == group[0][2]
+assert 'rails' == group[1][2]
+assert 'ruby' == group[1][1]
+
+// Use matcher methods.
+assert ('Hello world' =~ /Hello/).replaceFirst('Hi') == 'Hi world'
+----
+
+=== Match Operator
+
+We can use the +==~+ operator, to do exact matches. With this operator the +matches()+ method is invoked on the matcher object. The result is a Boolean value.
+
+[source,groovy]
+----
+def matcher = ('groovy' ==~ /gr.*/)
+assert matcher instanceof Boolean
+
+
+assert !('Groovy rocks!' ==~ /Groovy/)
+assert 'Groovy rocks!' ==~ /Groovy.*/
+----
+
+== Objects
+
+We already some example on how to create a new class in Groovy. It is just the same as in Java. We can also create interfaces in Groovy just like in Java.
+
+[source,groovy]
+----
+interface SayService {
+   String say(String text)
+}
+
+
+class SayImpl implements SayService {
+   String say(String text) {
+       "I say: $text"
+   }
+}
+----
+  
+=== GroovyBeans
+
+A common concept in Java is the JavaBean. If we define a class that needs to follow the JavaBean specification we must provide getter and setter methods for the different properties so the value can be set and read. We also must provide a default constructor. In Groovy we don't have to write the getter and setter methods ourselves, because Groovy will generate them for us. Also the default constructor is generated for us. It is important to know the generated bytecode really contains the getter and setter methods for our class. We call these classes GroovyBeans.
+
+
+The following two files will have the same bytecode after compilation, but the Groovy version is much easier to write.
+
+[source,java]
+----
+package org.gr8conf.java;
+
+public class JavaSample {
+   private String userName;
+   private int age;
+
+   public JavaSample() {
+   }
+
+   public void setUserName(String userName) {
+       this.userName = userName;
+   }
+
+   public String getUserName() {
+       return userName;
+   }
+
+   public void setAge(int age) {
+       this.age = age;
+   }
+
+   public int getAge() {
+       return age;
+   }
+}
+----
+
+[source,groovy]
+----
+package org.gr8conf.groovy
+
+class GroovySample {
+   String userName
+   int age
+}
+----
+  
+Let's write a little sample code to use both beans. We can use the getter and setter methods to read and set values for the properties, but we can also reference the properties with the following syntax: +obj.property+. Groovy will invoke the getter and setter method for us, but we simple can write +obj.property+.
+
+
+As an extra bonus we get a constructor for our class that takes a +Map+ argument. If the key in the map matches a property, the value is set. This makes it very easy to initialize a class and set property values in one line.
+
+[source,groovy]
+----
+import org.gr8conf.java.JavaSample
+import org.gr8conf.groovy.GroovySample
+
+def javaBean = new JavaSample()
+javaBean.setUserName 'user 1'
+javaBean.setAge 20
+
+assert javaBean.getUserName() == 'user 1'
+assert javaBean.getAge() == 20
+
+def groovyBean = new GroovySample()
+groovyBean.setUserName 'user 2'
+groovyBean.setAge 19
+
+assert groovyBean.getUserName() == 'user 2'
+assert groovyBean.getAge() == 19
+
+// We can use a constructor with the names of the properties and their values.
+javaBean = new JavaSample(userName: 'user 3', age: 25)
+assert javaBean.getUserName() == 'user 3'
+assert javaBean.getAge() == 25
+
+// We can use simple assignments instead of setter methods.
+javaBean.userName = 'user 3a'
+javaBean.age = javaBean.age + 10
+
+// And we don't have to use the getter method to get the value.
+assert javaBean.userName == 'user 3a'
+assert javaBean.age == 35
+
+groovyBean = new GroovySample(userName: 'user 4', age: 30)
+assert groovyBean.userName == 'user 4'
+assert groovyBean.age == 30
+----
+
+=== Methods
+
+A method definition in Groovy is the same as in Java. But we can do more with our argument definition than in Java.
+
+
+In Groovy we can define a default value for an argument. If the parameter is not set when the method is called the default value is used.
+
+
+We can define an optional argument if we use an array as the last argument of the method.
+We use named arguments in our method definition. This provides a very intuitive way to assign parameter values when we invoke the method. If our method contains an argument of Map type then all named parameters are put into that map, so we can use them in our method.
+
+
+[source,groovy]
+----
+String defaultArgs(String message, String append = 'world') {
+   message + ' ' + append
+}
+
+assert 'Hello world' == defaultArgs('Hello')
+assert 'Hello user' == defaultArgs('Hello', 'user')
+
+String optionalArgs(String message, String[] optional) {
+   String result = message
+   for (int i = 0; i < optional.length; i++) {
+       result += ' ' + optional[i]
+   }
+   result
+}
+
+assert 'Hello world' == optionalArgs('Hello', 'world')
+assert 'Hello world and user' == optionalArgs('Hello', 'world', 'and', 'user')
+
+String namedArgs(Map arguments, String message) {
+   "$message $arguments.user, you are $arguments.age years old."
+}
+
+assert 'Hello user, you are 28 years old.' == namedArgs(user: 'user', 'Hello', age: 28)
+----
+  
+=== Multimethods
+
+Groovy's method lookup takes into account the dynamic type of method arguments, where Java relies on the static type. This feature is called mulitmethods.
+
+We define overloaded methods with differently typed arguments and let Groovy decided at runtime which method to invoke. This subject is best explained by an example.
+
+[source,groovy]
+----
+// We start off by some very simple class definitions
+// with a one-level hierarchy amongst them.
+abstract class Person {
+   String name
+}
+class Parent extends Person {}
+class Child extends Person {}
+
+// Now we define methods to return the name with some extra info.
+def printName(Person person) {
+   "printName(Person): $person.name"
+}
+def printName(Child child) {
+   "printName(Child): $child.name"
+}
+def printName(p /* dynamic argument */) {
+   "printName(p): $p.name"
+}
+
+// Create new Parent and Child objects but use Person type reference.
+Person parent1 = new Parent(name: 'parent1')
+Person child1 = new Child(name: 'child1')
+
+assert 'printName(Person): parent1' == printName(parent1)
+assert 'printName(Child): child1' == printName(child1)  // This is not what Java would do!!
+assert 'printName(Person): child1' == printName(child1 as Person)  // Same as what Java would do with printName(child1)
+
+// Create objects with type reference is equal to object.
+Parent parent2 = new Parent(name: 'parent2')
+Child child2 = new Child(name: 'child2')
+
+assert 'printName(Person): parent2' == printName(parent2)
+assert 'printName(Child): child2' == printName(child2)
+
+// Use class outside Person hierarchy.
+class Dog {
+   String name
+}
+assert 'printName(p): buck' == printName(new Dog(name: 'buck'))
+----
+  
+=== GPath
+
+GPath allows short and compact expressions to travers an object graph. It is analog to XPath which is used to travers through XML documents. Closely related is the null-safe dereference operator (+?.+) to avoid NullPointerExceptions.
+
+[source,groovy]
+----
+class Order {
+   Date date
+   List orderItems
+}
+
+class OrderLine {
+   String product
+   BigDecimal price
+   Integer count
+
+   def getTotal() {
+       count * price
+   }
+}
+
+def orderLines = [
+   new OrderLine(product: 'PRD1', price: 1.02, count: 10),
+   new OrderLine(product: 'PRD2', price: 8.21, count: 3),
+   new OrderLine(price: 10)
+]
+def order = new Order(orderItems: orderLines)
+
+// Use GPath to travers object graph.
+assert order.orderItems[0].product == 'PRD1'
+assert order.orderItems[1].price == 8.21
+assert order.orderItems[1].total == 3 * 8.21
+
+// Null-safe dereference operator.
+assert order?.orderItems[1]?.product?.toLowerCase() == 'prd2'
+assert order.orderItems[2].product?.toLowerCase() == null
+assert order.orderItems[3]?.product == null
+----
+  
+=== Exceptions
+
+Exceptions and exception handling is the same in Groovy as it is in Java. We use the +try/catch/finally+, +try/catch+ or +try/finally+ blocks in Groovy as we would in Java. The only thing different is that in Groovy we don't have to declare an exception in the method signature, this is optional.
+
+
+When a checked exception is not declared the exception is propagated up the exception stack as a +RuntimeException+. This is also true if we invoke a method from a Java class that has declared a checked exception.
+
+[source,groovy]
+----
+try {
+   def url = new URL('malformedUrl')
+   assert false, 'We should never get here because of the exception.'
+} catch (MalformedURLException e) {
+   assert true
+   assert e in MalformedURLException
+}
+
+// Method throws MalformedURLException, but we don't
+// have to define it. Groovy will pass the exception
+// on to the calling code.
+def createUrl() {
+   new URL('malformedUrl')
+}
+
+try {
+   def url1 = createUrl()
+   assert false, 'We should never get here because of the exception.'
+} catch (all) {  // Groovy shortcut: we can omit the Exception class
+                 // if we want to catch all Exception and descendant objects.
+                 // In Java we have to write catch (Exception all).
+   assert true
+   assert all in MalformedURLException
+}
+----
+
+=== Exercise
+
+[NOTE]
+====
+. Write a Groovy class with a +String+ property username
+. Create an instance of the class and set and read a value for the username property.
+. Add a new method greeting that returns a salutation for the username, like Hi, mrhaki.
+. Change the method signature and add a argument with a default value for the salutation, eg. the default is Hello
+====
+  
+== Control Structures
+
+Because Groovy looks so much like Java and because we can write Java code in Groovy, we can use all control structures from Java also in Groovy. But Groovy has made some of the control structures even more useful by adding extra functionality.
+
+=== Groovy Truth
+
+In Java only a boolean type can be used in a conditional context like in a if statement. In Groovy we can use all kinds of objects in a conditional context and Groovy will coerce these objects to true or false depending on the value. And to top it of we can even write our own implementation of the truth for our objects. We need to implement the +asBoolean()+ method to return true or false for our object.
+
+[source,groovy]
+----
+// Simple boolean values, just like Java.
+assert true
+assert !false
+
+// Collections that are empty return false.
+assert ['Groovy']
+assert ![]
+
+// Null objects return false.
+def a = new Object()
+def b
+assert a
+assert !b
+
+// Empty string returns false.
+assert 'Non empty string'
+assert !''
+
+// 0 number is false (tricky!)
+def n = 0
+assert 12
+assert !n
+
+// Regular expression matcher that matches returns true.
+def matcher = ('groovy' ==~ /gr.*/)
+def javaMatcher = ('java' ==~ /gr.*/)
+assert matcher
+assert !javaMatcher
+
+class User {
+   String username
+   boolean active
+
+   boolean asBoolean() {
+       active
+   }
+}
+
+assert new User(username: 'student', active: true)
+assert !new User(username: 'student', active: false)
+----
+
+=== Elvis Operator
+
+Groovy supports the conditional ternary expression, just like in Java, but introduces also a shorthand notation, the Elvis operator. The Elvis operator is to shorten the ternary operator. If we have a sensible default when the value is null or false (following Groovy truth rules) we can use the Elvis operator. And why is it called the Elvis operator? Turn your head to the left and you will know.
+
+[source,groovy]
+----
+// Normal ternary operator.
+String ternary(String sampleText) {
+   return (sampleText != null) ? sampleText : 'Hello Groovy!'
+}
+
+// The Elvis operator in action. We must read: 'If sampleText is not null assign
+// sampleText to elvisOuput, otherwise assign 'Viva Las Vegas!' to elvisOutput.
+String elvis(def sampleText) {
+   return elvisOutput = sampleText ?: 'Viva Las Vegas!'
+}
+
+assert ternary('Hello Java') == 'Hello Java'
+assert ternary(null) == 'Hello Groovy!'
+
+assert elvis('Has left the building') == 'Has left the building'
+assert elvis('') == 'Viva Las Vegas!'
+----
+
+=== Switch
+
+The Java switch statement looks pale compared to Groovy's switch statement. In Groovy we can use different classifiers for a switch statement instead of only an +int+ or +int+-derived type. Anything that implements the +isCase()+ method can be used as a classifier. Groovy already added an +isCase()+ method to +Class+ (uses +isInstance+), +Object+ (uses +equals+), collections (uses +contains+) and regular expressions (uses +matches+). If we implement the +isCase+ method in our own Groovy classes we can use it as a classifier as well. Finally we can use a closure as a classifier. The closure will be evaluated to a boolean value. We will learn about closures later.
+
+[source,groovy]
+----
+def testSwitch(val) {
+   def result
+   switch (val) {
+       case ~/^Switch.*Groovy$/:
+           result = 'Pattern match'
+           break
+       case BigInteger:
+           result = 'Class isInstance'
+           break
+       case 60..90:
+           result = 'Range contains'
+           break
+       case [21, 'test', 9.12]:
+           result = 'List contains'
+           break
+       case 42.056:
+           result = 'Object equals'
+           break
+       case { it instanceof Integer && it < 50 }: // We see closures later.
+           result = 'Closure boolean'
+           break
+       case [groovy: 'Rocks!', version: '1.7.6']:
+                           result = "Map contains key '$val'"
+                           break
+       default:
+           result = 'Default'
+           break
+   }
+   result
+}
+
+assert testSwitch("Switch to Groovy") == 'Pattern match'
+assert testSwitch(42G) == 'Class isInstance'
+assert testSwitch(70) == 'Range contains'
+assert testSwitch('test') == 'List contains'
+assert testSwitch(42.056) == 'Object equals'
+assert testSwitch(20) == 'Closure boolean'
+assert testSwitch('groovy') == "Map contains key 'groovy'"
+assert testSwitch('default') == 'Default'
+----
+
+=== For-in Loop
+
+In Java we have different for loops. Groovy adds one more: +for .. in+:
+
+[source,groovy]
+----
+// Result variable for storing loop results.
+def result = ''
+
+// Closure to fill result variable with value.
+def createResult(arg) {
+   if (!arg) {  // A bit of Groovy truth: arg == 0 is false
+       result = '0'
+   } else {
+       result += arg
+   }
+}
+
+// Classic for loop.
+for (i = 0; i < 5; i++) {
+   createResult(i)
+}
+assert result == '01234'
+
+def list = [0, 1, 2, 3, 4]
+
+// Classic Java for-each loop.
+for (int i : list) {
+   createResult(i)
+}
+assert result == '01234'
+
+
+// Groovy for-each loop.
+for (i in list) {
+   createResult(i)
+}
+assert result == '01234'
+----
+  
+== Operators
+
+=== Operator overloading
+
+We can use the same operators in Groovy as in Java, but the nice thing is the operators are all implemented by methods in Groovy. This means we can do operator overriding in our own classes. This is very useful and can make more concise code.
+
+The following table shows all operators and their corresponding methods:
+
+|===
+|Operator |Method
+
+|a + b
+|a.plus(b)
+
+|a - b
+|a.minus(b)
+
+|a * b
+|a.multiply(b)
+
+|a ** b
+|a.power(b)
+
+|a / b
+|a.div(b)
+
+|a % b
+|a.mod(b)
+
+|a | b
+|a.or(b)
+
+|a & b
+|a.and(b)
+
+|a ^ b
+|a.xor(b)
+
+|a++ or ++a
+|a.next()
+
+|a-- or --a
+|a.previous()
+
+|a[b]
+|a.getAt(b)
+
+|a[b] = c
+|a.putAt(b, c)
+
+|a << b
+|a.leftShift(b)
+
+|a >> b
+|a.rightShift(b)
+
+|a >>> b
+|a.rightShiftUnsigned(b)
+
+|switch(a) { case(b) : }
+|b.isCase(a)
+
+|~a
+|a.negate()
+
+|-a
+|a.negative()
+
+|+a
+|a.positive()
+
+|a == b
+|a.equals(b)
+
+|a != b
+|! a.equals(b)
+
+|a <=> b
+|a.compareTo(b)
+
+|a > b
+|a.compareTo(b) > 0
+
+|a >= b
+|a.compareTo(b) >= 0
+
+|a < b
+|a.compareTo(b) < 0
+
+|a <= b
+|a.compareTo(b) <= 0
+
+|as as type
+|a.asType(typeClass)
+|===
+
+[source,groovy]
+----
+class Money {
+   def amount
+
+   Money plus(Money other) {
+       new Money(amount: this.amount + other.amount)
+   }
+
+   boolean equals(Object other) {
+       amount == other.amount
+   }
+
+   int hashCode() {
+       amount.hashCode()
+   }
+
+   String toString() {
+       amount
+   }
+}
+
+def m1 = new Money(amount: 100)
+def m2 = new Money(amount: 1)
+
+assert (m1 + m2).amount == 101  // plus()
+assert m1 + m2 == new Money(amount: 101)  // equals() and plus()
+----
+
+  
+=== Spaceship Operator
+
+Groovy adds some nice operators to the language. One of them is the spaceship operator. It's called the spaceship operator, because we use the following syntax +<=>+ and that looks a bit like a UFO. The operator is another way of referring to the +compareTo+ method of the +Comparable+ interface. This means we can implement the +compareTo+ method in our own classes and this will allow us to use the +<=>+ operator in our code. And of course all classes which already have implemented the +compareTo+ method can be used with the spaceship operator. The operator makes for good readable sort methods.
+
+[source,groovy]
+----
+class Person implements Comparable {
+   String username
+   String email
+
+   int compareTo(other) {
+       this.username <=> other.username
+   }
+}
+
+assert -1 == ('a' <=> 'b')
+assert 0 == (42 <=> 42)
+assert -1 == (new Person([username:'student', email: 'test@email.com']) <=> new Person([username:'zavaria', email:'tester@email.com']))
+assert [1, 2, 3, 4] == [4, 2, 1, 3].sort{ a, b -> a <=> b }
+----
+  
+=== Spread-Dot Operator
+
+The spread-dot operator (+*.+) is used to invoke a method on all members of a +Collection+ object. The result of using the spread-dot operator is another +Collection+ object.
+
+[source,groovy]
+----
+class Language {
+   String lang
+   def speak() {
+       "$lang speaks."
+   }
+}
+
+// Create a list with 3 objects. Each object has a lang
+// property and a speak() method.
+def list = [
+   new Language(lang: 'Groovy'),
+   new Language(lang: 'Java'),
+   new Language(lang: 'Scala')
+]
+
+// Use the spread-dot operator to invoke the speak() method.
+assert ['Groovy speaks.', 'Java speaks.', 'Scala speaks.'] == list*.speak()
+assert ['Groovy speaks.', 'Java speaks.', 'Scala speaks.'] == list.collect{ it.speak() }
+
+// We can also use the spread-dot operator to access
+// properties, but we don't need to, because Groovy allows
+// direct property access on list members.
+assert ['Groovy', 'Java', 'Scala'] == list*.lang
+assert ['Groovy', 'Java', 'Scala'] == list.lang
+----
+  
+=== Spread Operator
+
+The spread operator (+*+) is used to tear a list apart into single elements. This can be used to invoke a method with multiple parameters and then spread a list into the values for the parameters. The spread operator can also be used to add lists or ranges to lists and to add maps to other maps. We see samples of the spread operator when we look at collections.
+
+[source,groovy]
+----
+class Simple {
+   String speak(Integer n, String text, Date date) {
+       def out = new StringBuffer()
+       n.times { 
+           out << "Say $text on ${date.format('yyyy-MM-dd')}.\n" 
+       }
+       out
+   }
+}
+
+// Spread params list for speak() method.
+def params = [
+   2,
+   "hello world",
+   new Date().parse("yyyy/MM/dd", "2009/09/01")
+]
+assert '''Say hello world on 2009-09-01.
+Say hello world on 2009-09-01.
+''' == new Simple().speak(*params)
+----
+
+=== Is vs. ==
+
+Groovy overloads the +==+ operator and maps it to the +equals()+ method. This is very different from Java, so when developers are switching back and forth between Groovy and Java mistakes are bound to happen. In Java we use the +==+ operator to see if variables are referring to the same object instance. In Groovy we use the +==+ operator to see if two objects are the same, in Java we would use the +equals()+ method for this. To test if two variables are referring to the same object instance in Groovy we use the +is()+ method. The +!=+ operator is also overloaded and maps to the +!equals()+ statement.
+
+And because we are in Groovy land all +null+ values are handled gracefully. We don't have to write extra checks to check for +null+ values before we can test for equality.
+
+[source,groovy]
+----
+Integer myInt = 42
+Integer anotherInt = myInt
+Integer newInt = 42
+Integer different = 101
+
+assert myInt == anotherInt  // In Java: myInt != null && myInt.equals(anotherInt)
+assert myInt.is(anotherInt)  // In Java: myInt == anotherInt
+
+assert myInt == newInt
+
+assert myInt != different
+----
+
+
+
+== Closures
+
+Closures cannot be found in Java 7, so we spent some extra time on this subject. Java 8 introduces lambdas which have similarities with closures in Groovy. Closures look a lot like methods, because we can pass parameters and we get a return value. But closures are anonymous. A closure is a piece of code that can be assigned to a variable. Later we can execute the code.
+
+
+A closure in Groovy is ultimately compiled to a groovy.lang.Closure object. We can even use this type when we define a variable and assign a closure to it. We can invoke a closure just like a method and use the return value, but we can also use the call() method of a closure to invoke it.
+
+
+If we define a closure in Groovy we can define our own arguments or rely on the default argument it for a single argument closure. The it argument is available if we don't define any named arguments ourselves. We can also create a closure and define it to have no arguments even not the it argument.
+
+[source,groovy]
+----
+def defaultItArg = {
+   it - 1
+}
+def result = defaultItArg('Groovy string 1.')  // Invoke closure.
+assert result == 'Groovy string .'
+assert defaultItArg(44) == 43
+assert defaultItArg.call('1') == ''
+
+
+Closure namedArg = { value ->
+   value * 2
+}
+result = namedArg('Groovy')
+assert result == 'GroovyGroovy'
+assert namedArg(2) == 4
+assert namedArg.call(3) == 6
+
+
+def multiArgs = { a, b ->
+   a + b
+}
+assert multiArgs('Groovy ', 'Java') == 'Groovy Java'
+assert multiArgs(10, 1) == 11
+
+
+def noArgs = { ->
+   'Closure without arguments.'
+}
+assert noArgs() == 'Closure without arguments.'
+assert noArgs.call() == 'Closure without arguments.'
+----
+  
+=== Turn Methods into Closures
+
+Sometimes we need to pass a closure to a method, but the functionality is implemented in a method. We can convert a method into a closure with the +.&+ operator. The method to be converted doesn't have to be a Groovy method, but can also be a Java method. This way we can easily integrate existing Java code into Groovy.
+
+
+We create a Java class JavaMethods with a static public method:
+
+[source,java]
+----
+package org.gr8conf.java;
+
+public class JavaMethods {
+   public static String sayHello(String text) {
+       return "Java says hello to " + text;
+   }
+}
+----
+
+We also create a Groovy script to show how we can turn methods into closures:
+
+[source,groovy]
+----
+package org.gr8conf.groovy
+
+String sayHello(text) {
+   "Groovy says hello to $text"
+}
+
+Closure sayHelloClosure = {
+   "Closure says hello to $it"
+}
+
+def sayHelloGroovy = this.&sayHello
+def sayHelloJava = org.gr8conf.java.JavaMethods.&sayHello
+
+assert sayHelloClosure('student') == 'Closure says hello to student'
+assert sayHelloGroovy.call('student') == 'Groovy says hello to student'
+assert sayHelloJava('student') == 'Java says hello to student'
+----
+  
+=== Closures as Method Parameters
+
+We saw closures are just blocks of code we can assign to a variable and execute. But this also means we can use closures as method parameters. Groovy has some variations we can use to pass a closure into a method. If for example the closure is the last argument for a method we can put the closure outside the argument list.
+
+[source,groovy]
+----
+// Method with two arguments. Last argument is a closure.
+def work(input, Closure code) {
+   code(input)  // Invoke closure!
+}
+
+// Define a closure.
+def assertJava = {
+   it == 'Java'
+}
+
+work('Java', assertJava)
+
+work 'Java', assertJava  // No parenthesis.
+
+work('Groovy', {
+   assert it == 'Groovy'
+})  // Anonymous closure as argument.
+
+work('Groovy') {
+   assert it == 'Groovy'
+}  // Last argument is closure and can be outside parenthesis.
+
+work('Groovy')
+{
+    assert it == 'Groovy'
+}  // Opening bracket on new line. If we want a code block (e.g. static initializer) instead of closure we must use ; to separate code.
+
+work 'Groovy', {
+   assert it == 'Groovy'
+}  // Pay attention, no parenthesis, so comma is needed again!
+
+// Does not work:
+//
+// Comma between argument list needed:
+// work 'Groovy' {
+//     assert it == 'Groovy'
+// }
+----
+
+=== Info About Closure Parameters
+
+We can inspect the number and type of parameters defined for a closure very easily. A closure has the properties +maximumNumberOfParameters+ and +parameterTypes+ for this. So in our code we can ask a closure how many parameters are expected and even which type the parameters are.
+
+[source,groovy]
+----
+// Two simple closures with one and two parameters.
+def one = { it.toUpperCase() }
+def two = { String s, upper ->
+   if (upper) {
+       s.toUpperCase()
+   } else {
+       s.toLowerCase()
+   }
+}
+
+def runClosure(cl) {
+   switch (cl.maximumNumberOfParameters) {
+       case 1:
+           assert [java.lang.Object] == cl.parameterTypes
+           cl.call('Groovy')
+           break
+       case 2:
+           assert [java.lang.String, java.lang.Object] == cl.parameterTypes
+           cl('Groovy', false)
+           break
+   }
+}
+
+assert 'GROOVY' == runClosure(one)
+assert 'groovy' == runClosure(two)
+----
+
+=== Currying
+
+Currying is a technique to create a clone of a closure and fixing values for some of the parameters. We can fix one or more parameters, depending on the number of arguments we use for the +curry()+ method. The parameters are bound from left to right. The +rcurry()+ method which uses a right to left order and the +ncurry()+ where we can supply a parameter value for an argument of the closure at a specific index The good thing is we can even use other closures as parameters for the +curry()+ method.
+
+[source,groovy]
+----
+def addNumbers = { x, y, z -> x + y - z }
+
+def addOne = addNumbers.curry(1)
+assert addOne(10, 2) == 9
+
+def subtractOne = addNumbers.rcurry(1)
+assert subtractOne(10, 2) == 11
+
+def addOneSubtractTwo = addNumbers.ncurry(1, 1, 2)  // From the n-th argument pass these values
+assert addOneSubtractTwo(10) == 9
+
+// Recipe to find text in lines.
+def findText = { filter, handler, text ->
+   text.eachLine {
+       filter(it) ? handler(it) : null
+   }
+}
+// Recipe for a regular expression filter.
+def regexFilter = { pattern, line -> line =~ pattern }
+
+// Create filter for searching lines with "Groovy".
+def groovyFilter = regexFilter.curry(/Groovy/)
+// Create handler to print out line.
+def printHandler = { println "Found in line: $it" }
+
+// Create specific closure as clone of processText to
+// search with groovyFilter and print out found lines.
+def findGroovy = findText.curry(groovyFilter, printHandler)
+
+// Invoke the closure.
+findGroovy('''Groovy rules!
+And Java?
+Well... Groovy needs the JVM...
+''')
+
+// This will output:
+// Found in line: Groovy rules!
+// Found in line: Well... Groovy needs the JVM...
+----
+
+=== Exercise 
+
+[NOTE]
+====
+. Write a 3-argument closure, where the third argument has a default value 'gr8conf'. The closure result returns the concatenation of the 3 arguments.
+. Print the value of the closure.
+. Make a second closure, that curries the first closure, so the 2nd argument is set to 'love'.
+. Make a method, taking two arguments: the closure and a String value, eg. 'I', 'we' or 'you'. The method should print out the result of the closure we created at the previous step.
+====
+
+== Collections
+
+Working with collections is very common in every dag programming. Groovy makes working with collections very easy, by providing a concise syntax and by adding new functionality.
+
+=== Ranges
+
+Ranges are lists with sequential values. Each range is also a list object, because +Range+ extends +java.util.List+. A range can be inclusive (so both begin and end values are in the range) or exclusive (the end value is not in the range). We use +..+ for an inclusive range and +..<+ for an exclusive range.
+
+
+Each object that implements the +Comparable+ interface and implements a +next()+ and +previous()+ method can be used for a range. So this means we can write our own objects so they can be used in ranges, but also we can use for example +String+ objects or +Enum+ values in a range.
+
+[source,groovy]
+----
+// Simple ranges with number values.
+def ints = 1..10
+assert [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] == ints
+assert ints.size() == 10
+assert ints.from == 1
+assert ints.to == 10
+
+// A range is just a List.
+assert 1  == ints[0]
+assert 10 == ints.last()
+
+// Exclusive range.
+def exclusive = 2..<8
+assert [2, 3, 4, 5, 6, 7] == exclusive
+assert 6 == exclusive.size()
+assert !exclusive.contains(8)
+
+// Object with next() and previous() can be used
+// in ranges. Groovy extends Java enum with
+// next() and previous() so we can use it in ranges.
+enum Compass {
+   NORTH, NORTH_EAST, EAST, SOUTH_EAST,
+   SOUTH, SOUTH_WEST, WEST, NORTH_WEST
+}
+def northToSouth = Compass.NORTH..Compass.SOUTH
+assert 5 == northToSouth.size()
+assert Compass.EAST == northToSouth[2]
+assert northToSouth.contains(Compass.SOUTH_EAST)
+
+// Bonus: next() and previous() are equivalent to
+// ++ and -- operators.
+def region = Compass.SOUTH
+assert Compass.SOUTH_WEST == ++region
+assert Compass.SOUTH == --region
+----
+  
+=== Lists
+
+Defining a list in Groovy looks like defining an array. We use square brackets to define a new list. The list is of type +java.util.ArrayList+. It is very easy to create a list this way.
+
+[source,groovy]
+----
+def empty = []
+assert empty.class.name == 'java.util.ArrayList'
+
+class User {
+   String username
+}
+def student = new User(username: 'student')
+
+def items = ['Groovy', 12, student]
+assert items.size() == 3
+assert items[-2] == 12  // Negative index to read from last to first.
+assert items.reverse() == [student, 12, 'Groovy']
+
+items << 'Grails'  // Adding items with the leftShift operator.
+assert items == ['Groovy', 12, student, 'Grails']
+
+assert items + [1, 2] == ['Groovy', 12, student, 'Grails', 1, 2]
+assert items - [student, 12] == ['Groovy', 'Grails']
+----
+  
+=== Maps
+
+Maps are defined by a list of keys and values. The key is a string by default, but we can use any type we want for the key. We can even use variables as keys for our map. We only have to place parentheses around the key to make it work. This way we can use variables and types like +Date+ and +Boolean+ as keys for our map. When we use parentheses around the key when using the +.+ notation the key is converted to a +String+, otherwise the key is not converted and keeps it type.
+
+[source,groovy]
+----
+def empty = [:]
+assert empty.class.name == 'java.util.LinkedHashMap'
+
+// Simple map.
+def m = [name: 'student', language: 'Groovy']
+
+assert 'student' == m.getAt('name')
+assert 'student' == m['name']
+assert 'Groovy' == m.language
+assert 'student' == m."name"
+assert 'student' == m.get('name')  // We can omit the default value if we know the key exists.
+assert 'Groovy' == m.get('language', 'Java')
+assert null == m.get('expression')  // Non-existing key in map.
+assert 'rocks' == m.get('expression', 'rocks')  // Use default value, this also creates the key/value pair in the map.
+assert 'rocks' ==  m.get('expression')
+assert [name: 'student', language: 'Groovy', expression: 'rocks'] == m
+
+def key = 100  // Variable to be used a key.
+
+def m = [
+   user: 'string key', // default
+   (new Date(109, 11, 1)): 'date key',
+   (-42): 'negative number key',
+   (false): 'boolean key',
+   (key): 'variable key'
+]
+m.(true) = 'boolean key'  // Key is converted to String.
+m.(2 + 2) = 'number key'
+m[(key + 1)] = 'number key'  // Key keeps to be Integer.
+
+assert 'date key' == m[new Date(109, 11, 1)]
+assert 'negative number key' == m.get(-42)
+assert 'boolean key' == m[(false)]
+assert 'variable key' == m[100]
+assert 'variable key' == m.getAt(key)
+assert 'boolean key' == m['true']  // Key is String so we can use it to get the value.
+assert 'number key' == m.'4'
+assert 'number key' == m.get(101)
+----
+  
+=== Looping
+
+Looping in Groovy can be done in several ways. We can use the standard classic Java for loop or use the newer Java for-each loop. But Groovy adds more ways to loop several times and execute a piece of code. Groovy extends the +Integer+ class with the +step()+, +upto()+ and +times()+ methods. These methods take a closure as a parameter. In the closure we define the piece of code we want to be executed several times.
+
+
+If we have a +List+ in Groovy we can loop through the items of the list with the +each()+ and +eachWithIndex()+ methods. We also need to pass a closure as parameter to the methods. The closure is then executed for every item in the list.
+
+[source,groovy]
+----
+// Result variable for storing loop results.
+def result = ''
+// Closure to fill result variable with value.
+def createResult = {
+   if (!it) {  // A bit of Groovy truth: it == 0 is false
+       result = '0'
+   } else {
+       result += it
+   }
+}
+
+// Classic for loop.
+for (i = 0; i < 5; i++) {
+   createResult(i)
+}
+assert '01234' == result
+
+// Using int.upto(max).
+0.upto(4, createResult)
+assert '01234' == result
+
+// Using int.times.
+5.times(createResult)
+assert '01234' == result
+
+// Using int.step(to, increment).
+0.step 5, 1, createResult
+assert '01234' == result
+
+// Classic while loop.
+def z = 0
+while (z < 5) {
+   createResult(z)
+   z++
+}
+assert '01234' == result
+
+def list = [0, 1, 2, 3, 4]
+
+// Classic Java for-each loop.
+for (int i : list) {
+   createResult(i)
+}
+assert '01234' == result
+
+// Groovy for-each loop.
+for (i in list) {
+   createResult(i)
+}
+assert '01234' == result
+
+// Use each method to loop through list values.
+list.each(createResult)
+assert '01234' == result
+
+// Ranges are lists as well.
+(0..4).each(createResult)
+assert '01234' == result
+
+// eachWithIndex can be used with closure: first parameter is value, second is index.
+result = ''
+list.eachWithIndex { listValue, index -> result += "$index$listValue" }
+assert '0011223344' == result
+----
+
+Groovy has some features and methods we can categorize as functional programming. The +inject()+ method is a so called higher-order function. Other languages call it a fold, reduce or accumulate. The +inject()+ method processes a data structure with a closure and builds up a return value. The first parameter of the +inject()+ method is the first value of the intermediary results of the second parameter: the closure. When we use the +inject()+ we don't introduce any side effects, because we build up the value without using any outside variable.
+
+To understand the +inject()+ method better we look at some sample code:
+
+[source,groovy]
+----
+// Traditional "sum of the values in a list" sample.
+// First with each() and side effect, because we have
+// to declare a variable to hold the result:
+def total = 0
+(1..4).each { total += it }
+assert 10  == total
+
+// With the inject method we 'inject' the 
+// first value of the result, and then for
+// each item the result is increased and
+// returned for the next iteration.
+def sum = (1..4).inject(0) { result, i -> result + i }
+assert 10 == sum
+
+// We add a println statement to see what happens.
+(1..4).inject(0) { result, i ->
+   println "$result + $i = ${result + i}"
+   result + i
+}
+// Output: 
+// 0 + 1 = 1
+// 1 + 2 = 3
+// 3 + 3 = 6
+// 6 + 4 = 10
+----
+
+=== Finding Data
+Groovy adds several methods to Collection classes to find elements in the collection. The findXXX() methods take a closure and if an element matches the condition defined in the closure we get a result. We can also use the any() method to verify if at least one element applies to the closure condition, or we use the every() method to verify all elements that confirm to the closure condition. Both the any() and every() method return a boolean value.
+
+[source,groovy]
+----
+def list = ['Daffy', 'Bugs', 'Elmer', 'Tweety', 'Silvester', 'Yosemite']
+
+assert list.find { it == 'Bugs' } == 'Bugs'
+assert list.findAll { it.size() < 6 } == ['Daffy', 'Bugs', 'Elmer']
+
+assert list.findIndexOf { name ->
+   name =~ /^B.*/
+} == 1  // Start with B.
+assert list.findIndexOf(3) { it[0] > 'S' } == 3 // Use a start index.
+assert list.findIndexValues { it =~ /(y|Y)/ } == [0,3,5] // Contains y or Y.
+assert list.findIndexValues(2) { it =~ /(y|Y)/ } == [3,5]
+assert list.findLastIndexOf { it.size() == 5 } == 2
+assert list.findLastIndexOf(1) { it.count('e') > 1 } == 5
+assert list.any { it =~ /a/ }
+assert list.every { it.size() > 3 }
+
+
+def map = [name: 'Groovy and Grails', url: 'http://groovy.codehaus.org', blog: false]
+def found = map.find { key, value ->
+   key == 'name'
+}
+assert found.key == 'name' && found.value == 'Groovy and Grails'
+
+found = map.find { it.value =~ /Groovy/ }
+assert found.key == 'name' && found.value == 'Groovy and Grails'
+
+assert map.findAll { key, value ->
+   value =~ /(G|g)roovy/
+} == [name: 'Groovy and Grails', url: 'http://groovy.codehaus.org']
+
+assert map.findIndexOf { it.value.endsWith('org') } == 1
+assert map.findIndexValues { it.key =~ /l/ } == [1,2]  // All keys with the letter 'l'.
+assert map.findLastIndexOf { it.key =~ /l/ && !it.value } == 2
+assert map.any { entry ->
+   entry.value
+}
+assert map.every { key, value ->
+   key.size() >= 3
+}
+----
+
+The grep() method is used to filter elements in a collection. The argument of the grep() method is a filter Object. This is related to Groovy's switch statement, because the same isCase() method is used to evaluate the filter.
+
+[source,groovy]
+----
+assert [true] == ['test', 12, 20, true].grep(Boolean), 'Class isInstance'
+assert ['Groovy'] == ['test', 'Groovy', 'Java'].grep(~/^G.*/), 'Pattern match'
+assert ['b', 'c'] == ['a', 'b', 'c', 'd'].grep(['b', 'c']), 'List contains'
+assert [15, 16, 12] == [1, 15, 16, 30, 12].grep(12..18), 'Range contains'
+assert [42.031] == [12.300, 109.20, 42.031, 42.032].grep(42.031), 'Object equals'
+assert [100, 200] == [10, 20, 30, 50, 100, 200].grep({ it > 50 }), 'Closure boolean'
+----
+
+=== Grouping Elements
+In Groovy we can group the elements of a Collection type in a map. We define the rule for grouping with a closure. The result is a map where the key is the grouping condition and the value contains the elements of the Collection type belonging to the key.
+
+[source,groovy]
+----
+class User {
+   String name
+   String city
+   Date birthDate
+   public String toString() { "$name" }
+}
+
+def users = [
+   new User(name:'mrhaki', city:'Tilburg', birthDate:new Date(73,9,7)),
+   new User(name:'bob', city:'New York', birthDate:new Date(63,3,30)),
+   new User(name:'britt', city:'Amsterdam', birthDate:new Date(80,5,12)),
+   new User(name:'kim', city:'Amsterdam', birthDate:new Date(83,3,30)),
+   new User(name:'liam', city:'Tilburg', birthDate:new Date(109,3,6))
+]
+
+// Helper closure for asserts.
+def userToString = { it.toString() }
+
+// Group by city property of user object:
+def usersByCity = users.groupBy({ user ->
+   user.city
+})
+assert 2 == usersByCity["Tilburg"].size()
+assert ['mrhaki', 'liam'] == usersByCity["Tilburg"].collect(userToString)
+assert ['bob'] == usersByCity["New York"].collect(userToString)
+assert ['britt', 'kim'] == usersByCity["Amsterdam"].collect(userToString)
+
+// Group by year of birthdate property of user object:
+def byYear = { u ->
+   u.birthDate[Calendar.YEAR]
+}
+def usersByBirthDateYear = users.groupBy(byYear)
+assert ['mrhaki'] == usersByBirthDateYear[1973].collect(userToString)
+
+// Just a little fun with the closure:
+def groupByGroovy = {
+   if (it =~ /y/) {
+       "Contains y"
+   } else {
+       "Doesn't contain y"
+   }
+}
+assert ["Contains y":["Groovy"], "Doesn't contain y":["Java", "Scala"]] == ['Groovy', 'Java', 'Scala'].groupBy(groupByGroovy)
+----
+
+== Files
+
+When we write code in Java to work with files we must write a lot of boilerplate code to make sure all streams are opened and closed correctly and provide exception handling. The Commons IO package already helps, but Groovy makes working with files so easy. Groovy adds a lot of useful methods to the java.io.File class. We can use simple properties to write and read text, methods to traverse the file system and methods to filter contents.
+
+
+Here is a Groovy script with different samples of working with files:
+
+[source,groovy]
+----
+// Normal way of creating file objects.
+def file1 = new File('groovy1.txt')
+def file2 = new File('groovy2.txt')
+def file3 = new File('groovy3.txt')
+
+// Writing to the files with the write method:
+file1.write 'Working with files the Groovy way is easy.\n'
+
+// Using the leftShift operator:
+file1 << 'See how easy it is to add text to a file.\n'
+
+// Using the text property:
+file2.text = '''We can even use the text property of
+a file to set a complete block of text at once.'''
+
+// Or a writer object:
+file3.withWriter('UTF-8') { writer ->
+   writer.write('We can also use writers to add contents.')
+}
+
+// Reading contents of files to an array:
+def lines = file1.readLines()
+assert 2 == lines.size()
+assert 'Working with files the Groovy way is easy.' == lines[0]
+
+// Or we read with the text property:
+assert 'We can also use writers to add contents.' == file3.text
+
+// Or with a reader:
+count = 0
+file2.withReader { reader ->
+   while (line = reader.readLine()) {
+       switch (count) {
+           case 0:
+               assert 'We can even use the text property of' == line
+               break
+           case 1:
+               assert 'a file to set a complete block of text at once.' == line
+               break
+       }
+       count++
+   }
+}
+
+// We can also read contents with a filter:
+sw = new StringWriter()
+file1.filterLine(sw) { it =~ /Groovy/ }
+assert 'Working with files the Groovy way is easy.\r\n' == sw.toString()
+
+// We can look for files in the directory with different methods.
+// See for a complete list the File GDK documentation.
+files = []
+new File('.').eachFileMatch(~/^groovy.*\.txt$/) { files << it.name }
+assert ['groovy1.txt', 'groovy2.txt', groovy3.txt'] == files
+
+// Delete all files:
+files.each { new File(it).delete() }
+Working with URLs
+Working with URLs is just as easy as working with files. Groovy has decorated the URL with some of the same methods, as for files.
+Here is a Groovy script with different samples of working with files:
+
+// Converting a string to an URL
+def url = "http://mrhaki.com/books.xml".toURL()
+
+// Read the entire URL text
+def text = url.text
+assert text.startsWith('<?xml version="1.0"?>')
+
+// Read each line from the URL
+url.eachLine {
+    println it
+}
+/* Outputs:
+<?xml version="1.0"?> 
+<books count="3"> 
+ <book id="1"> 
+   <title lang="en">Groovy in Action</title> 
+   <isbn>1-932394-84-2</isbn> 
+ </book> 
+ <book id="2"> 
+   <title lang="en">Groovy Programming</title> 
+   <isbn>0123725070</isbn> 
+ </book> 
+ <book id="3"> 
+   <title>Groovy &amp; Grails</title> 
+   <!--Not yet available.--> 
+ </book> 
+ <book id="4"> 
+   <title>Griffon Guide</title> 
+ </book> 
+</books>
+*/
+
+// Iterate over the URL content with a reader
+url.withReader { reader ->
+    def count = 0
+    while(line = reader.readLine()) {
+        switch(count) {
+            case 0:
+                assert line == '<?xml version="1.0"?>'
+                break;
+            case 1: 
+                assert line == '<books count="3">'
+                break;
+            case 17:
+                assert line == '</books>'
+                break;        
+        }
+        count++    
+    }
+}
+----
+
+== XML
+XML is something we come across quite regularly when we develop applications. Sometimes we need to write some XML or we need to read it. With Groovy these tasks are easy. We don't have to worry about DOM or SAX (unless we want to of course).
+
+
+To create a hierarchical structure like XML we can use different kind of builders in Groovy. These classes allow us to define the structure in our code of the hierarchy and is then output to the format we want. To create XML we can use the MarkupBuilder or the StreamingMarkupBuilder. Both allow us to define the XML structure with builder syntax. The MarkupBuilder is good for simple XML, but if we want to add for example namespaces we can use the StreamingMarkupBuilder.
+
+[source,groovy]
+----
+import groovy.xml.*
+
+def writer = new StringWriter()
+def html = new MarkupBuilder(writer)
+html.html {
+   head {
+       title 'Simple document'
+   }
+   body(id: 'main') {
+       h1 'Building HTML the Groovy Way'
+       p {
+          mkp.yield 'Mixing text with '
+          strong 'bold'
+          mkp.yield ' elements.'
+       }
+       a href: 'more.html', 'Read more...'
+   }
+}
+println writer
+
+/*
+Output:
+<html>
+ <head>
+   <title>Simple document</title>
+ </head>
+ <body id='main'>
+   <h1>Building HTML the Groovy Way</h1>
+   <p>Mixing text with
+     <b>bold</b> elements.
+   </p>
+   <a href="more.html">Read more..</a>
+ </body>
+</html>
+*/
+
+def builder = new StreamingMarkupBuilder()
+builder.encoding = 'UTF-8'
+def books = builder.bind {
+   mkp.xmlDeclaration()
+   namespaces << [meta:'http://meta/book/info']  // Or mkp.declareNamespace('meta':'http://meta/book/info')
+   books(count: 3) {
+       book(id: 1) {
+           title lang:'en', 'Groovy in Action'
+           meta.isbn '1-932394-84-2'
+       }
+       book(id: 2) {
+           title lang:'en', 'Groovy Programming'
+           meta.isbn '0123725070'
+       }
+       book(id: 3) {
+           title 'Groovy & Grails'  // & is converted to &amp;
+           comment << 'Not yet available.'  // Or mkp.comment('Not yet available')
+       }
+       book(id: 4) {
+           mkp.yieldUnescaped '<title>Griffon Guide</title>'
+       }
+   }
+}
+
+println XmlUtil.serialize(books)
+
+/*
+Output:
+<?xml version="1.0" encoding="UTF-8"?>
+<books xmlns:meta="http://meta/book/info" count="3">
+ <book id="1">
+   <title lang="en">Groovy in Action</title>
+   <meta:isbn>1-932394-84-2</meta:isbn>
+ </book>
+ <book id="2">
+   <title lang="en">Groovy Programming</title>
+   <meta:isbn>0123725070</meta:isbn>
+ </book>
+ <book id="3">
+   <title>Groovy &amp; Grails</title>
+   <!--Not yet available.-->
+ </book>
+ <book id="4">
+   <title>Griffon Guide</title>
+ </book>
+</books>
+*/
+----
+  
+To read XML in Groovy we can use two parser classes: XmlParser and XmlSlurper. The main difference between both parsers is that the XmlParser return a list of NodeList and Node objects and the XmlSlurper return a GPathResult.
+
+
+First we parse the XML with the XmlParser. We define a namespace so we can access the meta.isbn elements with a namespace syntax.
+
+[source,groovy]
+----
+import groovy.xml.*
+
+def xml = '''
+<books xmlns:meta="http://meta/book/info" count="3">
+ <book id="1">
+   <title lang="en">Groovy in Action</title>
+   <meta:isbn>1-932394-84-2</meta:isbn>
+ </book>
+ <book id="2">
+   <title lang="en">Groovy Programming</title>
+   <meta:isbn>0123725070</meta:isbn>
+ </book>
+ <book id="3">
+   <title>Groovy &amp; Grails</title>
+   <!--Not yet available.-->
+ </book>
+ <book id="4">
+   <title>Griffon Guide</title>
+ </book>
+</books>
+'''
+
+def ns = new Namespace('http://meta/book/info', 'meta')
+def books = new XmlParser().parseText(xml)
+assert books instanceof Node
+assert 4 == books.book.size()
+assert 11 == books.breadthFirst().size()
+assert 'Groovy in Action' == books.book[0].title.text()
+assert 'Groovy Programming' == books.book.find { it.'@id' == '2' }.title.text()
+assert 'Groovy Programming' == books.book.find { it.attribute('id') == '2' }.title.text()
+assert [1, 2, 3] ==  books.book.findAll { it.title.text() =~ /Groovy/ }.'@id'
+assert ['1-932394-84-2', '0123725070'] == books.book[ns.isbn].inject([]) { result, v -> result << v.text() }
+----
+
+Next we use XmlSlurper to parse the same XML.
+
+[source,groovy]
+----
+import groovy.xml.*
+
+def xml = '''
+<books xmlns:meta="http://meta/book/info" count="3">
+ <book id="1">
+   <title lang="en">Groovy in Action</title>
+   <meta:isbn>1-932394-84-2</meta:isbn>
+ </book>
+ <book id="2">
+   <title lang="en">Groovy Programming</title>
+   <meta:isbn>0123725070</meta:isbn>
+ </book>
+ <book id="3">
+   <title>Groovy &amp; Grails</title>
+   <!--Not yet available.-->
+ </book>
+ <book id="4">
+   <title>Griffon Guide</title>
+ </book>
+</books>
+'''
+
+def books = new XmlSlurper().parseText(xml).declareNamespace([meta:'http://meta/book/info'])
+assert books instanceof groovy.util.slurpersupport.GPathResult
+assert 4 == books.book.size()
+assert 11 == books.breadthFirst().size()
+assert 'Groovy in Action' == books.book[0].title
+assert 'Groovy Programming' == books.book.find { it.@id == '2' }.title
+assert [1, 2, 3] == books.book.findAll { it.title =~ /Groovy/ }.'@id'.list()
+assert ['1-932394-84-2', '0123725070'] == books.book.'meta:isbn'.list()
+----
+
+== AST Transformations
+
+Groovy adds AST (Abstract Syntax Tree) transformations to be able to add metaprogramming capabilities during compile-time. We can use AST transformations to add for example extra code the compiled class. Because we can access the AST we can add our own stuff to extend the AST.
+
+
+Groovy supports global and local transformations. Global transformations are applied to by the compiler on the code being compiled, wherever the transformation apply. A JAR added to the classpath of the compiler should contain a service locator file at META-INF/services/org.codehaus.groovy.transform.ASTTransformation with a line with the name of the transformation class. The transformation class must have a no-args constructor and implement the org.codehaus.groovy.transform.ASTTransformationinterface. It will be run against every source in the compilation, so be sure to not create transformations which scan all the AST in an expansive and time-consuming manner, to keep the compiler fast.
+Local transformations are transformations applied locally by annotating code elements you want to transform. For this, we reuse the annotation notation, and those annotations should implement org.codehaus.groovy.transform.ASTTransformation. The compiler will discover them and apply the transformation on these code elements.
+
+
+We take a look at several transformations that are already present in Groovy.
+
+
+=== @Delegate
+
+With this annotation we can import all the methods of the class the annotation is used for. For example if we use the delegate annotation for the Date class we get all the methods of the Date class in our class. Just like that. This is best explained with a little sample in which we use the @Delegate annotation for properties of type Date and List:
+
+[source,groovy]
+----
+class SimpleEvent {
+    @Delegate Date when
+    @Delegate List<String> attendees = []
+    int maxAttendees = 0
+    String description
+}
+
+def event = new SimpleEvent(when: new Date() + 7, description: 'Small Groovy seminar', maxAttendees: 2)
+
+assert 0 == event.size()  // Delegate to List.size()
+assert event.after(new Date())  // Delegate to Date.after()
+assert 'Small Groovy seminar' == event.description
+assert 2 == event.maxAttendees
+
+event << 'mrhaki' << 'student1'  // Delegate to List.leftShift()
+assert 2 == event.size()
+assert 'mrhaki' == event[0]
+
+event -= 'student1'  // Delegate to List.minus()
+assert 1 == event.size()
+----
+
+We have used the @Delegate annotations and as by magic the SimpleEvent has all methods of both the Date class and List interface. The code reads naturally and the meaning is obvious. Because the SimpleEvent class has all methods from the List interface we can override the methods as well. In our sample we override the add() so we can check if the number of attendees doesn't exceed the maximum number of attendees allowed:
+
+[source,groovy]
+----
+class SimpleEvent {
+    @Delegate Date when
+    @Delegate List<String> attendees = []
+    int maxAttendees = 0
+    String description
+
+
+    boolean add(Object value) {
+        if (attendees.size() < maxAttendees) {
+            return attendees.add(value)
+        } else {
+            throw new IllegalArgumentException("Maximum of ${maxAttendees} attendees exceeded.")
+        }
+    }
+}
+
+def event = new SimpleEvent(when: new Date() + 7, description: 'Small Groovy seminar', maxAttendees: 2)
+event << 'mrhaki' << 'student1'
+
+try {
+    event << 'three is a crowd.'
+    assert false
+} catch (IllegalArgumentException e) {
+    assert 'Maximum of 2 attendees exceeded.' == e.message
+}
+----
+
+
+
+=== @Synchronized
+This annotation is based on the Project Lombok Synchronized annotation. We can use the annotation on instance and static methods. The annotation will create a lock variable in our class (or we can use an existing variable) and the code is synchronized on that lock variable. Normally with the synchronized keyword the lock is on this, but that can have side-effects.
+
+
+[source,groovy]
+----
+import groovy.transform.Synchronized
+
+class Util {
+    private counter = 0
+    
+    private def list = ['Groovy']
+    
+    private Object listLock = new Object[0]
+    
+    @Synchronized
+    void workOnCounter() {
+        assert 0 == counter
+        counter++
+        assert 1 == counter
+        counter --
+        assert 0 == counter
+    }
+    
+    @Synchronized('listLock')
+    void workOnList() {
+        assert 'Groovy' == list[0]
+        list << 'Grails'
+        assert 2 == list.size()
+        list = list - 'Grails'
+        assert 'Groovy' == list[0]
+    }
+}
+
+def util = new Util()
+def tc1 = Thread.start { 
+    100.times { 
+        util.workOnCounter()
+        sleep 20 
+        util.workOnList()
+        sleep 10
+    } 
+}
+def tc2 = Thread.start { 
+    100.times { 
+        util.workOnCounter()
+        sleep 10 
+        util.workOnList()
+        sleep 15
+    } 
+}
+tc1.join()
+tc2.join()
+----
+
+
+
+=== @Bindable and @Vetoable (code size reduction!)
+
+We see how we can implement bound and constrained properties as defined in the JavaBeans specification. A bound property is a bean property for which a change to the property results in a notification being sent to some other bean. A constrained property is a bean property for which a change to the property results in validation by another bean. The other bean may reject the change if it is not appropriate.
+
+Implementing these properties is of course easy in Groovy! Groovy supports the @Bindable and @Vetoable annotations (extra info on Groovy site) to implement bound and constrained properties. The following code shows a simple bean:
+
+[source,groovy]
+----
+import groovy.beans.*
+
+class Car {
+   int numberOfDoors
+   @Vetoable String model
+   @Vetoable String brand
+   boolean automatic
+   @Bindable double price
+ 
+   String toString() {
+     "[Car details => brand: '${brand}', model: '${model}', #doors: '${numberOfDoors}', automatic: '${automatic}', price: '${price}']"
+   }
+}
+----
+
+=== @Singleton (massive code size reduction!)
+Creating a singleton class in Groovy is simple. We only have to use the @Singleton transformation annotation and a complete singleton class is generated for us.
+
+[source,groovy]
+----
+package org.gr8conf.blog
+
+// Old style singleton class.
+public class StringUtil {
+   private static final StringUtil instance = new StringUtil();
+
+   private StringUtil() {
+   }
+
+   public static StringUtil getInstance() { 
+       return instance;
+   }
+   
+   int count(text) { 
+       text.size() 
+   }
+}
+
+assert 6 == StringUtil.instance.count('mrhaki')
+
+// Use @Singleton to create a valid singleton class.
+// We can also use @Singleton(lazy=true) for a lazy loading
+// singleton class.
+@Singleton 
+class Util {
+   int count(text) {
+       text.size()
+   }
+}
+
+assert 6 == Util.instance.count("mrhaki")
+
+try {
+   new Util()
+} catch (e) {
+   assert e instanceof RuntimeException
+   assert "Can't instantiate singleton org.gr8conf.blog.Util. Use org.gr8conf.blog.Util.instance" == e.message
+}
+----
+
+=== @InheritConstructors
+When we apply this transformation to our class we automatically get all constructors from the super class. This is very useful if we for example extend from java.lang.Exception, because otherwise we would have to define four constructors ourselves. The transformation adds these constructors for us in our class file. This works also for our own created classes.
+
+[source,groovy]
+----
+import groovy.transform.InheritConstructors
+
+@InheritConstructors
+class MyException extends Exception {
+}
+
+def e = new MyException()
+def e1 = new MyException('message')   // Other constructors are available.
+assert 'message' == e1.message
+
+class Person {
+   String name
+   
+   Person(String name) {
+       this.name = name
+   }
+}
+
+@InheritConstructors
+class Child extends Person {}
+
+def child = new Child('Liam')
+assert 'Liam' == child.name
+----
+
+=== @Newify
+The @Newify transformation annotation allows other ways to create a new instance of a class. We can use a new() method on the class or even omit the whole new keyword. The syntax is copied from other languages like Ruby and Python. If we use the @Newify annotation we get a slightly more readable piece of code (in some situations). We can use parameters in the annotation to denote all those classes we want to be instantiated with the new() method or without the new keyword.
+
+[source,groovy]
+----
+class Author {
+   String name
+   List books
+}
+class Book { 
+   String title 
+}
+
+def createKing() {
+   new Author(name: 'Stephen King', books: [
+       new Book(title: 'Carrie'),
+       new Book(title: 'The Shining'),
+       new Book(title: 'It')
+   ])
+}
+
+assert 3 == createKing().books.size()
+assert 'Stephen King' == createKing().name
+assert 'Carrie' == createKing().books.getAt(0).title
+----
+
+[source,groovy]
+----
+@Newify 
+def createKingRuby() {
+   Author.new(name: 'Stephen King', books: [
+       Book.new(title: 'Carrie'),
+       Book.new(title: 'The Shining'),
+       Book.new(title: 'It')
+   ])
+}
+
+assert 3 == createKingRuby().books.size()
+assert 'Stephen King' == createKingRuby().name
+assert 'Carrie, The Shining, It' == createKingRuby().books.title.join(', ')
+----
+
+[source,groovy]
+----
+@Newify([Author, Book]) 
+def createKingPython() {
+   Author(name: 'Stephen King', books: [
+       Book(title: 'Carrie'),
+       Book(title: 'The Shining'),
+       Book(title: 'It')
+   ])
+}
+
+assert 3 == createKingPython().books.size()
+assert 'Stephen King' == createKingPython().name
+assert 'It' == createKingPython().books.title.find { it == 'It' }
+----
+
+=== @Immutable
+
+Immutable objects are created and cannot change after creation. This makes immutable objects very usable in concurrent and functional programming. To define a Java class as immutable we must define all properties as readonly and private. Only the constructor can set the values of the properties. The Groovy documentation has a complete list of the rules applying to immutable objects. The Java code to make a class immutable is verbose, especially since the hashCode(), equals() and toString() methods need to be overridden.
+
+
+We only have to define @Immutable in our class definition and any object we create for this class is an immutable object. Groovy generates a class file following the rules for immutable objects. So all properties are readonly, constructors are created to set the properties, implementations for the hashCode(), equals() and toString() methods are generated.
+
+[source,groovy]
+----
+@Immutable class User {
+   String username, email
+   Date created = new Date()
+   Collection roles
+}
+
+def first = new User(username: 'mrhaki', email: 'email@host.com', roles: ['admin', 'user'])
+assert 'mrhaki' == first.username
+assert 'email@host.com' == first.email
+assert ['admin', 'user'] == first.roles
+assert new Date().after(first.created)
+
+try {
+   // Properties are readonly.
+   first.username = 'new username'
+} catch (ReadOnlyPropertyException e) {
+   assert 'Cannot set readonly property: username for class: User' == e.message
+}
+
+try {
+   // Collections are wrapped in immutable wrapper classes, so we cannot
+   // change the contents of the collection.
+   first.roles << 'new role'
+} catch (UnsupportedOperationException e) {
+   assert true
+}
+
+def date = new Date(109, 8, 16)
+def second = new User('user', 'test@host.com', date, ['user'])
+assert 'user' == second.username
+assert 'test@host.com' == second.email
+assert ['user'] == second.roles
+assert '2009/08/16' == second.created.format('yyyy/MM/dd')
+assert date == second.created
+assert !date.is(second.created)  // Date, Clonables and arrays are deep copied.
+// toString() implementation is created.
+assert 'User(user, test@host.com, Wed Sep 16 00:00:00 UTC 2009, [user])' == second.toString() 
+
+def third = new User(username: 'user', email: 'test@host.com', created: date, roles: ['user'])
+// equals() method is also generated by the annotation and is based on the
+// property values.
+assert third == second
+----
+
+
+=== @EqualsAndHashCode
+
+With this annotation an equals() and hashCode() method is generated for a class. The hashCode() method is implemented using Groovy's org.codehaus.groovy.util.HashCodeHelper (following an algorithm from the book Effective Java). The equals() method looks at all the single properties of a class to see of both objects are the same.
+
+We can even include class fields instead of only properties for generating both methods. We only have to use includeFields=true when we assign the annotation.
+
+To include calls to a super class we use the annotation attribute callSuper and assign the value true. Finally we can also exclude properties or fields from hashcode calculation or equal comparisons. We use the annotation attribute excludes for this and we can assign a list of property and field names.
+
+[source,groovy]
+----
+import groovy.transform.EqualsAndHashCode
+
+@EqualsAndHashCode(includeFields=true)
+class User {
+   String name
+   boolean active
+   List likes
+   private int age = 37
+}
+
+def user = new User(name: 'mrhaki', active: false, likes: ['Groovy', 'Java'])
+def mrhaki = new User(name: 'mrhaki', likes: ['Groovy', 'Java'])
+def hubert = new User(name: 'Hubert Klein Ikkink', likes: ['Groovy', 'Java'])
+
+assert user == mrhaki
+assert mrhaki != hubert
+
+Set users = new HashSet()
+users.add user
+users.add mrhaki
+users.add hubert
+assert users.size() == 2
+----
+
+=== @ToString
+We can use the @ToString annotation for easy creation of a toString() method. We only have to add the annotation to our class definition and we get a nicely formatted output of the properties of our class.
+
+
+We can even customize what we want to see in the output. We can see the names of the properties of our class in the toString() output if we add the attribute includeNames=true. By default only properties are added to the output, but we can include fields as well with the annotation attribute includeFields=true. To exclude properties we use the attribute excludes and assign the names of the properties we don't want in the output separated by a comma.
+
+
+Finally we can include properties from a super class with the annotation atribute includeSuper=true.
+
+
+Let's see the @ToString in action with a few samples:
+
+[source,groovy]
+----
+// Most simple implementation of toString.
+import groovy.transform.ToString
+
+@ToString
+class Person {
+   String name
+   List likes
+   private boolean active = false
+}
+
+def person = new Person(name: 'mrhaki', likes: ['Groovy', 'Java'])
+
+assert person.toString() == 'Person(mrhaki, [Groovy, Java])'
+----
+
+[source,groovy]
+----
+// includeNames to output the names of the properties.
+import groovy.transform.ToString
+
+@ToString(includeNames=true)
+class Person {
+   String name
+   List likes
+   private boolean active = false
+}
+
+def person = new Person(name: 'mrhaki', likes: ['Groovy', 'Java'])
+
+assert person.toString() == 'Person(name:mrhaki, likes:[Groovy, Java])'
+----
+
+[source,groovy]
+----
+// includeFields to not only output properties, but also field values.
+import groovy.transform.ToString
+
+@ToString(includeNames=true, includeFields=true)
+class Person {
+   String name
+   List likes
+   private boolean active = false
+}
+
+def person = new Person(name: 'mrhaki', likes: ['Groovy', 'Java'])
+
+assert person.toString() == 'Person(name:mrhaki, likes:[Groovy, Java], active:false)'
+----
+
+[source,groovy]
+----
+// Use includeSuper to include properties from super class in output.
+import groovy.transform.ToString
+
+@ToString(includeNames=true)
+class Person {
+   String name
+   List likes
+   private boolean active = false
+}
+
+@ToString(includeSuper=true, includeNames=true)
+class Student extends Person {
+   List courses
+}
+
+def student = new Student(name: 'mrhaki', likes: ['Groovy', 'Java'], courses: ['IT', 'Business'])
+
+assert student.toString() == 'Student(courses:[IT, Business], super:Person(name:mrhaki, likes:[Groovy, Java]))'
+----
+
+[source,groovy]
+----
+// excludes active field and likes property from output
+import groovy.transform.ToString
+
+@ToString(includeNames=true, includeFields=true, excludes='active,likes')
+class Person {
+   String name
+   List likes
+   private boolean active = false
+}
+
+def person = new Person(name: 'mrhaki', likes: ['Groovy', 'Java'])
+
+assert person.toString() == 'Person(name:mrhaki)'
+----
+
+=== @Log (with variations JUL, Log4j, Slf4j, Commons, Log4j2)
+We can inject a log field into our classes with a simple annotation. In our class we can invoke method on the log field, just as we would do if we wrote the code to inject the log field ourselves. How many times have we written code like this Logger log = LoggerFactory.getLogger(<class>) at the top of our classes to use for example the Slf4j API? Since Groovy 1.8 we only have to add the @Slf4j annotation to our class and get the same result. AND each invocation of a log method is encapsulated in a check to see if the log level is enabled.
+
+[source,groovy]
+----
+// File: LogSlf4j.groovy
+// Add dependencies for Slf4j API and Logback
+@Grapes([
+   @Grab(group='org.slf4j', module='slf4j-api', version='1.6.1'),
+   @Grab(group='ch.qos.logback', module='logback-classic', version='0.9.28')
+])
+import org.slf4j.*
+import groovy.util.logging.Slf4j
+
+// Use annotation to inject log field into the class.
+@Slf4j
+class HelloWorldSlf4j {
+   def execute() {
+       log.debug 'Execute HelloWorld.'
+       log.info 'Simple sample to show log field is injected.'
+   }
+}
+
+def helloWorld = new HelloWorldSlf4j()
+helloWorld.execute()
+----
+
+Besides an annotation for the Slf4j API other logging frameworks are supported with annotations:
+
+|===
+|Log implementation |AST Annotation
+
+|java.util.logging                
+|@Log
+
+|Log4j                                
+|@Log4j
+
+|Apache Commons Logging        
+|@Commons
+
+|Slf4j API                        
+|@Slf4j
+|===
+
+== Meta Programming
+
+Groovy is a dynamic language. Besides dynamically typed variables we can change the behavior of classes and object at run-time. This is where a lot of magic of Groovy happens and we can do the same thing. We have several ways to manipulate classes and objects. For example we can add new methods to the String class. In this lab we learn how to do this kind of 'magic'.
+
+=== Categories
+
+Categories allow us to add extra functionality to classes, even those classes we didn't develop ourselves. A Category class contain static methods. The first argument of the method determines the type the method can be applied to.
+We can also use the @Category transformation annotation to make a class into a category. The class doesn't have to define static methods anymore, but we can use instance methods. The parameter of the @Category annotation defines for which class the category is.
+The category can be applied to a specific code block with the use() method. Only within the code block (which is a closure) the rules of the category are applied. The last statement of the code block is also the return value of the use() method.
+
+[source,groovy]
+----
+class Speak {
+   static String shout(String text) {  // Method argument is String, so we can add shout() to String object.
+       text.toUpperCase() + '!'
+   }
+
+
+   static String whisper(String text, boolean veryQuiet = false) {
+       "${veryQuiet ? 'sssssssh' : 'sssh'}.. $text"
+   }
+
+
+   static String army(String text) {
+       "$text. Sir, yes sir!"
+   }
+}
+
+use (Speak) {
+   assert 'PAY ATTENTION!' == "Pay attention".shout()
+   assert 'sssh.. Be vewy, vewy, quiet.' == "Be vewy, vewy, quiet.".whisper()
+   assert 'sssssssh.. Be vewy, vewy, quiet.' == "Be vewy, vewy, quiet.".whisper(true)
+   assert 'Groovy rocks. Sir, yes sir!' == "Groovy rocks".army()
+}
+----
+
+[source,groovy]
+----
+// Or we can use the @Category annotation.
+@Category(String)
+class StreetTalk {
+   String hiphop() {
+       "Yo, yo, here we go. ${this}"
+   }
+}
+
+
+use(StreetTalk) {
+   assert 'Yo, yo, here we go. Groovy is fun!' == 'Groovy is fun!'.hiphop()
+}
+----
+  
+We can even use public static methods from Java classes. Or we can use the @Category annotation in our Java code to turn it into a Groovy category.
+
+[source,java]
+----
+// File: JavaTalk.java
+package org.gr8conf.java;
+
+import groovy.lang.Category;
+
+@Category(String.class)
+public class JavaTalk {
+   /** Instance method. */
+   public String hiphop() {
+       return "Yo yo, " + this;
+   }
+
+   /** Static method. */
+   public static String text(Integer i) {
+       switch (i) {
+           case 1: return "one";
+           case 2: return "two";
+           default: return i.toString();
+       }
+   }
+}
+----
+  
+[source,groovy]
+----
+// File: TalkApp.groovy
+package org.gr8conf.groovy
+
+use (org.gr8conf.java.JavaTalk) {
+    assert 1.text() == 'one'
+    assert 2.text() == 'two'
+    assert 3.text() == '3'
+
+    assert "Groovy rulez!".hiphop() == 'Yo yo, Groovy rulez!'
+}
+----
+  
+=== Mixins
+
+We can also add new functionality to classes with the mixin() method (runtime) or with the @Mixin annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.
+
+[source,groovy]
+----
+package org.gr8conf.groovy
+
+import org.gr8conf.java.JavaTalk
+
+class Parrot {
+    static String speak(String text) {
+        /Parrot says "$text"/
+    }
+}
+
+String.mixin Parrot
+Integer.mixin JavaTalk
+
+assert "Lorre".speak() == 'Parrot says "Lorre"'
+assert 1.text() == 'one'
+assert 2.text() == 'two'
+----  
+
+[source,groovy]
+----
+class Pirate {
+    def talk(text) {
+        "Aargh, walk the plank. ${text}"
+    }
+}
+
+// Compile time mixin to Talk class. This add all
+// methods from Pirate to Talk.
+@Mixin(Pirate)
+class Talk {}
+
+assert 'Aargh, walk the plank. Give me a bottle of rum.' == new Talk().talk("Give me a bottle of rum.")
+----
+
+=== MetaClass
+
+If we define a class in Groovy we automatically implement the groovy.lang.GroovyObject interface. Groovy adds a default implementation for the methods in the interface to our generated class file.
+
+[source,groovy]
+----
+public interface GroovyObject {
+   public Object invokeMethod(String name, Object args);
+   public Object getProperty(String name);
+   public void setProperty(String name, Object value);
+   public MetaClass getMetaClass();
+   public void setMetaClass(MetaClass metaClass);
+}
+----
+  
+We can implement this interface in our Java classes to make them Groovy classes immediately. Or we can extend GroovyObjectSupport to get default implementations for the methods.
+
+[source,groovy]
+----
+class Simple {
+   def props = [:]
+
+   Object invokeMethod(String name, Object args) {
+       def argumentsCount = args.size()
+       return "invokeMethod with name $name and $argumentsCount arguments"
+   }
+
+   void setProperty(String name, Object value) {
+       props[name] = value
+   }
+
+   Object getProperty(String name) {
+       props.get name, 'no value'
+   }
+}
+
+def s = new Simple()
+
+assert s.doSomething() == 'invokeMethod with name doSomething and 0 arguments'
+assert s.runIt('Groovy', 42) == 'invokeMethod with name runIt and 2 arguments'
+
+s.simple = true
+assert s.simple
+
+assert s.value == 'no value'
+----
+
+We can do the same thing with a Java class which we extend from GroovyObjectSupport.
+
+[source,java]
+----
+// File: JavaSimple.java
+package org.gr8conf.java;
+
+import groovy.lang.GroovyObjectSupport;
+
+import java.lang.Object;
+import java.lang.Override;
+import java.lang.String;
+
+public class JavaSimple extends GroovyObjectSupport {
+   private Map props = new HashMap();
+
+   @Override
+   public Object getProperty(String property) {
+       Object value = props.get(property);
+       if (value == null) {
+           value = "no value";
+       }
+       return value;
+   }
+
+   @Override
+   public void setProperty(String property, Object newValue) {
+       props.put(property, newValue);
+   }
+
+   @Override
+   public Object invokeMethod(String name, Object args) {
+       int argumentsCount = args.size();
+       return "invokeMethod with name " + name + " and " + argumentsCount + " arguments"
+   }
+}
+----
+
+When we compile this Java class with groovyc we can use it in our script:
+
+[source,groovy]
+----
+// File: RunJavaSimple.groovy
+package org.gr8conf.groovy
+
+def s = new org.g8conf.java.JavaSimple()
+assert s.doSomething() == 'invokeMethod with name doSomething and 0 arguments'
+assert s.runIt('Groovy', 42) == 'invokeMethod with name runIt and 2 arguments'
+
+s.simple = true
+assert s.simple
+
+assert s.value == 'no value'
+----
+
+The getMetaClass() method is our entry to extend classes. Groovy adds this method also to some Java classes, like String, so we can extend those as well. We can use the metaClass property to dynamically add methods, properties, constructors and static methods using a closure. This is very powerful.
+
+[source,groovy]
+----
+class User {
+   String username
+}
+
+// Add a constructor.
+User.metaClass.constructor = { String username ->
+   new User(username: username)
+}
+
+// Add the upper() method.
+User.metaClass.upper = { ->
+   username.toUpperCase()
+}
+
+// Add the 'admin' property.
+User.metaClass.admin = false
+
+// Add a static method.
+User.metaClass.static.create = { String username ->
+   new User(username: username)
+}
+
+def u = new User('student')
+assert u.username == 'student'
+assert u.upper() == 'STUDENT'
+assert !u.admin
+u.admin = true
+assert u.admin
+
+def user = User.create('groovy')
+assert user.username == 'groovy'
+----
+
+Another example
+
+[source,groovy]
+----
+String.metaClass.toCamelCase = {
+    delegate.toLowerCase().replaceAll( /(_)([a-z0-9])/, { 
+        Object[] part -> part[2].toUpperCase()
+    })
+}
+ 
+String.metaClass.toSnakeCase = { capitalize = false ->
+    def res = delegate.replaceAll( /([A-Z])/, /_$1/ )
+                      .replaceAll( /^_/, '' )
+    capitalize ? res.toUpperCase() : res.toLowerCase()
+}
+println "THIS_IS_A_CASE_FOR_THE_CAMEL".toCamelCase()
+println "AndNowForSomeSnakeOil".toSnakeCase()
+println "LoudYellingExample".toSnakeCase(true)
+----
+
+
