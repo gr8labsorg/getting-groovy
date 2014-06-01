@@ -2542,7 +2542,7 @@ Local transformations are transformations applied locally by annotating code ele
 <div class="sect2">
 <h3 id="__delegate"><a class="anchor" href="#__delegate"></a>@Delegate</h3>
 <div class="paragraph">
-<p>With this annotation we can import all the methods of the class the annotation is used for. For example if we use the delegate annotation for the Date class we get all the methods of the Date class in our class. Just like that. This is best explained with a little sample in which we use the @Delegate annotation for properties of type Date and List:</p>
+<p>With this annotation we can import all the methods of the class the annotation is used for. For example if we use the delegate annotation for the <code>Date</code> class we get all the methods of the <code>Date</code> class in our class. Just like that. This is best explained with a little sample in which we use the <code>@Delegate</code> annotation for properties of type Date and <code>List</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2569,7 +2569,7 @@ assert 1 == event.size()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We have used the @Delegate annotations and as by magic the SimpleEvent has all methods of both the Date class and List interface. The code reads naturally and the meaning is obvious. Because the SimpleEvent class has all methods from the List interface we can override the methods as well. In our sample we override the add() so we can check if the number of attendees doesn&#8217;t exceed the maximum number of attendees allowed:</p>
+<p>We have used the @Delegate annotations and as by magic the <code>SimpleEvent</code> has all methods of both the Date class and List interface. The code reads naturally and the meaning is obvious. Because the <code>SimpleEvent</code> class has all methods from the <code>List</code> interface we can override the methods as well. In our sample we override the <code>add()</code> so we can check if the number of attendees doesn&#8217;t exceed the maximum number of attendees allowed:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2578,7 +2578,6 @@ assert 1 == event.size()</code></pre>
     @Delegate List&lt;String&gt; attendees = []
     int maxAttendees = 0
     String description
-
 
     boolean add(Object value) {
         if (attendees.size() &lt; maxAttendees) {
@@ -2664,7 +2663,7 @@ tc2.join()</code></pre>
 <p>We see how we can implement bound and constrained properties as defined in the JavaBeans specification. A bound property is a bean property for which a change to the property results in a notification being sent to some other bean. A constrained property is a bean property for which a change to the property results in validation by another bean. The other bean may reject the change if it is not appropriate.</p>
 </div>
 <div class="paragraph">
-<p>Implementing these properties is of course easy in Groovy! Groovy supports the @Bindable and @Vetoable annotations (extra info on Groovy site) to implement bound and constrained properties. The following code shows a simple bean:</p>
+<p>Implementing these properties is of course easy in Groovy! Groovy supports the <code>@Bindable</code> and <code>@Vetoable</code> annotations (extra info on Groovy site) to implement bound and constrained properties. The following code shows a simple bean:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2687,7 +2686,7 @@ class Car {
 <div class="sect2">
 <h3 id="__singleton_massive_code_size_reduction"><a class="anchor" href="#__singleton_massive_code_size_reduction"></a>@Singleton (massive code size reduction!)</h3>
 <div class="paragraph">
-<p>Creating a singleton class in Groovy is simple. We only have to use the @Singleton transformation annotation and a complete singleton class is generated for us.</p>
+<p>Creating a singleton class in Groovy is simple. We only have to use the <code>@Singleton</code> transformation annotation and a complete singleton class is generated for us.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2735,7 +2734,7 @@ try {
 <div class="sect2">
 <h3 id="__inheritconstructors"><a class="anchor" href="#__inheritconstructors"></a>@InheritConstructors</h3>
 <div class="paragraph">
-<p>When we apply this transformation to our class we automatically get all constructors from the super class. This is very useful if we for example extend from java.lang.Exception, because otherwise we would have to define four constructors ourselves. The transformation adds these constructors for us in our class file. This works also for our own created classes.</p>
+<p>When we apply this transformation to our class we automatically get all constructors from the super class. This is very useful if we for example extend from <code>java.lang.Exception</code>, because otherwise we would have to define four constructors ourselves. The transformation adds these constructors for us in our class file. This works also for our own created classes.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2768,7 +2767,7 @@ assert 'Liam' == child.name</code></pre>
 <div class="sect2">
 <h3 id="__newify"><a class="anchor" href="#__newify"></a>@Newify</h3>
 <div class="paragraph">
-<p>The @Newify transformation annotation allows other ways to create a new instance of a class. We can use a new() method on the class or even omit the whole new keyword. The syntax is copied from other languages like Ruby and Python. If we use the @Newify annotation we get a slightly more readable piece of code (in some situations). We can use parameters in the annotation to denote all those classes we want to be instantiated with the new() method or without the new keyword.</p>
+<p>The <code>@Newify</code> transformation annotation allows other ways to create a new instance of a class. We can use a <code>new()</code> method on the class or even omit the whole <code>new</code> keyword. The syntax is copied from other languages like Ruby and Python. If we use the <code>@Newify</code> annotation we get a slightly more readable piece of code (in some situations). We can use parameters in the annotation to denote all those classes we want to be instantiated with the <code>new()</code> method or without the <code>new</code> keyword.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2829,10 +2828,10 @@ assert 'It' == createKingPython().books.title.find { it == 'It' }</code></pre>
 <div class="sect2">
 <h3 id="__immutable"><a class="anchor" href="#__immutable"></a>@Immutable</h3>
 <div class="paragraph">
-<p>Immutable objects are created and cannot change after creation. This makes immutable objects very usable in concurrent and functional programming. To define a Java class as immutable we must define all properties as readonly and private. Only the constructor can set the values of the properties. The Groovy documentation has a complete list of the rules applying to immutable objects. The Java code to make a class immutable is verbose, especially since the hashCode(), equals() and toString() methods need to be overridden.</p>
+<p>Immutable objects are created and cannot change after creation. This makes immutable objects very usable in concurrent and functional programming. To define a Java class as immutable we must define all properties as readonly and private. Only the constructor can set the values of the properties. The Groovy documentation has a complete list of the rules applying to immutable objects. The Java code to make a class immutable is verbose, especially since the <code>hashCode()</code>, <code>equals()</code> and <code>toString()</code> methods need to be overridden.</p>
 </div>
 <div class="paragraph">
-<p>We only have to define @Immutable in our class definition and any object we create for this class is an immutable object. Groovy generates a class file following the rules for immutable objects. So all properties are readonly, constructors are created to set the properties, implementations for the hashCode(), equals() and toString() methods are generated.</p>
+<p>We only have to define <code>@Immutable</code> in our class definition and any object we create for this class is an immutable object. Groovy generates a class file following the rules for immutable objects. So all properties are readonly, constructors are created to set the properties, implementations for the <code>hashCode()</code>, <code>equals()</code> and <code>toString()</code> methods are generated.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2884,13 +2883,13 @@ assert third == second</code></pre>
 <div class="sect2">
 <h3 id="__equalsandhashcode"><a class="anchor" href="#__equalsandhashcode"></a>@EqualsAndHashCode</h3>
 <div class="paragraph">
-<p>With this annotation an equals() and hashCode() method is generated for a class. The hashCode() method is implemented using Groovy&#8217;s org.codehaus.groovy.util.HashCodeHelper (following an algorithm from the book Effective Java). The equals() method looks at all the single properties of a class to see of both objects are the same.</p>
+<p>With this annotation an <code>equals()</code> and <code>hashCode()</code> method is generated for a class. The <code>hashCode()</code> method is implemented using Groovy&#8217;s <code>org.codehaus.groovy.util.HashCodeHelper</code> (following an algorithm from the book Effective Java). The <code>equals()</code> method looks at all the single properties of a class to see of both objects are the same.</p>
 </div>
 <div class="paragraph">
-<p>We can even include class fields instead of only properties for generating both methods. We only have to use includeFields=true when we assign the annotation.</p>
+<p>We can even include class fields instead of only properties for generating both methods. We only have to use <code>includeFields=true</code> when we assign the annotation.</p>
 </div>
 <div class="paragraph">
-<p>To include calls to a super class we use the annotation attribute callSuper and assign the value true. Finally we can also exclude properties or fields from hashcode calculation or equal comparisons. We use the annotation attribute excludes for this and we can assign a list of property and field names.</p>
+<p>To include calls to a super class we use the annotation attribute <code>callSuper</code> and assign the value true. Finally we can also exclude properties or fields from hashcode calculation or equal comparisons. We use the annotation attribute <code>excludes</code> for this and we can assign a list of property and field names.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2922,16 +2921,16 @@ assert users.size() == 2</code></pre>
 <div class="sect2">
 <h3 id="__tostring"><a class="anchor" href="#__tostring"></a>@ToString</h3>
 <div class="paragraph">
-<p>We can use the @ToString annotation for easy creation of a toString() method. We only have to add the annotation to our class definition and we get a nicely formatted output of the properties of our class.</p>
+<p>We can use the <code>@ToString</code> annotation for easy creation of a <code>toString()</code> method. We only have to add the annotation to our class definition and we get a nicely formatted output of the properties of our class.</p>
 </div>
 <div class="paragraph">
-<p>We can even customize what we want to see in the output. We can see the names of the properties of our class in the toString() output if we add the attribute includeNames=true. By default only properties are added to the output, but we can include fields as well with the annotation attribute includeFields=true. To exclude properties we use the attribute excludes and assign the names of the properties we don&#8217;t want in the output separated by a comma.</p>
+<p>We can even customize what we want to see in the output. We can see the names of the properties of our class in the <code>toString()</code> output if we add the attribute <code>includeNames=true</code>. By default only properties are added to the output, but we can include fields as well with the annotation attribute <code>includeFields=true</code>. To exclude properties we use the attribute excludes and assign the names of the properties we don&#8217;t want in the output separated by a comma.</p>
 </div>
 <div class="paragraph">
-<p>Finally we can include properties from a super class with the annotation atribute includeSuper=true.</p>
+<p>Finally we can include properties from a super class with the annotation atribute <code>includeSuper=true</code>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s see the @ToString in action with a few samples:</p>
+<p>Let&#8217;s see the <code>@ToString</code> in action with a few samples:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3027,7 +3026,7 @@ assert person.toString() == 'Person(name:mrhaki)'</code></pre>
 <div class="sect2">
 <h3 id="__log_with_variations_jul_log4j_slf4j_commons_log4j2"><a class="anchor" href="#__log_with_variations_jul_log4j_slf4j_commons_log4j2"></a>@Log (with variations JUL, Log4j, Slf4j, Commons, Log4j2)</h3>
 <div class="paragraph">
-<p>We can inject a log field into our classes with a simple annotation. In our class we can invoke method on the log field, just as we would do if we wrote the code to inject the log field ourselves. How many times have we written code like this Logger log = LoggerFactory.getLogger(&lt;class&gt;) at the top of our classes to use for example the Slf4j API? Since Groovy 1.8 we only have to add the @Slf4j annotation to our class and get the same result. AND each invocation of a log method is encapsulated in a check to see if the log level is enabled.</p>
+<p>We can inject a log field into our classes with a simple annotation. In our class we can invoke method on the log field, just as we would do if we wrote the code to inject the log field ourselves. How many times have we written code like this <code>Logger log = LoggerFactory.getLogger(&lt;class&gt;)</code> at the top of our classes to use for example the Slf4j API? Since Groovy 1.8 we only have to add the <code>@Slf4j</code> annotation to our class and get the same result. AND each invocation of a log method is encapsulated in a check to see if the log level is enabled.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3077,6 +3076,10 @@ helloWorld.execute()</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Log4j</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log4j2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@Log4j2</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Apache Commons Logging</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Commons</p></td>
 </tr>
@@ -3100,21 +3103,20 @@ helloWorld.execute()</code></pre>
 <h3 id="_categories"><a class="anchor" href="#_categories"></a>Categories</h3>
 <div class="paragraph">
 <p>Categories allow us to add extra functionality to classes, even those classes we didn&#8217;t develop ourselves. A Category class contain static methods. The first argument of the method determines the type the method can be applied to.
-We can also use the @Category transformation annotation to make a class into a category. The class doesn&#8217;t have to define static methods anymore, but we can use instance methods. The parameter of the @Category annotation defines for which class the category is.
-The category can be applied to a specific code block with the use() method. Only within the code block (which is a closure) the rules of the category are applied. The last statement of the code block is also the return value of the use() method.</p>
+We can also use the <code>@Category</code> transformation annotation to make a class into a category. The class doesn&#8217;t have to define static methods anymore, but we can use instance methods. The parameter of the <code>@Category</code> annotation defines for which class the category is.
+The category can be applied to a specific code block with the <code>use()</code> method. Only within the code block (which is a closure) the rules of the category are applied. The last statement of the code block is also the return value of the <code>use()</code> method.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint groovy language-groovy"><code>class Speak {
-   static String shout(String text) {  // Method argument is String, so we can add shout() to String object.
+   // Method argument is String, so we can add shout() to String object.
+   static String shout(String text) {
        text.toUpperCase() + '!'
    }
-
 
    static String whisper(String text, boolean veryQuiet = false) {
        "${veryQuiet ? 'sssssssh' : 'sssh'}.. $text"
    }
-
 
    static String army(String text) {
        "$text. Sir, yes sir!"
@@ -3139,14 +3141,13 @@ class StreetTalk {
    }
 }
 
-
 use(StreetTalk) {
    assert 'Yo, yo, here we go. Groovy is fun!' == 'Groovy is fun!'.hiphop()
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We can even use public static methods from Java classes. Or we can use the @Category annotation in our Java code to turn it into a Groovy category.</p>
+<p>We can even use <code>public</code> <code>static</code> methods from Java classes. Or we can use the <code>@Category</code> annotation in our Java code to turn it into a Groovy category.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3191,7 +3192,7 @@ use (org.gr8conf.java.JavaTalk) {
 <div class="sect2">
 <h3 id="_mixins"><a class="anchor" href="#_mixins"></a>Mixins</h3>
 <div class="paragraph">
-<p>We can also add new functionality to classes with the mixin() method (runtime) or with the @Mixin annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.</p>
+<p>We can also add new functionality to classes with the <code>mixin()</code> method (runtime) or with the <code>@Mixin</code> annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3233,7 +3234,7 @@ assert 'Aargh, walk the plank. Give me a bottle of rum.' == new Talk().talk("Giv
 <div class="sect2">
 <h3 id="_metaclass"><a class="anchor" href="#_metaclass"></a>MetaClass</h3>
 <div class="paragraph">
-<p>If we define a class in Groovy we automatically implement the groovy.lang.GroovyObject interface. Groovy adds a default implementation for the methods in the interface to our generated class file.</p>
+<p>If we define a class in Groovy we automatically implement the <code>groovy.lang.GroovyObject</code> interface. Groovy adds a default implementation for the methods in the interface to our generated class file.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3247,7 +3248,7 @@ assert 'Aargh, walk the plank. Give me a bottle of rum.' == new Talk().talk("Giv
 </div>
 </div>
 <div class="paragraph">
-<p>We can implement this interface in our Java classes to make them Groovy classes immediately. Or we can extend GroovyObjectSupport to get default implementations for the methods.</p>
+<p>We can implement this interface in our Java classes to make them Groovy classes immediately. Or we can extend <code>GroovyObjectSupport</code> to get default implementations for the methods.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3280,7 +3281,7 @@ assert s.value == 'no value'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>We can do the same thing with a Java class which we extend from GroovyObjectSupport.</p>
+<p>We can do the same thing with a Java class which we extend from <code>GroovyObjectSupport</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3319,7 +3320,7 @@ public class JavaSimple extends GroovyObjectSupport {
 </div>
 </div>
 <div class="paragraph">
-<p>When we compile this Java class with groovyc we can use it in our script:</p>
+<p>When we compile this Java class with <code>groovyc</code> we can use it in our script:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3337,7 +3338,7 @@ assert s.value == 'no value'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The getMetaClass() method is our entry to extend classes. Groovy adds this method also to some Java classes, like String, so we can extend those as well. We can use the metaClass property to dynamically add methods, properties, constructors and static methods using a closure. This is very powerful.</p>
+<p>The <code>getMetaClass()</code> method is our entry to extend classes. Groovy adds this method also to some Java classes, like <code>String</code>, so we can extend those as well. We can use the metaClass property to dynamically add methods, properties, constructors and static methods using a closure. This is very powerful.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3401,7 +3402,7 @@ println "LoudYellingExample".toSnakeCase(true)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-02 00:32:30 CEST
+Last updated 2014-06-02 00:47:12 CEST
 </div>
 </div>
 </body>
