@@ -104,9 +104,16 @@
 <li><a href="#_looping">Looping</a></li>
 <li><a href="#_finding_data">Finding Data</a></li>
 <li><a href="#_grouping_elements">Grouping Elements</a></li>
+<li><a href="#_transforming_data">Transforming Data</a></li>
+<li><a href="#_exercise_4">Exercise</a></li>
 </ul>
 </li>
 <li><a href="#_files">Files</a></li>
+<li>
+<ul class="sectlevel2">
+<li><a href="#_working_with_urls">Working with URLs</a></li>
+</ul>
+</li>
 <li><a href="#_xml">XML</a></li>
 <li><a href="#_ast_transformations">AST Transformations</a></li>
 <li>
@@ -2047,7 +2054,7 @@ assert 10 == sum
 <div class="sect2">
 <h3 id="_finding_data"><a class="anchor" href="#_finding_data"></a>Finding Data</h3>
 <div class="paragraph">
-<p>Groovy adds several methods to Collection classes to find elements in the collection. The findXXX() methods take a closure and if an element matches the condition defined in the closure we get a result. We can also use the any() method to verify if at least one element applies to the closure condition, or we use the every() method to verify all elements that confirm to the closure condition. Both the any() and every() method return a boolean value.</p>
+<p>Groovy adds several methods to <code>Collection</code> classes to find elements in the collection. The <code>findXXX()</code> methods take a closure and if an element matches the condition defined in the closure we get a result. We can also use the <code>any()</code> method to verify if at least one element applies to the closure condition, or we use the <code>every()</code> method to verify all elements that confirm to the closure condition. Both the <code>any()</code> and <code>every()</code> method return a <code>boolean</code> value.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2066,7 +2073,6 @@ assert list.findLastIndexOf { it.size() == 5 } == 2
 assert list.findLastIndexOf(1) { it.count('e') &gt; 1 } == 5
 assert list.any { it =~ /a/ }
 assert list.every { it.size() &gt; 3 }
-
 
 def map = [name: 'Groovy and Grails', url: 'http://groovy.codehaus.org', blog: false]
 def found = map.find { key, value -&gt;
@@ -2093,7 +2099,7 @@ assert map.every { key, value -&gt;
 </div>
 </div>
 <div class="paragraph">
-<p>The grep() method is used to filter elements in a collection. The argument of the grep() method is a filter Object. This is related to Groovy&#8217;s switch statement, because the same isCase() method is used to evaluate the filter.</p>
+<p>The <code>grep()</code> method is used to filter elements in a collection. The argument of the <code>grep()</code> method is a filter Object. This is related to Groovy&#8217;s <code>switch</code> statement, because the same <code>isCase()</code> method is used to evaluate the filter.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2109,7 +2115,7 @@ assert [100, 200] == [10, 20, 30, 50, 100, 200].grep({ it &gt; 50 }), 'Closure b
 <div class="sect2">
 <h3 id="_grouping_elements"><a class="anchor" href="#_grouping_elements"></a>Grouping Elements</h3>
 <div class="paragraph">
-<p>In Groovy we can group the elements of a Collection type in a map. We define the rule for grouping with a closure. The result is a map where the key is the grouping condition and the value contains the elements of the Collection type belonging to the key.</p>
+<p>In Groovy we can group the elements of a <code>Collection</code> type in a map. We define the rule for grouping with a closure. The result is a map where the key is the grouping condition and the value contains the elements of the <code>Collection</code> type belonging to the key.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2159,13 +2165,62 @@ assert ["Contains y":["Groovy"], "Doesn't contain y":["Java", "Scala"]] == ['Gro
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_transforming_data"><a class="anchor" href="#_transforming_data"></a>Transforming Data</h3>
+<div class="paragraph">
+<p>We can use the <code>collect()</code> method to apply a method or do some calculation with each element in the list. The result is a new <code>Collection</code> object with new values.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>def numbers = [1,2,3,4,5]
+def squared = numbers.collect { it*it }
+assert squared == [1,4,9,16,25]
+
+def words = ['Groovy', 'Rocks']
+assert words.collect { it.toUpperCase() } == ['GROOVY', 'ROCKS']</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exercise_4"><a class="anchor" href="#_exercise_4"></a>Exercise</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a new list with String values, boolean values and numbers.</p>
+</li>
+<li>
+<p>Use a finder method to find all String values.</p>
+</li>
+<li>
+<p>Check if any String elements is at least 4 characters.</p>
+</li>
+<li>
+<p>Create a new Map with some keys and values.</p>
+</li>
+<li>
+<p>Transform all key/value pairs to a new list where each element in the list is the concatenation of the key and value.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_files"><a class="anchor" href="#_files"></a>Files</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When we write code in Java to work with files we must write a lot of boilerplate code to make sure all streams are opened and closed correctly and provide exception handling. The Commons IO package already helps, but Groovy makes working with files so easy. Groovy adds a lot of useful methods to the java.io.File class. We can use simple properties to write and read text, methods to traverse the file system and methods to filter contents.</p>
+<p>When we write code in Java to work with files we must write a lot of boilerplate code to make sure all streams are opened and closed correctly and provide exception handling. The Commons IO package already helps, but Groovy makes working with files so easy. Groovy adds a lot of useful methods to the <code>java.io.File</code> class. We can use simple properties to write and read text, methods to traverse the file system and methods to filter contents.</p>
 </div>
 <div class="paragraph">
 <p>Here is a Groovy script with different samples of working with files:</p>
@@ -2228,12 +2283,18 @@ new File('.').eachFileMatch(~/^groovy.*\.txt$/) { files &lt;&lt; it.name }
 assert ['groovy1.txt', 'groovy2.txt', groovy3.txt'] == files
 
 // Delete all files:
-files.each { new File(it).delete() }
-Working with URLs
-Working with URLs is just as easy as working with files. Groovy has decorated the URL with some of the same methods, as for files.
-Here is a Groovy script with different samples of working with files:
-
-// Converting a string to an URL
+files.each { new File(it).delete() }</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_working_with_urls"><a class="anchor" href="#_working_with_urls"></a>Working with URLs</h3>
+<div class="paragraph">
+<p>Working with URLs is just as easy as working with files. Groovy has decorated the URL with some of the same methods, as for files.
+Here is a Groovy script with different samples of working with files:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>// Converting a string to an URL
 def url = "http://mrhaki.com/books.xml".toURL()
 
 // Read the entire URL text
@@ -2287,6 +2348,7 @@ url.withReader { reader -&gt;
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_xml"><a class="anchor" href="#_xml"></a>XML</h2>
 <div class="sectionbody">
@@ -2294,7 +2356,7 @@ url.withReader { reader -&gt;
 <p>XML is something we come across quite regularly when we develop applications. Sometimes we need to write some XML or we need to read it. With Groovy these tasks are easy. We don&#8217;t have to worry about DOM or SAX (unless we want to of course).</p>
 </div>
 <div class="paragraph">
-<p>To create a hierarchical structure like XML we can use different kind of builders in Groovy. These classes allow us to define the structure in our code of the hierarchy and is then output to the format we want. To create XML we can use the MarkupBuilder or the StreamingMarkupBuilder. Both allow us to define the XML structure with builder syntax. The MarkupBuilder is good for simple XML, but if we want to add for example namespaces we can use the StreamingMarkupBuilder.</p>
+<p>To create a hierarchical structure like XML we can use different kind of builders in Groovy. These classes allow us to define the structure in our code of the hierarchy and is then output to the format we want. To create XML we can use the <code>MarkupBuilder</code> or the <code>StreamingMarkupBuilder</code>. Both allow us to define the XML structure with builder syntax. The <code>MarkupBuilder</code> is good for simple XML, but if we want to add for example namespaces we can use the <code>StreamingMarkupBuilder</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2384,10 +2446,10 @@ Output:
 </div>
 </div>
 <div class="paragraph">
-<p>To read XML in Groovy we can use two parser classes: XmlParser and XmlSlurper. The main difference between both parsers is that the XmlParser return a list of NodeList and Node objects and the XmlSlurper return a GPathResult.</p>
+<p>To read XML in Groovy we can use two parser classes: <code>XmlParser</code> and <code>XmlSlurper</code>. The main difference between both parsers is that the <code>XmlParser</code> return a list of NodeList and Node objects and the <code>XmlSlurper</code> return a <code>GPathResult</code>.</p>
 </div>
 <div class="paragraph">
-<p>First we parse the XML with the XmlParser. We define a namespace so we can access the meta.isbn elements with a namespace syntax.</p>
+<p>First we parse the XML with the <code>XmlParser</code>. We define a namespace so we can access the meta.isbn elements with a namespace syntax.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2471,7 +2533,7 @@ assert ['1-932394-84-2', '0123725070'] == books.book.'meta:isbn'.list()</code></
 <p>Groovy adds AST (Abstract Syntax Tree) transformations to be able to add metaprogramming capabilities during compile-time. We can use AST transformations to add for example extra code the compiled class. Because we can access the AST we can add our own stuff to extend the AST.</p>
 </div>
 <div class="paragraph">
-<p>Groovy supports global and local transformations. Global transformations are applied to by the compiler on the code being compiled, wherever the transformation apply. A JAR added to the classpath of the compiler should contain a service locator file at META-INF/services/org.codehaus.groovy.transform.ASTTransformation with a line with the name of the transformation class. The transformation class must have a no-args constructor and implement the org.codehaus.groovy.transform.ASTTransformationinterface. It will be run against every source in the compilation, so be sure to not create transformations which scan all the AST in an expansive and time-consuming manner, to keep the compiler fast.
+<p>Groovy supports global and local transformations. Global transformations are applied to by the compiler on the code being compiled, wherever the transformation apply. A JAR added to the classpath of the compiler should contain a service locator file at <code>META-INF/services/org.codehaus.groovy.transform.ASTTransformation</code> with a line with the name of the transformation class. The transformation class must have a no-args constructor and implement the <code>org.codehaus.groovy.transform.ASTTransformation</code> interface. It will be run against every source in the compilation, so be sure to not create transformations which scan all the AST in an expansive and time-consuming manner, to keep the compiler fast.
 Local transformations are transformations applied locally by annotating code elements you want to transform. For this, we reuse the annotation notation, and those annotations should implement org.codehaus.groovy.transform.ASTTransformation. The compiler will discover them and apply the transformation on these code elements.</p>
 </div>
 <div class="paragraph">
@@ -3339,7 +3401,7 @@ println "LoudYellingExample".toSnakeCase(true)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-02 00:12:54 CEST
+Last updated 2014-06-02 00:32:30 CEST
 </div>
 </div>
 </body>
