@@ -1601,7 +1601,8 @@ assert 10 == sum
 ----
 
 === Finding Data
-Groovy adds several methods to Collection classes to find elements in the collection. The findXXX() methods take a closure and if an element matches the condition defined in the closure we get a result. We can also use the any() method to verify if at least one element applies to the closure condition, or we use the every() method to verify all elements that confirm to the closure condition. Both the any() and every() method return a boolean value.
+
+Groovy adds several methods to +Collection+ classes to find elements in the collection. The +findXXX()+ methods take a closure and if an element matches the condition defined in the closure we get a result. We can also use the +any()+ method to verify if at least one element applies to the closure condition, or we use the +every()+ method to verify all elements that confirm to the closure condition. Both the +any()+ and +every()+ method return a +boolean+ value.
 
 [source,groovy]
 ----
@@ -1620,7 +1621,6 @@ assert list.findLastIndexOf { it.size() == 5 } == 2
 assert list.findLastIndexOf(1) { it.count('e') > 1 } == 5
 assert list.any { it =~ /a/ }
 assert list.every { it.size() > 3 }
-
 
 def map = [name: 'Groovy and Grails', url: 'http://groovy.codehaus.org', blog: false]
 def found = map.find { key, value ->
@@ -1646,7 +1646,7 @@ assert map.every { key, value ->
 }
 ----
 
-The grep() method is used to filter elements in a collection. The argument of the grep() method is a filter Object. This is related to Groovy's switch statement, because the same isCase() method is used to evaluate the filter.
+The +grep()+ method is used to filter elements in a collection. The argument of the +grep()+ method is a filter Object. This is related to Groovy's +switch+ statement, because the same +isCase()+ method is used to evaluate the filter.
 
 [source,groovy]
 ----
@@ -1659,7 +1659,8 @@ assert [100, 200] == [10, 20, 30, 50, 100, 200].grep({ it > 50 }), 'Closure bool
 ----
 
 === Grouping Elements
-In Groovy we can group the elements of a Collection type in a map. We define the rule for grouping with a closure. The result is a map where the key is the grouping condition and the value contains the elements of the Collection type belonging to the key.
+
+In Groovy we can group the elements of a +Collection+ type in a map. We define the rule for grouping with a closure. The result is a map where the key is the grouping condition and the value contains the elements of the +Collection+ type belonging to the key.
 
 [source,groovy]
 ----
@@ -1708,9 +1709,34 @@ def groupByGroovy = {
 assert ["Contains y":["Groovy"], "Doesn't contain y":["Java", "Scala"]] == ['Groovy', 'Java', 'Scala'].groupBy(groupByGroovy)
 ----
 
+=== Transforming Data
+
+We can use the +collect()+ method to apply a method or do some calculation with each element in the list. The result is a new +Collection+ object with new values.
+
+[source,groovy]
+----
+def numbers = [1,2,3,4,5]
+def squared = numbers.collect { it*it }
+assert squared == [1,4,9,16,25]
+
+def words = ['Groovy', 'Rocks']
+assert words.collect { it.toUpperCase() } == ['GROOVY', 'ROCKS']
+----
+
+=== Exercise
+
+[NOTE]
+====
+. Create a new list with String values, boolean values and numbers.
+. Use a finder method to find all String values.
+. Check if any String elements is at least 4 characters.
+. Create a new Map with some keys and values.
+. Transform all key/value pairs to a new list where each element in the list is the concatenation of the key and value.
+====
+
 == Files
 
-When we write code in Java to work with files we must write a lot of boilerplate code to make sure all streams are opened and closed correctly and provide exception handling. The Commons IO package already helps, but Groovy makes working with files so easy. Groovy adds a lot of useful methods to the java.io.File class. We can use simple properties to write and read text, methods to traverse the file system and methods to filter contents.
+When we write code in Java to work with files we must write a lot of boilerplate code to make sure all streams are opened and closed correctly and provide exception handling. The Commons IO package already helps, but Groovy makes working with files so easy. Groovy adds a lot of useful methods to the +java.io.File+ class. We can use simple properties to write and read text, methods to traverse the file system and methods to filter contents.
 
 
 Here is a Groovy script with different samples of working with files:
@@ -1774,10 +1800,15 @@ assert ['groovy1.txt', 'groovy2.txt', groovy3.txt'] == files
 
 // Delete all files:
 files.each { new File(it).delete() }
-Working with URLs
+----
+
+=== Working with URLs
+
 Working with URLs is just as easy as working with files. Groovy has decorated the URL with some of the same methods, as for files.
 Here is a Groovy script with different samples of working with files:
 
+[source,groovy]
+----
 // Converting a string to an URL
 def url = "http://mrhaki.com/books.xml".toURL()
 
@@ -1831,10 +1862,11 @@ url.withReader { reader ->
 ----
 
 == XML
+
 XML is something we come across quite regularly when we develop applications. Sometimes we need to write some XML or we need to read it. With Groovy these tasks are easy. We don't have to worry about DOM or SAX (unless we want to of course).
 
 
-To create a hierarchical structure like XML we can use different kind of builders in Groovy. These classes allow us to define the structure in our code of the hierarchy and is then output to the format we want. To create XML we can use the MarkupBuilder or the StreamingMarkupBuilder. Both allow us to define the XML structure with builder syntax. The MarkupBuilder is good for simple XML, but if we want to add for example namespaces we can use the StreamingMarkupBuilder.
+To create a hierarchical structure like XML we can use different kind of builders in Groovy. These classes allow us to define the structure in our code of the hierarchy and is then output to the format we want. To create XML we can use the +MarkupBuilder+ or the +StreamingMarkupBuilder+. Both allow us to define the XML structure with builder syntax. The +MarkupBuilder+ is good for simple XML, but if we want to add for example namespaces we can use the +StreamingMarkupBuilder+.
 
 [source,groovy]
 ----
@@ -1923,10 +1955,10 @@ Output:
 */
 ----
   
-To read XML in Groovy we can use two parser classes: XmlParser and XmlSlurper. The main difference between both parsers is that the XmlParser return a list of NodeList and Node objects and the XmlSlurper return a GPathResult.
+To read XML in Groovy we can use two parser classes: +XmlParser+ and +XmlSlurper+. The main difference between both parsers is that the +XmlParser+ return a list of NodeList and Node objects and the +XmlSlurper+ return a +GPathResult+.
 
 
-First we parse the XML with the XmlParser. We define a namespace so we can access the meta.isbn elements with a namespace syntax.
+First we parse the XML with the +XmlParser+. We define a namespace so we can access the meta.isbn elements with a namespace syntax.
 
 [source,groovy]
 ----
@@ -2005,7 +2037,7 @@ assert ['1-932394-84-2', '0123725070'] == books.book.'meta:isbn'.list()
 Groovy adds AST (Abstract Syntax Tree) transformations to be able to add metaprogramming capabilities during compile-time. We can use AST transformations to add for example extra code the compiled class. Because we can access the AST we can add our own stuff to extend the AST.
 
 
-Groovy supports global and local transformations. Global transformations are applied to by the compiler on the code being compiled, wherever the transformation apply. A JAR added to the classpath of the compiler should contain a service locator file at META-INF/services/org.codehaus.groovy.transform.ASTTransformation with a line with the name of the transformation class. The transformation class must have a no-args constructor and implement the org.codehaus.groovy.transform.ASTTransformationinterface. It will be run against every source in the compilation, so be sure to not create transformations which scan all the AST in an expansive and time-consuming manner, to keep the compiler fast.
+Groovy supports global and local transformations. Global transformations are applied to by the compiler on the code being compiled, wherever the transformation apply. A JAR added to the classpath of the compiler should contain a service locator file at +META-INF/services/org.codehaus.groovy.transform.ASTTransformation+ with a line with the name of the transformation class. The transformation class must have a no-args constructor and implement the +org.codehaus.groovy.transform.ASTTransformation+ interface. It will be run against every source in the compilation, so be sure to not create transformations which scan all the AST in an expansive and time-consuming manner, to keep the compiler fast.
 Local transformations are transformations applied locally by annotating code elements you want to transform. For this, we reuse the annotation notation, and those annotations should implement org.codehaus.groovy.transform.ASTTransformation. The compiler will discover them and apply the transformation on these code elements.
 
 
@@ -2014,7 +2046,7 @@ We take a look at several transformations that are already present in Groovy.
 
 === @Delegate
 
-With this annotation we can import all the methods of the class the annotation is used for. For example if we use the delegate annotation for the Date class we get all the methods of the Date class in our class. Just like that. This is best explained with a little sample in which we use the @Delegate annotation for properties of type Date and List:
+With this annotation we can import all the methods of the class the annotation is used for. For example if we use the delegate annotation for the +Date+ class we get all the methods of the +Date+ class in our class. Just like that. This is best explained with a little sample in which we use the +@Delegate+ annotation for properties of type Date and +List+:
 
 [source,groovy]
 ----
@@ -2040,7 +2072,7 @@ event -= 'student1'  // Delegate to List.minus()
 assert 1 == event.size()
 ----
 
-We have used the @Delegate annotations and as by magic the SimpleEvent has all methods of both the Date class and List interface. The code reads naturally and the meaning is obvious. Because the SimpleEvent class has all methods from the List interface we can override the methods as well. In our sample we override the add() so we can check if the number of attendees doesn't exceed the maximum number of attendees allowed:
+We have used the @Delegate annotations and as by magic the +SimpleEvent+ has all methods of both the Date class and List interface. The code reads naturally and the meaning is obvious. Because the +SimpleEvent+ class has all methods from the +List+ interface we can override the methods as well. In our sample we override the +add()+ so we can check if the number of attendees doesn't exceed the maximum number of attendees allowed:
 
 [source,groovy]
 ----
@@ -2049,7 +2081,6 @@ class SimpleEvent {
     @Delegate List<String> attendees = []
     int maxAttendees = 0
     String description
-
 
     boolean add(Object value) {
         if (attendees.size() < maxAttendees) {
@@ -2071,9 +2102,8 @@ try {
 }
 ----
 
-
-
 === @Synchronized
+
 This annotation is based on the Project Lombok Synchronized annotation. We can use the annotation on instance and static methods. The annotation will create a lock variable in our class (or we can use an existing variable) and the code is synchronized on that lock variable. Normally with the synchronized keyword the lock is on this, but that can have side-effects.
 
 
@@ -2134,7 +2164,7 @@ tc2.join()
 
 We see how we can implement bound and constrained properties as defined in the JavaBeans specification. A bound property is a bean property for which a change to the property results in a notification being sent to some other bean. A constrained property is a bean property for which a change to the property results in validation by another bean. The other bean may reject the change if it is not appropriate.
 
-Implementing these properties is of course easy in Groovy! Groovy supports the @Bindable and @Vetoable annotations (extra info on Groovy site) to implement bound and constrained properties. The following code shows a simple bean:
+Implementing these properties is of course easy in Groovy! Groovy supports the +@Bindable+ and +@Vetoable+ annotations (extra info on Groovy site) to implement bound and constrained properties. The following code shows a simple bean:
 
 [source,groovy]
 ----
@@ -2154,7 +2184,8 @@ class Car {
 ----
 
 === @Singleton (massive code size reduction!)
-Creating a singleton class in Groovy is simple. We only have to use the @Singleton transformation annotation and a complete singleton class is generated for us.
+
+Creating a singleton class in Groovy is simple. We only have to use the +@Singleton+ transformation annotation and a complete singleton class is generated for us.
 
 [source,groovy]
 ----
@@ -2199,7 +2230,8 @@ try {
 ----
 
 === @InheritConstructors
-When we apply this transformation to our class we automatically get all constructors from the super class. This is very useful if we for example extend from java.lang.Exception, because otherwise we would have to define four constructors ourselves. The transformation adds these constructors for us in our class file. This works also for our own created classes.
+
+When we apply this transformation to our class we automatically get all constructors from the super class. This is very useful if we for example extend from +java.lang.Exception+, because otherwise we would have to define four constructors ourselves. The transformation adds these constructors for us in our class file. This works also for our own created classes.
 
 [source,groovy]
 ----
@@ -2229,7 +2261,8 @@ assert 'Liam' == child.name
 ----
 
 === @Newify
-The @Newify transformation annotation allows other ways to create a new instance of a class. We can use a new() method on the class or even omit the whole new keyword. The syntax is copied from other languages like Ruby and Python. If we use the @Newify annotation we get a slightly more readable piece of code (in some situations). We can use parameters in the annotation to denote all those classes we want to be instantiated with the new() method or without the new keyword.
+
+The +@Newify+ transformation annotation allows other ways to create a new instance of a class. We can use a +new()+ method on the class or even omit the whole +new+ keyword. The syntax is copied from other languages like Ruby and Python. If we use the +@Newify+ annotation we get a slightly more readable piece of code (in some situations). We can use parameters in the annotation to denote all those classes we want to be instantiated with the +new()+ method or without the +new+ keyword.
 
 [source,groovy]
 ----
@@ -2288,10 +2321,10 @@ assert 'It' == createKingPython().books.title.find { it == 'It' }
 
 === @Immutable
 
-Immutable objects are created and cannot change after creation. This makes immutable objects very usable in concurrent and functional programming. To define a Java class as immutable we must define all properties as readonly and private. Only the constructor can set the values of the properties. The Groovy documentation has a complete list of the rules applying to immutable objects. The Java code to make a class immutable is verbose, especially since the hashCode(), equals() and toString() methods need to be overridden.
+Immutable objects are created and cannot change after creation. This makes immutable objects very usable in concurrent and functional programming. To define a Java class as immutable we must define all properties as readonly and private. Only the constructor can set the values of the properties. The Groovy documentation has a complete list of the rules applying to immutable objects. The Java code to make a class immutable is verbose, especially since the +hashCode()+, +equals()+ and +toString()+ methods need to be overridden.
 
 
-We only have to define @Immutable in our class definition and any object we create for this class is an immutable object. Groovy generates a class file following the rules for immutable objects. So all properties are readonly, constructors are created to set the properties, implementations for the hashCode(), equals() and toString() methods are generated.
+We only have to define +@Immutable+ in our class definition and any object we create for this class is an immutable object. Groovy generates a class file following the rules for immutable objects. So all properties are readonly, constructors are created to set the properties, implementations for the +hashCode()+, +equals()+ and +toString()+ methods are generated.
 
 [source,groovy]
 ----
@@ -2342,11 +2375,11 @@ assert third == second
 
 === @EqualsAndHashCode
 
-With this annotation an equals() and hashCode() method is generated for a class. The hashCode() method is implemented using Groovy's org.codehaus.groovy.util.HashCodeHelper (following an algorithm from the book Effective Java). The equals() method looks at all the single properties of a class to see of both objects are the same.
+With this annotation an +equals()+ and +hashCode()+ method is generated for a class. The +hashCode()+ method is implemented using Groovy's +org.codehaus.groovy.util.HashCodeHelper+ (following an algorithm from the book Effective Java). The +equals()+ method looks at all the single properties of a class to see of both objects are the same.
 
-We can even include class fields instead of only properties for generating both methods. We only have to use includeFields=true when we assign the annotation.
+We can even include class fields instead of only properties for generating both methods. We only have to use +includeFields=true+ when we assign the annotation.
 
-To include calls to a super class we use the annotation attribute callSuper and assign the value true. Finally we can also exclude properties or fields from hashcode calculation or equal comparisons. We use the annotation attribute excludes for this and we can assign a list of property and field names.
+To include calls to a super class we use the annotation attribute +callSuper+ and assign the value true. Finally we can also exclude properties or fields from hashcode calculation or equal comparisons. We use the annotation attribute +excludes+ for this and we can assign a list of property and field names.
 
 [source,groovy]
 ----
@@ -2375,16 +2408,17 @@ assert users.size() == 2
 ----
 
 === @ToString
-We can use the @ToString annotation for easy creation of a toString() method. We only have to add the annotation to our class definition and we get a nicely formatted output of the properties of our class.
+
+We can use the +@ToString+ annotation for easy creation of a +toString()+ method. We only have to add the annotation to our class definition and we get a nicely formatted output of the properties of our class.
 
 
-We can even customize what we want to see in the output. We can see the names of the properties of our class in the toString() output if we add the attribute includeNames=true. By default only properties are added to the output, but we can include fields as well with the annotation attribute includeFields=true. To exclude properties we use the attribute excludes and assign the names of the properties we don't want in the output separated by a comma.
+We can even customize what we want to see in the output. We can see the names of the properties of our class in the +toString()+ output if we add the attribute +includeNames=true+. By default only properties are added to the output, but we can include fields as well with the annotation attribute +includeFields=true+. To exclude properties we use the attribute excludes and assign the names of the properties we don't want in the output separated by a comma.
 
 
-Finally we can include properties from a super class with the annotation atribute includeSuper=true.
+Finally we can include properties from a super class with the annotation atribute +includeSuper=true+.
 
 
-Let's see the @ToString in action with a few samples:
+Let's see the +@ToString+ in action with a few samples:
 
 [source,groovy]
 ----
@@ -2477,7 +2511,8 @@ assert person.toString() == 'Person(name:mrhaki)'
 ----
 
 === @Log (with variations JUL, Log4j, Slf4j, Commons, Log4j2)
-We can inject a log field into our classes with a simple annotation. In our class we can invoke method on the log field, just as we would do if we wrote the code to inject the log field ourselves. How many times have we written code like this Logger log = LoggerFactory.getLogger(<class>) at the top of our classes to use for example the Slf4j API? Since Groovy 1.8 we only have to add the @Slf4j annotation to our class and get the same result. AND each invocation of a log method is encapsulated in a check to see if the log level is enabled.
+
+We can inject a log field into our classes with a simple annotation. In our class we can invoke method on the log field, just as we would do if we wrote the code to inject the log field ourselves. How many times have we written code like this +Logger log = LoggerFactory.getLogger(<class>)+ at the top of our classes to use for example the Slf4j API? Since Groovy 1.8 we only have to add the +@Slf4j+ annotation to our class and get the same result. AND each invocation of a log method is encapsulated in a check to see if the log level is enabled.
 
 [source,groovy]
 ----
@@ -2514,6 +2549,9 @@ Besides an annotation for the Slf4j API other logging frameworks are supported w
 |Log4j                                
 |@Log4j
 
+|Log4j2                              
+|@Log4j2
+
 |Apache Commons Logging        
 |@Commons
 
@@ -2528,21 +2566,20 @@ Groovy is a dynamic language. Besides dynamically typed variables we can change 
 === Categories
 
 Categories allow us to add extra functionality to classes, even those classes we didn't develop ourselves. A Category class contain static methods. The first argument of the method determines the type the method can be applied to.
-We can also use the @Category transformation annotation to make a class into a category. The class doesn't have to define static methods anymore, but we can use instance methods. The parameter of the @Category annotation defines for which class the category is.
-The category can be applied to a specific code block with the use() method. Only within the code block (which is a closure) the rules of the category are applied. The last statement of the code block is also the return value of the use() method.
+We can also use the +@Category+ transformation annotation to make a class into a category. The class doesn't have to define static methods anymore, but we can use instance methods. The parameter of the +@Category+ annotation defines for which class the category is.
+The category can be applied to a specific code block with the +use()+ method. Only within the code block (which is a closure) the rules of the category are applied. The last statement of the code block is also the return value of the +use()+ method.
 
 [source,groovy]
 ----
 class Speak {
-   static String shout(String text) {  // Method argument is String, so we can add shout() to String object.
+   // Method argument is String, so we can add shout() to String object.
+   static String shout(String text) {  
        text.toUpperCase() + '!'
    }
-
 
    static String whisper(String text, boolean veryQuiet = false) {
        "${veryQuiet ? 'sssssssh' : 'sssh'}.. $text"
    }
-
 
    static String army(String text) {
        "$text. Sir, yes sir!"
@@ -2567,13 +2604,12 @@ class StreetTalk {
    }
 }
 
-
 use(StreetTalk) {
    assert 'Yo, yo, here we go. Groovy is fun!' == 'Groovy is fun!'.hiphop()
 }
 ----
   
-We can even use public static methods from Java classes. Or we can use the @Category annotation in our Java code to turn it into a Groovy category.
+We can even use +public+ +static+ methods from Java classes. Or we can use the +@Category+ annotation in our Java code to turn it into a Groovy category.
 
 [source,java]
 ----
@@ -2616,7 +2652,7 @@ use (org.gr8conf.java.JavaTalk) {
   
 === Mixins
 
-We can also add new functionality to classes with the mixin() method (runtime) or with the @Mixin annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.
+We can also add new functionality to classes with the +mixin()+ method (runtime) or with the +@Mixin+ annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.
 
 [source,groovy]
 ----
@@ -2656,7 +2692,7 @@ assert 'Aargh, walk the plank. Give me a bottle of rum.' == new Talk().talk("Giv
 
 === MetaClass
 
-If we define a class in Groovy we automatically implement the groovy.lang.GroovyObject interface. Groovy adds a default implementation for the methods in the interface to our generated class file.
+If we define a class in Groovy we automatically implement the +groovy.lang.GroovyObject+ interface. Groovy adds a default implementation for the methods in the interface to our generated class file.
 
 [source,groovy]
 ----
@@ -2669,7 +2705,7 @@ public interface GroovyObject {
 }
 ----
   
-We can implement this interface in our Java classes to make them Groovy classes immediately. Or we can extend GroovyObjectSupport to get default implementations for the methods.
+We can implement this interface in our Java classes to make them Groovy classes immediately. Or we can extend +GroovyObjectSupport+ to get default implementations for the methods.
 
 [source,groovy]
 ----
@@ -2701,7 +2737,7 @@ assert s.simple
 assert s.value == 'no value'
 ----
 
-We can do the same thing with a Java class which we extend from GroovyObjectSupport.
+We can do the same thing with a Java class which we extend from +GroovyObjectSupport+.
 
 [source,java]
 ----
@@ -2739,7 +2775,7 @@ public class JavaSimple extends GroovyObjectSupport {
 }
 ----
 
-When we compile this Java class with groovyc we can use it in our script:
+When we compile this Java class with +groovyc+ we can use it in our script:
 
 [source,groovy]
 ----
@@ -2756,7 +2792,7 @@ assert s.simple
 assert s.value == 'no value'
 ----
 
-The getMetaClass() method is our entry to extend classes. Groovy adds this method also to some Java classes, like String, so we can extend those as well. We can use the metaClass property to dynamically add methods, properties, constructors and static methods using a closure. This is very powerful.
+The +getMetaClass()+ method is our entry to extend classes. Groovy adds this method also to some Java classes, like +String+, so we can extend those as well. We can use the metaClass property to dynamically add methods, properties, constructors and static methods using a closure. This is very powerful.
 
 [source,groovy]
 ----
