@@ -51,6 +51,7 @@
 <li>
 <ul class="sectlevel2">
 <li><a href="#_pattern_operator">Pattern Operator</a></li>
+<li><a href="#_find_operator">Find Operator</a></li>
 <li><a href="#_match_operator">Match Operator</a></li>
 </ul>
 </li>
@@ -62,6 +63,7 @@
 <li><a href="#_multimethods">Multimethods</a></li>
 <li><a href="#_gpath">GPath</a></li>
 <li><a href="#_exceptions">Exceptions</a></li>
+<li><a href="#_exercise_2">Exercise</a></li>
 </ul>
 </li>
 <li><a href="#_control_structures">Control Structures</a></li>
@@ -86,9 +88,11 @@
 <li><a href="#_closures">Closures</a></li>
 <li>
 <ul class="sectlevel2">
+<li><a href="#_turn_methods_into_closures">Turn Methods into Closures</a></li>
 <li><a href="#_closures_as_method_parameters">Closures as Method Parameters</a></li>
 <li><a href="#_info_about_closure_parameters">Info About Closure Parameters</a></li>
 <li><a href="#_currying">Currying</a></li>
+<li><a href="#_exercise_3">Exercise</a></li>
 </ul>
 </li>
 <li><a href="#_collections">Collections</a></li>
@@ -157,7 +161,7 @@
 <p>Groovy comes bundled as a .zip file or platform-specific installer for Windows, and Ubuntu, Debian. This section will explain how to install the zipped version, since it covers the widest breadth of platforms.</p>
 </div>
 <div class="paragraph">
-<p>Note: Because Groovy is Java, it requires at least Java Development Kit (JDK) 1.4 or above to be installed and the JAVA_HOME environment variable to be set. Java Development Kit (JDK) 1.6 or higher is recommended to use all features of Groovy.</p>
+<p>Note: Because Groovy is Java, it requires at least Java Development Kit (JDK) 1.6 or above to be installed and the JAVA_HOME environment variable to be set.</p>
 </div>
 <div class="paragraph">
 <p>To install Groovy, follow these steps:</p>
@@ -660,7 +664,27 @@ where id &gt; 100
 </div>
 <div class="sect2">
 <h3 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h3>
-
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Play around with different types in Groovy.</p>
+</li>
+<li>
+<p>Try to define a GString with an expression.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -693,10 +717,8 @@ where id &gt; 100
 <pre class="prettyprint groovy language-groovy"><code>def singleQuotes =  ~'[ab]test\\d'
 assert singleQuotes.class.name == 'java.util.regex.Pattern'
 
-
 def doubleQuotes = ~"string\$"
 assert doubleQuotes.class.name == 'java.util.regex.Pattern'
-
 
 // Groovy's string slashy syntax is very useful to
 // define patterns, because we don't have to escape
@@ -704,11 +726,9 @@ assert doubleQuotes.class.name == 'java.util.regex.Pattern'
 def slashy = ~/slashy \d+ value/
 assert slashy.class.name == 'java.util.regex.Pattern'
 
-
 def s = 'more'
 def curlyGString = ~"$s GString"
 assert curlyGString instanceof java.util.regex.Pattern
-
 
 // Using Pattern.matcher() to create new java.util.regex.Matcher.
 def last = "t"
@@ -716,22 +736,22 @@ def testPattern = ~/t..${last}/
 assert testPattern.matcher("test").matches()</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_find_operator"><a class="anchor" href="#_find_operator"></a>Find Operator</h3>
 <div class="paragraph">
-<p>Find Operator
-In Groovy we use the =~ operator (find operator) to create a new matcher object. If the matcher has any match results we can access the results by invoking methods on the matcher object. But Groovy wouldn&#8217;t by groovy if we could access the results easier. Groovy enhances the Matcher class so the data is available with an array-like syntax. If we use groups in the matcher the result can be accessed with a multidimensional array.</p>
+<p>In Groovy we use the <code>=~</code> operator (find operator) to create a new matcher object. If the matcher has any match results we can access the results by invoking methods on the matcher object. But Groovy wouldn&#8217;t by groovy if we could access the results easier. Groovy enhances the Matcher class so the data is available with an array-like syntax. If we use groups in the matcher the result can be accessed with a multidimensional array.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint groovy language-groovy"><code>def finder = ('groovy' =~ /gr.*/)
 assert finder instanceof java.util.regex.Matcher
 
-
 def cool = /gr\w{4}/  // Start with gr followed by 4 characters.
 def findCool = ('groovy, java and grails rock!' =~ /$cool/)
 assert 2 == findCool.getCount()
 assert 'groovy' == findCool[0]  // Array-like access to match results.
 assert 'grails' == findCool[1]
-
 
 // With grouping we get a multidimensional array.
 def group = ('groovy and grails, ruby and rails' =~ /(\w+) and (\w+)/)
@@ -743,7 +763,6 @@ assert 'grails' == group[0][2]
 assert 'rails' == group[1][2]
 assert 'ruby' == group[1][1]
 
-
 // Use matcher methods.
 assert ('Hello world' =~ /Hello/).replaceFirst('Hi') == 'Hi world'</code></pre>
 </div>
@@ -752,7 +771,7 @@ assert ('Hello world' =~ /Hello/).replaceFirst('Hi') == 'Hi world'</code></pre>
 <div class="sect2">
 <h3 id="_match_operator"><a class="anchor" href="#_match_operator"></a>Match Operator</h3>
 <div class="paragraph">
-<p>We can use the ==~ operator, to do exact matches. With this operator the matches() method is invoked on the matcher object. The result is a Boolean value.</p>
+<p>We can use the <code>==~</code> operator, to do exact matches. With this operator the <code>matches()</code> method is invoked on the matcher object. The result is a Boolean value.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -835,50 +854,42 @@ class GroovySample {
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s write a little sample code to use both beans. We can use the getter and setter methods to read and set values for the properties, but we can also reference the properties with the following syntax: obj.property. Groovy will invoke the getter and setter method for us, but we simple can write obj.property.</p>
+<p>Let&#8217;s write a little sample code to use both beans. We can use the getter and setter methods to read and set values for the properties, but we can also reference the properties with the following syntax: <code>obj.property</code>. Groovy will invoke the getter and setter method for us, but we simple can write <code>obj.property</code>.</p>
 </div>
 <div class="paragraph">
-<p>As an extra bonus we get a constructor for our class that takes a Map argument. If the key in the map matches a property, the value is set. This makes it very easy to initialize a class and set property values in one line.</p>
+<p>As an extra bonus we get a constructor for our class that takes a <code>Map</code> argument. If the key in the map matches a property, the value is set. This makes it very easy to initialize a class and set property values in one line.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint groovy language-groovy"><code>import org.gr8conf.java.JavaSample
 import org.gr8conf.groovy.GroovySample
 
-
 def javaBean = new JavaSample()
 javaBean.setUserName 'user 1'
 javaBean.setAge 20
 
-
 assert javaBean.getUserName() == 'user 1'
 assert javaBean.getAge() == 20
-
 
 def groovyBean = new GroovySample()
 groovyBean.setUserName 'user 2'
 groovyBean.setAge 19
 
-
 assert groovyBean.getUserName() == 'user 2'
 assert groovyBean.getAge() == 19
-
 
 // We can use a constructor with the names of the properties and their values.
 javaBean = new JavaSample(userName: 'user 3', age: 25)
 assert javaBean.getUserName() == 'user 3'
 assert javaBean.getAge() == 25
 
-
 // We can use simple assignments instead of setter methods.
 javaBean.userName = 'user 3a'
 javaBean.age = javaBean.age + 10
 
-
 // And we don't have to use the getter method to get the value.
 assert javaBean.userName == 'user 3a'
 assert javaBean.age == 35
-
 
 groovyBean = new GroovySample(userName: 'user 4', age: 30)
 assert groovyBean.userName == 'user 4'
@@ -904,10 +915,8 @@ We use named arguments in our method definition. This provides a very intuitive 
    message + ' ' + append
 }
 
-
 assert 'Hello world' == defaultArgs('Hello')
 assert 'Hello user' == defaultArgs('Hello', 'user')
-
 
 String optionalArgs(String message, String[] optional) {
    String result = message
@@ -917,15 +926,12 @@ String optionalArgs(String message, String[] optional) {
    result
 }
 
-
 assert 'Hello world' == optionalArgs('Hello', 'world')
 assert 'Hello world and user' == optionalArgs('Hello', 'world', 'and', 'user')
-
 
 String namedArgs(Map arguments, String message) {
    "$message $arguments.user, you are $arguments.age years old."
 }
-
 
 assert 'Hello user, you are 28 years old.' == namedArgs(user: 'user', 'Hello', age: 28)</code></pre>
 </div>
@@ -934,7 +940,7 @@ assert 'Hello user, you are 28 years old.' == namedArgs(user: 'user', 'Hello', a
 <div class="sect2">
 <h3 id="_multimethods"><a class="anchor" href="#_multimethods"></a>Multimethods</h3>
 <div class="paragraph">
-<p>Groovy&#8217;s method lookup takes into account the dynamic type of method arguments, where Java relies on tthe static type. This feature is called mulitmethods.</p>
+<p>Groovy&#8217;s method lookup takes into account the dynamic type of method arguments, where Java relies on the static type. This feature is called mulitmethods.</p>
 </div>
 <div class="paragraph">
 <p>We define overloaded methods with differently typed arguments and let Groovy decided at runtime which method to invoke. This subject is best explained by an example.</p>
@@ -949,7 +955,6 @@ abstract class Person {
 class Parent extends Person {}
 class Child extends Person {}
 
-
 // Now we define methods to return the name with some extra info.
 def printName(Person person) {
    "printName(Person): $person.name"
@@ -961,25 +966,20 @@ def printName(p /* dynamic argument */) {
    "printName(p): $p.name"
 }
 
-
 // Create new Parent and Child objects but use Person type reference.
 Person parent1 = new Parent(name: 'parent1')
 Person child1 = new Child(name: 'child1')
-
 
 assert 'printName(Person): parent1' == printName(parent1)
 assert 'printName(Child): child1' == printName(child1)  // This is not what Java would do!!
 assert 'printName(Person): child1' == printName(child1 as Person)  // Same as what Java would do with printName(child1)
 
-
 // Create objects with type reference is equal to object.
 Parent parent2 = new Parent(name: 'parent2')
 Child child2 = new Child(name: 'child2')
 
-
 assert 'printName(Person): parent2' == printName(parent2)
 assert 'printName(Child): child2' == printName(child2)
-
 
 // Use class outside Person hierarchy.
 class Dog {
@@ -992,7 +992,7 @@ assert 'printName(p): buck' == printName(new Dog(name: 'buck'))</code></pre>
 <div class="sect2">
 <h3 id="_gpath"><a class="anchor" href="#_gpath"></a>GPath</h3>
 <div class="paragraph">
-<p>GPath allows short and compact expressions to travers an object graph. It is analog to XPath which is used to travers through XML documents. Closely related is the null-safe dereference operator (?.) to avoid NullPointerExceptions.</p>
+<p>GPath allows short and compact expressions to travers an object graph. It is analog to XPath which is used to travers through XML documents. Closely related is the null-safe dereference operator (<code>?.</code>) to avoid NullPointerExceptions.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1001,18 +1001,15 @@ assert 'printName(p): buck' == printName(new Dog(name: 'buck'))</code></pre>
    List orderItems
 }
 
-
 class OrderLine {
    String product
    BigDecimal price
    Integer count
 
-
    def getTotal() {
        count * price
    }
 }
-
 
 def orderLines = [
    new OrderLine(product: 'PRD1', price: 1.02, count: 10),
@@ -1021,12 +1018,10 @@ def orderLines = [
 ]
 def order = new Order(orderItems: orderLines)
 
-
 // Use GPath to travers object graph.
 assert order.orderItems[0].product == 'PRD1'
 assert order.orderItems[1].price == 8.21
 assert order.orderItems[1].total == 3 * 8.21
-
 
 // Null-safe dereference operator.
 assert order?.orderItems[1]?.product?.toLowerCase() == 'prd2'
@@ -1038,10 +1033,10 @@ assert order.orderItems[3]?.product == null</code></pre>
 <div class="sect2">
 <h3 id="_exceptions"><a class="anchor" href="#_exceptions"></a>Exceptions</h3>
 <div class="paragraph">
-<p>Exceptions and exception handling is the same in Groovy as it is in Java. We use the try/catch/finally, try/catch or try/finally blocks in Groovy as we would in Java. The only thing different is that in Groovy we don&#8217;t have to declare an exception in the method signature, this is optional.</p>
+<p>Exceptions and exception handling is the same in Groovy as it is in Java. We use the <code>try/catch/finally</code>, <code>try/catch</code> or <code>try/finally</code> blocks in Groovy as we would in Java. The only thing different is that in Groovy we don&#8217;t have to declare an exception in the method signature, this is optional.</p>
 </div>
 <div class="paragraph">
-<p>When a checked exception is not declared the exception is propagated up the exception stack as a RuntimeException. This is also true if we invoke a method from a Java class that has declared a checked exception.</p>
+<p>When a checked exception is not declared the exception is propagated up the exception stack as a <code>RuntimeException</code>. This is also true if we invoke a method from a Java class that has declared a checked exception.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1053,7 +1048,6 @@ assert order.orderItems[3]?.product == null</code></pre>
    assert e in MalformedURLException
 }
 
-
 // Method throws MalformedURLException, but we don't
 // have to define it. Groovy will pass the exception
 // on to the calling code.
@@ -1061,17 +1055,46 @@ def createUrl() {
    new URL('malformedUrl')
 }
 
-
 try {
    def url1 = createUrl()
    assert false, 'We should never get here because of the exception.'
 } catch (all) {  // Groovy shortcut: we can omit the Exception class
-                // if we want to catch all Exception and descendant objects.
-                // In Java we have to write catch (Exception all).
+                 // if we want to catch all Exception and descendant objects.
+                 // In Java we have to write catch (Exception all).
    assert true
    assert all in MalformedURLException
 }</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exercise_2"><a class="anchor" href="#_exercise_2"></a>Exercise</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Write a Groovy class with a <code>String</code> property username</p>
+</li>
+<li>
+<p>Create an instance of the class and set and read a value for the username property.</p>
+</li>
+<li>
+<p>Add a new method greeting that returns a salutation for the username, like Hi, mrhaki.</p>
+</li>
+<li>
+<p>Change the method signature and add a argument with a default value for the salutation, eg. the default is Hello</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1085,7 +1108,7 @@ try {
 <div class="sect2">
 <h3 id="_groovy_truth"><a class="anchor" href="#_groovy_truth"></a>Groovy Truth</h3>
 <div class="paragraph">
-<p>In Java only a boolean type can be used in a conditional context like in a if statement. In Groovy we can use all kinds of objects in a conditional context and Groovy will coerce these objects to true or false depending on the value. And to top it of we can even write our own implementation of the truth for our objects. We need to implement the asBoolean() method to return true or false for our object.</p>
+<p>In Java only a boolean type can be used in a conditional context like in a if statement. In Groovy we can use all kinds of objects in a conditional context and Groovy will coerce these objects to true or false depending on the value. And to top it of we can even write our own implementation of the truth for our objects. We need to implement the <code>asBoolean()</code> method to return true or false for our object.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1161,7 +1184,7 @@ assert elvis('') == 'Viva Las Vegas!'</code></pre>
 <div class="sect2">
 <h3 id="_switch"><a class="anchor" href="#_switch"></a>Switch</h3>
 <div class="paragraph">
-<p>The Java switch statement looks pale compared to Groovy&#8217;s switch statement. In Groovy we can use different classifiers for a switch statement instead of only an int or int-derived type. Anything that implements the isCase() method can be used as a classifier. Groovy already added an isCase() method to Class (uses isInstance), Object (uses (equals), collections (uses contains) and regular expressions (uses matches). If we implement the isCase method in our own Groovy classes we can use it as a classifier as well. Finally we can a closure as a classifier. The closure will be evaluated to a boolean value.</p>
+<p>The Java switch statement looks pale compared to Groovy&#8217;s switch statement. In Groovy we can use different classifiers for a switch statement instead of only an <code>int</code> or <code>int</code>-derived type. Anything that implements the <code>isCase()</code> method can be used as a classifier. Groovy already added an <code>isCase()</code> method to <code>Class</code> (uses <code>isInstance</code>), <code>Object</code> (uses <code>equals</code>), collections (uses <code>contains</code>) and regular expressions (uses <code>matches</code>). If we implement the <code>isCase</code> method in our own Groovy classes we can use it as a classifier as well. Finally we can use a closure as a classifier. The closure will be evaluated to a boolean value. We will learn about closures later.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1196,7 +1219,6 @@ assert elvis('') == 'Viva Las Vegas!'</code></pre>
    result
 }
 
-
 assert testSwitch("Switch to Groovy") == 'Pattern match'
 assert testSwitch(42G) == 'Class isInstance'
 assert testSwitch(70) == 'Range contains'
@@ -1211,7 +1233,7 @@ assert testSwitch('default') == 'Default'</code></pre>
 <div class="sect2">
 <h3 id="_for_in_loop"><a class="anchor" href="#_for_in_loop"></a>For-in Loop</h3>
 <div class="paragraph">
-<p>In Java we have different for loops. Groovy adds one more for .. in …</p>
+<p>In Java we have different for loops. Groovy adds one more: <code>for .. in</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1412,7 +1434,6 @@ assert result == '01234'</code></pre>
    }
 }
 
-
 def m1 = new Money(amount: 100)
 def m2 = new Money(amount: 1)
 
@@ -1424,7 +1445,7 @@ assert m1 + m2 == new Money(amount: 101)  // equals() and plus()</code></pre>
 <div class="sect2">
 <h3 id="_spaceship_operator"><a class="anchor" href="#_spaceship_operator"></a>Spaceship Operator</h3>
 <div class="paragraph">
-<p>Groovy adds some nice operators to the language. One of them is the spaceship operator. It&#8217;s called the spaceship operator, because we use the following syntax &lt;&#8658; and that looks a bit like a UFO. The operator is another way of referring to the compareTo method of the Comparable interface. This means we can implement the compareTo method in our own classes and this will allow us to use the &lt;&#8658; operator in our code. And of course all classes which already have implemented the compareTo method can be used with the spaceship operator. The operator makes for good readable sort methods.</p>
+<p>Groovy adds some nice operators to the language. One of them is the spaceship operator. It&#8217;s called the spaceship operator, because we use the following syntax <code>&lt;&#8658;</code> and that looks a bit like a UFO. The operator is another way of referring to the <code>compareTo</code> method of the <code>Comparable</code> interface. This means we can implement the <code>compareTo</code> method in our own classes and this will allow us to use the <code>&lt;&#8658;</code> operator in our code. And of course all classes which already have implemented the <code>compareTo</code> method can be used with the spaceship operator. The operator makes for good readable sort methods.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1447,7 +1468,7 @@ assert [1, 2, 3, 4] == [4, 2, 1, 3].sort{ a, b -&gt; a &lt;=&gt; b }</code></pre
 <div class="sect2">
 <h3 id="_spread_dot_operator"><a class="anchor" href="#_spread_dot_operator"></a>Spread-Dot Operator</h3>
 <div class="paragraph">
-<p>The spread-dot operator (*.) is used to invoke a method on all members of a Collection object. The result of using the spread-dot operator is another Collection object.</p>
+<p>The spread-dot operator (<code>*.</code>) is used to invoke a method on all members of a <code>Collection</code> object. The result of using the spread-dot operator is another <code>Collection</code> object.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1481,7 +1502,7 @@ assert ['Groovy', 'Java', 'Scala'] == list.lang</code></pre>
 <div class="sect2">
 <h3 id="_spread_operator"><a class="anchor" href="#_spread_operator"></a>Spread Operator</h3>
 <div class="paragraph">
-<p>The spread operator (*) is used to tear a list apart into single elements. This can be used to invoke a method with multiple parameters and then spread a list into the values for the parameters. The spread operator can also be used to add lists or ranges to lists and to add maps to other maps. We see samples of the spread operator when we look at collections.</p>
+<p>The spread operator (<code>*</code>) is used to tear a list apart into single elements. This can be used to invoke a method with multiple parameters and then spread a list into the values for the parameters. The spread operator can also be used to add lists or ranges to lists and to add maps to other maps. We see samples of the spread operator when we look at collections.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1510,7 +1531,7 @@ Say hello world on 2009-09-01.
 <div class="sect2">
 <h3 id="_is_vs"><a class="anchor" href="#_is_vs"></a>Is vs. ==</h3>
 <div class="paragraph">
-<p>Groovy overloads the == operator and maps it to the equals() method. This is very different from Java, so when developers are switching back and forth between Groovy and Java mistakes are bound to happen. In Java we use the == operator to see if variables are referring to the same object instance. In Groovy we use the == operator to see if two objects are the same, in Java we would use the equals() method for this. To test if two variables are referring to the same object instance in Groovy we use the is() method. The <code>!=</code> operator is also overloaded and maps to the !equals() statement.</p>
+<p>Groovy overloads the <code>==</code> operator and maps it to the <code>equals()</code> method. This is very different from Java, so when developers are switching back and forth between Groovy and Java mistakes are bound to happen. In Java we use the <code>==</code> operator to see if variables are referring to the same object instance. In Groovy we use the <code>==</code> operator to see if two objects are the same, in Java we would use the <code>equals()</code> method for this. To test if two variables are referring to the same object instance in Groovy we use the <code>is()</code> method. The <code>!=</code> operator is also overloaded and maps to the <code>!equals()</code> statement.</p>
 </div>
 <div class="paragraph">
 <p>And because we are in Groovy land all <code>null</code> values are handled gracefully. We don&#8217;t have to write extra checks to check for <code>null</code> values before we can test for equality.</p>
@@ -1579,11 +1600,10 @@ assert noArgs() == 'Closure without arguments.'
 assert noArgs.call() == 'Closure without arguments.'</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_turn_methods_into_closures"><a class="anchor" href="#_turn_methods_into_closures"></a>Turn Methods into Closures</h3>
 <div class="paragraph">
-<p>===Turn Methods into Closures</p>
-</div>
-<div class="paragraph">
-<p>Sometimes we need to pass a closure to a method, but the functionality is implemented in a method. We can convert a method into a closure with the .&amp; operator. The method to be converted doesn&#8217;t have to be a Groovy method, but can also be a Java method. This way we can easily integrate existing Java code into Groovy.</p>
+<p>Sometimes we need to pass a closure to a method, but the functionality is implemented in a method. We can convert a method into a closure with the <code>.&amp;</code> operator. The method to be converted doesn&#8217;t have to be a Groovy method, but can also be a Java method. This way we can easily integrate existing Java code into Groovy.</p>
 </div>
 <div class="paragraph">
 <p>We create a Java class JavaMethods with a static public method:</p>
@@ -1620,6 +1640,7 @@ def sayHelloJava = org.gr8conf.java.JavaMethods.&amp;sayHello
 assert sayHelloClosure('student') == 'Closure says hello to student'
 assert sayHelloGroovy.call('student') == 'Groovy says hello to student'
 assert sayHelloJava('student') == 'Java says hello to student'</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1672,7 +1693,7 @@ work 'Groovy', {
 <div class="sect2">
 <h3 id="_info_about_closure_parameters"><a class="anchor" href="#_info_about_closure_parameters"></a>Info About Closure Parameters</h3>
 <div class="paragraph">
-<p>We can inspect the number and type of parameters defined for a closure very easily. A closure has the properties maximumNumberOfParameters and parameterTypes for this. So in our code we can ask a closure how many parameters are expected and even which type the parameters are.</p>
+<p>We can inspect the number and type of parameters defined for a closure very easily. A closure has the properties <code>maximumNumberOfParameters</code> and <code>parameterTypes</code> for this. So in our code we can ask a closure how many parameters are expected and even which type the parameters are.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1685,7 +1706,6 @@ def two = { String s, upper -&gt;
        s.toLowerCase()
    }
 }
-
 
 def runClosure(cl) {
    switch (cl.maximumNumberOfParameters) {
@@ -1700,7 +1720,6 @@ def runClosure(cl) {
    }
 }
 
-
 assert 'GROOVY' == runClosure(one)
 assert 'groovy' == runClosure(two)</code></pre>
 </div>
@@ -1709,7 +1728,7 @@ assert 'groovy' == runClosure(two)</code></pre>
 <div class="sect2">
 <h3 id="_currying"><a class="anchor" href="#_currying"></a>Currying</h3>
 <div class="paragraph">
-<p>Currying is a technique to create a clone of a closure and fixing values for some of the parameters. We can fix one or more parameters, depending on the number of arguments we use for the curry() method. The parameters are bound from left to right. The rcurry() method which uses a right to left order and the ncurry() where we can supply a parameter value for an argument of the closure at a specific index The good thing is we can even use other closures as parameters for the curry() method.</p>
+<p>Currying is a technique to create a clone of a closure and fixing values for some of the parameters. We can fix one or more parameters, depending on the number of arguments we use for the <code>curry()</code> method. The parameters are bound from left to right. The <code>rcurry()</code> method which uses a right to left order and the <code>ncurry()</code> where we can supply a parameter value for an argument of the closure at a specific index The good thing is we can even use other closures as parameters for the <code>curry()</code> method.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1754,6 +1773,36 @@ Well... Groovy needs the JVM...
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_exercise_3"><a class="anchor" href="#_exercise_3"></a>Exercise</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Write a 3-argument closure, where the third argument has a default value <em>gr8conf</em>. The closure result returns the concatenation of the 3 arguments.</p>
+</li>
+<li>
+<p>Print the value of the closure.</p>
+</li>
+<li>
+<p>Make a second closure, that curries the first closure, so the 2nd argument is set to <em>love</em>.</p>
+</li>
+<li>
+<p>Make a method, taking two arguments: the closure and a String value, eg. <em>I</em>, <em>we</em> or <em>you</em>. The method should print out the result of the closure we created at the previous step.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1765,10 +1814,10 @@ Well... Groovy needs the JVM...
 <div class="sect2">
 <h3 id="_ranges"><a class="anchor" href="#_ranges"></a>Ranges</h3>
 <div class="paragraph">
-<p>Ranges are lists with sequential values. Each range is also a list object, because Range extends java.util.List. A range can be inclusive (so both begin and end values are in the range) or exclusive (the end value is not in the range). We use .. for an inclusive range and ..&lt; for an exclusive range.</p>
+<p>Ranges are lists with sequential values. Each range is also a list object, because <code>Range</code> extends <code>java.util.List</code>. A range can be inclusive (so both begin and end values are in the range) or exclusive (the end value is not in the range). We use <code>..</code> for an inclusive range and <code>..&lt;</code> for an exclusive range.</p>
 </div>
 <div class="paragraph">
-<p>Each object that implements the Comparable interface and implements a next() and previous() method can be used for a range. So this means we can write our own objects so they can be used in ranges, but also we can use for example String objects or Enum values in a range.</p>
+<p>Each object that implements the <code>Comparable</code> interface and implements a <code>next()</code> and <code>previous()</code> method can be used for a range. So this means we can write our own objects so they can be used in ranges, but also we can use for example <code>String</code> objects or <code>Enum</code> values in a range.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1801,7 +1850,6 @@ assert 5 == northToSouth.size()
 assert Compass.EAST == northToSouth[2]
 assert northToSouth.contains(Compass.SOUTH_EAST)
 
-
 // Bonus: next() and previous() are equivalent to
 // ++ and -- operators.
 def region = Compass.SOUTH
@@ -1813,29 +1861,25 @@ assert Compass.SOUTH == --region</code></pre>
 <div class="sect2">
 <h3 id="_lists"><a class="anchor" href="#_lists"></a>Lists</h3>
 <div class="paragraph">
-<p>Defining a list in Groovy looks like defining an array. We use square brackets to define a new list. The list is of type java.util.ArrayList. It is very easy to create a list this way.</p>
+<p>Defining a list in Groovy looks like defining an array. We use square brackets to define a new list. The list is of type <code>java.util.ArrayList</code>. It is very easy to create a list this way.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint groovy language-groovy"><code>def empty = []
 assert empty.class.name == 'java.util.ArrayList'
 
-
 class User {
    String username
 }
 def student = new User(username: 'student')
-
 
 def items = ['Groovy', 12, student]
 assert items.size() == 3
 assert items[-2] == 12  // Negative index to read from last to first.
 assert items.reverse() == [student, 12, 'Groovy']
 
-
 items &lt;&lt; 'Grails'  // Adding items with the leftShift operator.
 assert items == ['Groovy', 12, student, 'Grails']
-
 
 assert items + [1, 2] == ['Groovy', 12, student, 'Grails', 1, 2]
 assert items - [student, 12] == ['Groovy', 'Grails']</code></pre>
@@ -1845,7 +1889,7 @@ assert items - [student, 12] == ['Groovy', 'Grails']</code></pre>
 <div class="sect2">
 <h3 id="_maps"><a class="anchor" href="#_maps"></a>Maps</h3>
 <div class="paragraph">
-<p>Maps are defined by a list of keys and values. The key is a string by default, but we can use any type we want for the key. We can even use variables as keys for our map. We only have to place parentheses around the key to make it work. This way we can use variables and types like Date and Boolean as keys for our map. When we use parentheses around the key when using the . notation the key is converted to a String, otherwise the key is not converted and keeps it type.</p>
+<p>Maps are defined by a list of keys and values. The key is a string by default, but we can use any type we want for the key. We can even use variables as keys for our map. We only have to place parentheses around the key to make it work. This way we can use variables and types like <code>Date</code> and <code>Boolean</code> as keys for our map. When we use parentheses around the key when using the <code>.</code> notation the key is converted to a <code>String</code>, otherwise the key is not converted and keeps it type.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1893,10 +1937,10 @@ assert 'number key' == m.get(101)</code></pre>
 <div class="sect2">
 <h3 id="_looping"><a class="anchor" href="#_looping"></a>Looping</h3>
 <div class="paragraph">
-<p>Looping in Groovy can be done in several ways. We can use the standard classic Java for loop or use the newer Java for-each loop. But Groovy adds more ways to loop several times and execute a piece of code. Groovy extends the Integer class with the step() , upto() and times() methods. These methods take a closure as a parameter. In the closure we define the piece of code we want to be executed several times.</p>
+<p>Looping in Groovy can be done in several ways. We can use the standard classic Java for loop or use the newer Java for-each loop. But Groovy adds more ways to loop several times and execute a piece of code. Groovy extends the <code>Integer</code> class with the <code>step()</code>, <code>upto()</code> and <code>times()</code> methods. These methods take a closure as a parameter. In the closure we define the piece of code we want to be executed several times.</p>
 </div>
 <div class="paragraph">
-<p>If we have a List in Groovy we can loop through the items of the list with the each() and eachWithIndex() methods. We also need to pass a closure as parameter to the methods. The closure is then executed for every item in the list.</p>
+<p>If we have a <code>List</code> in Groovy we can loop through the items of the list with the <code>each()</code> and <code>eachWithIndex()</code> methods. We also need to pass a closure as parameter to the methods. The closure is then executed for every item in the list.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1966,10 +2010,10 @@ assert '0011223344' == result</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Groovy has some features and methods we can categorize as functional programming. The inject() method is a so called higher-order function. Other languages call it a fold, reduce or accumulate. The inject() method processes a data structure with a closure and builds up a return value. The first parameter of the inject() method is the first value of the intermediary results of the second parameter: the closure. When we use the inject() we don&#8217;t introduce any side effects, because we build up the value without using any outside variable.</p>
+<p>Groovy has some features and methods we can categorize as functional programming. The <code>inject()</code> method is a so called higher-order function. Other languages call it a fold, reduce or accumulate. The <code>inject()</code> method processes a data structure with a closure and builds up a return value. The first parameter of the <code>inject()</code> method is the first value of the intermediary results of the second parameter: the closure. When we use the <code>inject()</code> we don&#8217;t introduce any side effects, because we build up the value without using any outside variable.</p>
 </div>
 <div class="paragraph">
-<p>To understand the inject() method better we look at some sample code:</p>
+<p>To understand the <code>inject()</code> method better we look at some sample code:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3295,7 +3339,7 @@ println "LoudYellingExample".toSnakeCase(true)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-01 23:36:26 CEST
+Last updated 2014-06-02 00:12:54 CEST
 </div>
 </div>
 </body>
