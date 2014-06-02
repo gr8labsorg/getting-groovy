@@ -30,7 +30,7 @@
 <li><a href="#_ide_support">IDE Support</a></li>
 </ul>
 </li>
-<li><a href="#_transforming">Transforming</a></li>
+<li><a href="#_transforming_java_to_groovy">Transforming Java to Groovy</a></li>
 <li><a href="#_types">Types</a></li>
 <li>
 <ul class="sectlevel2">
@@ -459,7 +459,7 @@ Hello Groovy
 </div>
 </div>
 <div class="sect1">
-<h2 id="_transforming"><a class="anchor" href="#_transforming"></a>Transforming</h2>
+<h2 id="_transforming_java_to_groovy"><a class="anchor" href="#_transforming_java_to_groovy"></a>Transforming Java to Groovy</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following Java code</p>
@@ -3192,13 +3192,11 @@ use (org.gr8conf.java.JavaTalk) {
 <div class="sect2">
 <h3 id="_mixins"><a class="anchor" href="#_mixins"></a>Mixins</h3>
 <div class="paragraph">
-<p>We can also add new functionality to classes with the <code>mixin()</code> method (runtime) or with the <code>@Mixin</code> annotation (compile-time). We specify the class as an argument to the method or annotation. All public methods from the class are added to our own class.</p>
+<p>We can also add new functionality to classes with the <code>mixin()</code> method (runtime). We specify the class as an argument to the method. All public methods from the class are added to our own class.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint groovy language-groovy"><code>package org.gr8conf.groovy
-
-import org.gr8conf.java.JavaTalk
 
 class Parrot {
     static String speak(String text) {
@@ -3207,27 +3205,8 @@ class Parrot {
 }
 
 String.mixin Parrot
-Integer.mixin JavaTalk
 
-assert "Lorre".speak() == 'Parrot says "Lorre"'
-assert 1.text() == 'one'
-assert 2.text() == 'two'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint groovy language-groovy"><code>class Pirate {
-    def talk(text) {
-        "Aargh, walk the plank. ${text}"
-    }
-}
-
-// Compile time mixin to Talk class. This add all
-// methods from Pirate to Talk.
-@Mixin(Pirate)
-class Talk {}
-
-assert 'Aargh, walk the plank. Give me a bottle of rum.' == new Talk().talk("Give me a bottle of rum.")</code></pre>
+assert "Lorre".speak() == 'Parrot says "Lorre"'</code></pre>
 </div>
 </div>
 </div>
@@ -3402,7 +3381,7 @@ println "LoudYellingExample".toSnakeCase(true)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-02 00:47:12 CEST
+Last updated 2014-06-02 06:16:39 CEST
 </div>
 </div>
 </body>
