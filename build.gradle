@@ -49,6 +49,17 @@ task presentation(type: AsciidoctorTask) {
     sourceDocumentName = file('src/asciidoc/presentation.adoc')
     options = [
         template_dir: "src/asciidoc/templates/deckjs/",
+        attributes: [
+            iconsdir: './icons',
+            icons: 'font',
+            'source-highlighter': 'prettify',
+            encoding: 'utf-8',
+            backend: 'deckjs',
+            'deckjs_theme': 'swiss',
+            'deckjs_transition': 'fade',
+            menu: '',
+            imagesdir: './images'
+        ]
     ]
 }
 

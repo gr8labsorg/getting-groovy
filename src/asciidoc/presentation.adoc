@@ -1,0 +1,369 @@
+= Groovy Workshop Gr8Conf
+
+== Agenda
+
+* Introduction
+* Let's code and learn!
+
+== Hubert Klein Ikkink (mrhaki)
+
+* Java developer for many years (since 1996)
+* Live in The Netherlands (Tilburg)
+* Work at JDriven
+* Started with Groovy in 2008
+* http://mrhaki.blogspot.com blog about Groovy, Grails, Gradle and more
+* Twitter: @mrhaki
+
+== Workshop structure
+
+* Partly slideshow with live coding
+* Partly hands-on 
+** Small exercises
+** Code snippets
+** No big Groovy project
+* Getting Groovy links:
+** http://www.gr8labs.org/getting-groovy
+** http://www.gr8labs.org/getting-groovy/presentation.html
+
+== Groovy history
+
+* Groovy started in Aug 2003 by James Strachan
+* Open Source
+* Dynamic language compiling to Java byte code and executable in JVM
+* Language grammar extends Java, with heavy inspiration from Python, Ruby and Smalltalk
+* Flat learning curve for Java developer
+
+[quote]
+____
+Groovy is Java on steroids
+____
+
+== Getting started
+
+* How to install
+* Compiling and running
+* Groovy scripts
+* Groovy shell and console
+* Groovy web console
+* IDE support
+
+== Install - Requirements
+
+* JDK 1.6 or higher
+* Groovy (on conference USB stick)
+
+== Install
+
+. Uncompress the zip file to +c:\gr8conf\groovy\+ (Windows) or +~/gr8conf/groovy+ (Mac/Linux).
+. Set a +GROOVY_HOME+ environment variable to the directory from the previous step.
+. Add the +[GROOVY_HOME]\bin+ directory to your system path.
+ * Windows: Use your computer's properties to set the environment variable +PATH+ and add +%GROOVY_HOME%\bin+
+ * Linux/Mac OS X: open your shell and set the +PATH+ variable
+
+ > export PATH=$PATH:$GROOVY_HOME/bin  
+
+== Validate installation
+
+* To validate the installation we open a command prompt or console and type:
+
+  > groovy -version
+
+== Running Groovy code
+
+* Locally with Groovy Console
+
+  > groovyConsole
+
+* Or use Groovy web console
+** http://groovyconsole.appspot.com
+
+== Transforming Java to Groovy
+
+[source,java]
+----
+public class UsingJava {
+    private String name;
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    @Override
+    public String toString() {
+        return "Using Java " + getName();
+    }
+
+    public static void main(String[] args) {
+        UsingJava usingJava = new UsingJava();
+        usingJava.setName("Geeks");
+        System.out.println(usingJava);
+    }
+}
+----
+
+== Transforming Java to Groovy
+
+[source,groovy]
+----
+class UsingJava {
+    String name
+
+    String toString() {
+        "Using Java $name"    
+    }
+
+    static void main(String[] args) {
+        UsingJava usingJava = new UsingJava(name: ‘Geeks’)
+        println usingJava
+    }
+}
+----
+
+== Types
+
+* Basic types
+** Primitive types like in Java, but (un)boxed automatically
+** BigDecimal
+* Dynamic types
+
+
+== String variations and GString
+
+* Basic strings
+* Multi-line strings
+* GString
+
+== Exercise
+
+. Play around with different types in Groovy. 
+. Define a GString with an expression.
+
+== Exercise
+
+[source,groovy]
+----
+// dynamic type
+def s = 'Hello'
+assert s instanceof String
+s = 42
+assert s instanceof Integer
+
+// GString
+def user = 'mrhaki'
+def greeting = "Hi, ${user}. Your name has ${user.size()} characters"
+
+assert greeting == 'Hi, mrhaki. Your name has 6 characters' 
+----
+
+== Regular Expressions
+
+* Pattern operator (+~+)
+* Find operator (+=~+)
+* Match operator (+==~+)
+
+== Objects
+
+* GroovyBeans
+* Methods
+** Default arguments value
+* GPath
+* Exceptions
+
+== Exercise
+
+. Write a Groovy class with a +String+ property username
+. Create an instance of the class and set and read a value for the username property.
+. Add a new method greeting that returns a salutation for the username, like Hi, mrhaki.
+. Change the method signature and add a argument with a default value for the salutation, eg. the default is Hello
+
+== Exercise
+
+[source,groovy]
+----
+class User { 
+  String username
+
+  String greeting(salutation = 'Hello') {
+      "${salutation}, ${username}."
+  }
+}
+
+User user = new User(username: 'mrhaki')
+assert user.username == 'mrhaki'
+
+user.setUsername('Hubert')
+user.username = 'Hubert'
+
+assert user.greeting() == 'Hello, Hubert.'
+assert user.greeting('Hi') == 'Hi, Hubert.'
+----
+
+== Control structures
+
+* Groovy truth
+* Elvis operator
+* Switch
+* +for in+ loop
+
+== Operators
+
+* http://www.gr8labs.org/getting-groovy/index.html#_operator_overloading[Operator overloading]
+* Spaceship operator
+* Spread-dot operator
+* Spread operator
+
+
+
+== Break
+
+== Closures
+
+* Basic
+** Single argument (+it+)
+** Multiple arguments
+** No-argument
+* Methods into closures (+.&+)
+* Closures as method arguments
+** Special syntax for last argument
+* Currying
+
+== Exercise
+
+. Write a 3-argument closure, where the third argument has a default value 'gr8conf'. The closure result returns the concatenation of the 3 arguments.
+. Print the value of the closure.
+. Make a second closure, that curries the first closure, so the 2nd argument is set to 'love'.
+. Make a method, taking two arguments: the closure and a String value, eg. 'I', 'we' or 'you'. The method should print out the result of the closure we created at the previous step.
+
+== Exercise
+
+[source,groovy]
+----
+def gr8 = { arg1, arg2, arg3 = 'gr8conf' -> 
+    "$arg1 $arg2 $arg3"
+}
+println gr8("I'm","going to")
+
+def cl = gr8.ncurry(1,'love')
+
+def m(arg, closure) {
+    println closure(arg)
+}
+
+m('I',cl)
+----
+
+== Collections
+
+* Ranges
+* Lists
+* Maps
+* Looping
+** +upTo+
+** +times+
+** +each/eachWithIndex+
+* Finding data
+** +find/findAll/findIndexOf+
+** +any/every+
+* Transforming data
+** +collect+
+* Grouping elements
+
+== Exercise
+
+. Create a new list with String values, boolean values and numbers.
+. Use a finder method to find all String values.
+. Check if any String elements is at least 4 characters.
+. Create a new Map with some keys and values.
+. Transform all key/value pairs to a new list where each element in the list is the concatenation of the key and value.
+
+== Exercise
+
+[source,groovy]
+----
+def list = ['abc', 100, 'defg', false]
+
+assert list.findAll { it instanceof String } == ['abc', 'defg']
+assert list.any { it instanceof String && it.size() >= 4 }
+
+def map = [key: 'value', otherKey: 42, name: 'mrhaki']
+
+assert map.collect { key, value ->
+    "${key} = ${value}" } == ['key = value', 'otherKey = 42', 'name = mrhaki']
+----
+
+== File I/O
+
+* No boilerplate
+** +text+
+** +write+
+** +<<+
+* Resource handling
+* Getting data from the net
+
+== XML
+
+* Create XML
+** +MarkupBuilder+
+* Read XML
+** +XmlParser+
+** +XmlSlurper+
+
+== Exercise
+
+. Print the list of the book title from this url: http://mrhaki.com/books.xml
+. Get the title of the book with id == 2
+
+== Exercise
+
+[source,groovy]
+----
+import groovy.xml.* 
+
+def url = "http://mrhaki.com/books.xml".toURL()
+
+def slurper = new XmlSlurper()
+
+def xml = slurper.parseText(url.text)
+
+println xml.book.collect { it.title }
+
+println xml.book.find { it.@id == '2' }.title
+----
+
+== AST (Abstract Syntax Tree)
+
+* What is it
+* Examples of AST transformations
+** +@Delegate+
+** +@Singleton+
+** +@InheritConstructors+
+** +@ToString+
+** +@EqualsAndHashCode+
+** +@ToString+
+** +@Log+
+
+== Metaprogramming
+
+* Category
+* Mixin
+* Non-existing methods/properties
+** +invokeMethod/methodMissing+
+** +getProperty/setProperty/propertyMissing+
+* MetaClass
+
+== Groovy ecosystem
+
+* Grails (web stack)
+* Griffon (client GUI)
+* Gradle (build automation)
+* Spock (testing)
+* GPars (concurrency)
+* Gaelyk (Google App Engine)
+* Ratpack (web stack)
+* Embedded into
+** Jenkins
+** SoapUI
+** Spring
+
+== Thank you
+
+* Q & A
