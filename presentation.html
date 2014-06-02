@@ -1,183 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-<meta content="Asciidoctor 0.1.4" name="generator">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="generator" content="Asciidoctor 0.1.4">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Groovy Workshop Gr8Conf</title>
-<link href="deck.js/core/deck.core.css" rel="stylesheet">
-<link href="deck.js/extensions/goto/deck.goto.css" rel="stylesheet">
-<link href="deck.js/extensions/menu/deck.menu.css" rel="stylesheet">
-<link href="deck.js/extensions/navigation/deck.navigation.css" rel="stylesheet">
-<link href="deck.js/extensions/status/deck.status.css" rel="stylesheet">
-<link href="deck.js/extensions/hash/deck.hash.css" rel="stylesheet">
-<link href="deck.js/themes/style/swiss.css" rel="stylesheet">
-<link href="deck.js/themes/transition/fade.css" id="transition-theme-link" rel="stylesheet">
-<script src="deck.js/modernizr.custom.js"></script>
+<link rel="stylesheet" href="./stylesheets/asciidoctor.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', prettyPrint)</script>
 </head>
-<body class="deck-container article">
-<section class="slide" id="title-slide">
+<body class="book toc2 toc-left">
+<div id="header">
 <h1>Groovy Workshop Gr8Conf</h1>
-</section>
-<section class="slide" id="_agenda">
-<h2>Agenda</h2>
-<div class="ulist">
-<ul>
-<li>Introduction</li>
-<li>Let&#8217;s code and learn!</li>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_agenda">Agenda</a></li>
+<li><a href="#_hubert_klein_ikkink_mrhaki">Hubert Klein Ikkink (mrhaki)</a></li>
+<li><a href="#_workshop_structure">Workshop structure</a></li>
+<li><a href="#_groovy_history">Groovy history</a></li>
+<li><a href="#_getting_started">Getting started</a></li>
+<li><a href="#_install_requirements">Install - Requirements</a></li>
+<li><a href="#_install">Install</a></li>
+<li><a href="#_validate_installation">Validate installation</a></li>
+<li><a href="#_running_groovy_code">Running Groovy code</a></li>
+<li><a href="#_transforming_java_to_groovy">Transforming Java to Groovy</a></li>
+<li><a href="#_transforming_java_to_groovy_2">Transforming Java to Groovy</a></li>
+<li><a href="#_types">Types</a></li>
+<li><a href="#_string_variations_and_gstring">String variations and GString</a></li>
+<li><a href="#_exercise">Exercise</a></li>
+<li><a href="#_exercise_2">Exercise</a></li>
+<li><a href="#_regular_expressions">Regular Expressions</a></li>
+<li><a href="#_objects">Objects</a></li>
+<li><a href="#_exercise_3">Exercise</a></li>
+<li><a href="#_exercise_4">Exercise</a></li>
+<li><a href="#_control_structures">Control structures</a></li>
+<li><a href="#_operators">Operators</a></li>
+<li><a href="#_break">Break</a></li>
+<li><a href="#_closures">Closures</a></li>
+<li><a href="#_exercise_5">Exercise</a></li>
+<li><a href="#_exercise_6">Exercise</a></li>
+<li><a href="#_collections">Collections</a></li>
+<li><a href="#_exercise_7">Exercise</a></li>
+<li><a href="#_exercise_8">Exercise</a></li>
+<li><a href="#_file_i_o">File I/O</a></li>
+<li><a href="#_xml">XML</a></li>
+<li><a href="#_exercise_9">Exercise</a></li>
+<li><a href="#_exercise_10">Exercise</a></li>
+<li><a href="#_ast_abstract_syntax_tree">AST (Abstract Syntax Tree)</a></li>
+<li><a href="#_metaprogramming">Metaprogramming</a></li>
+<li><a href="#_groovy_ecosystem">Groovy ecosystem</a></li>
+<li><a href="#_thank_you">Thank you</a></li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_hubert_klein_ikkink_mrhaki">
-<h2>Hubert Klein Ikkink (mrhaki)</h2>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_agenda"><a class="anchor" href="#_agenda"></a>Agenda</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Java developer for many years (since 1996)</li>
-<li>Live in The Netherlands (Tilburg)</li>
-<li>Work at JDriven</li>
-<li>Started with Groovy in 2008</li>
-<li><a href="http://mrhaki.blogspot.com">http://mrhaki.blogspot.com</a> blog about Groovy, Grails, Gradle and more</li>
-<li>Twitter: @mrhaki</li>
+<li>
+<p>Introduction</p>
+</li>
+<li>
+<p>Let&#8217;s code and learn!</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_workshop_structure">
-<h2>Workshop structure</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hubert_klein_ikkink_mrhaki"><a class="anchor" href="#_hubert_klein_ikkink_mrhaki"></a>Hubert Klein Ikkink (mrhaki)</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Partly slideshow with live coding</li>
-<li><p>Partly hands-on</p>
-<div class="ulist">
-<ul>
-<li>Small exercises</li>
-<li>Code snippets</li>
-<li>No big Groovy project</li>
-</ul>
-</div></li>
-<li><p>Getting Groovy links:</p>
-<div class="ulist">
-<ul>
-<li><a href="http://www.gr8labs.org/getting-groovy">http://www.gr8labs.org/getting-groovy</a></li>
-<li><a href="http://www.gr8labs.org/getting-groovy/presentation.html">http://www.gr8labs.org/getting-groovy/presentation.html</a></li>
-</ul>
-</div></li>
+<li>
+<p>Java developer for many years (since 1996)</p>
+</li>
+<li>
+<p>Live in The Netherlands (Tilburg)</p>
+</li>
+<li>
+<p>Work at JDriven</p>
+</li>
+<li>
+<p>Started with Groovy in 2008</p>
+</li>
+<li>
+<p><a href="http://mrhaki.blogspot.com">http://mrhaki.blogspot.com</a> blog about Groovy, Grails, Gradle and more</p>
+</li>
+<li>
+<p>Twitter: @mrhaki</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_groovy_history">
-<h2>Groovy history</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_workshop_structure"><a class="anchor" href="#_workshop_structure"></a>Workshop structure</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Groovy started in Aug 2003 by James Strachan</li>
-<li>Open Source</li>
-<li>Dynamic language compiling to Java byte code and executable in JVM</li>
-<li>Language grammar extends Java, with heavy inspiration from Python, Ruby and Smalltalk</li>
-<li>Flat learning curve for Java developer</li>
+<li>
+<p>Partly slideshow with live coding</p>
+</li>
+<li>
+<p>Partly hands-on</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Small exercises</p>
+</li>
+<li>
+<p>Code snippets</p>
+</li>
+<li>
+<p>No big Groovy project</p>
+</li>
 </ul>
 </div>
-
+</li>
+<li>
+<p>Getting Groovy links:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.gr8labs.org/getting-groovy">http://www.gr8labs.org/getting-groovy</a></p>
+</li>
+<li>
+<p><a href="http://www.gr8labs.org/getting-groovy/presentation.html">http://www.gr8labs.org/getting-groovy/presentation.html</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_groovy_history"><a class="anchor" href="#_groovy_history"></a>Groovy history</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Groovy started in Aug 2003 by James Strachan</p>
+</li>
+<li>
+<p>Open Source</p>
+</li>
+<li>
+<p>Dynamic language compiling to Java byte code and executable in JVM</p>
+</li>
+<li>
+<p>Language grammar extends Java, with heavy inspiration from Python, Ruby and Smalltalk</p>
+</li>
+<li>
+<p>Flat learning curve for Java developer</p>
+</li>
+</ul>
+</div>
 <div class="quoteblock">
-<blockquote><div class="paragraph">
+<blockquote>
+<div class="paragraph">
 <p>Groovy is Java on steroids</p>
-</div></blockquote>
-<div class="attribution">
+</div>
+</blockquote>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_getting_started">
-<h2>Getting started</h2>
+</div>
+<div class="sect1">
+<h2 id="_getting_started"><a class="anchor" href="#_getting_started"></a>Getting started</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>How to install</li>
-<li>Compiling and running</li>
-<li>Groovy scripts</li>
-<li>Groovy shell and console</li>
-<li>Groovy web console</li>
-<li>IDE support</li>
+<li>
+<p>How to install</p>
+</li>
+<li>
+<p>Compiling and running</p>
+</li>
+<li>
+<p>Groovy scripts</p>
+</li>
+<li>
+<p>Groovy shell and console</p>
+</li>
+<li>
+<p>Groovy web console</p>
+</li>
+<li>
+<p>IDE support</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_install_requirements">
-<h2>Install - Requirements</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_requirements"><a class="anchor" href="#_install_requirements"></a>Install - Requirements</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>JDK 1.6 or higher</li>
-<li>Groovy (on conference USB stick)</li>
+<li>
+<p>JDK 1.6 or higher</p>
+</li>
+<li>
+<p>Groovy (on conference USB stick)</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_install">
-<h2>Install</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install"><a class="anchor" href="#_install"></a>Install</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Uncompress the zip file to <tt>c:\gr8conf\groovy\</tt> (Windows) or <tt>~/gr8conf/groovy</tt> (Mac/Linux).
+<p>Uncompress the zip file to <code>c:\gr8conf\groovy\</code> (Windows) or <code>~/gr8conf/groovy</code> (Mac/Linux).</p>
 </li>
 <li>
-Set a <tt>GROOVY_HOME</tt> environment variable to the directory from the previous step.
+<p>Set a <code>GROOVY_HOME</code> environment variable to the directory from the previous step.</p>
 </li>
 <li>
-<p>Add the <tt>[GROOVY_HOME]\bin</tt> directory to your system path.</p>
+<p>Add the <code>[GROOVY_HOME]\bin</code> directory to your system path.</p>
 <div class="ulist">
 <ul>
-<li>Windows: Use your computer&#8217;s properties to set the environment variable <tt>PATH</tt> and add <tt>%GROOVY_HOME%\bin</tt></li>
-<li><p>Linux/Mac OS X: open your shell and set the <tt>PATH</tt> variable</p>
+<li>
+<p>Windows: Use your computer&#8217;s properties to set the environment variable <code>PATH</code> and add <code>%GROOVY_HOME%\bin</code></p>
+</li>
+<li>
+<p>Linux/Mac OS X: open your shell and set the <code>PATH</code> variable</p>
 <div class="literalblock">
-<div class="content monospaced">
+<div class="content">
 <pre>&gt; export PATH=$PATH:$GROOVY_HOME/bin</pre>
 </div>
-</div></li>
+</div>
+</li>
 </ul>
 </div>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_validate_installation">
-<h2>Validate installation</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validate_installation"><a class="anchor" href="#_validate_installation"></a>Validate installation</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><p>To validate the installation we open a command prompt or console and type:</p>
+<li>
+<p>To validate the installation we open a command prompt or console and type:</p>
 <div class="literalblock">
-<div class="content monospaced">
+<div class="content">
 <pre>&gt; groovy -version</pre>
 </div>
-</div></li>
+</div>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_running_groovy_code">
-<h2>Running Groovy code</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_running_groovy_code"><a class="anchor" href="#_running_groovy_code"></a>Running Groovy code</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><p>Locally with Groovy Console</p>
+<li>
+<p>Locally with Groovy Console</p>
 <div class="literalblock">
-<div class="content monospaced">
+<div class="content">
 <pre>&gt; groovyConsole</pre>
 </div>
-</div></li>
-<li><p>Or use Groovy web console</p>
+</div>
+</li>
+<li>
+<p>Or use Groovy web console</p>
 <div class="ulist">
 <ul>
-<li><a href="http://groovyconsole.appspot.com">http://groovyconsole.appspot.com</a></li>
-</ul>
-</div></li>
+<li>
+<p><a href="http://groovyconsole.appspot.com">http://groovyconsole.appspot.com</a></p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_transforming_java_to_groovy">
-<h2>Transforming Java to Groovy</h2>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transforming_java_to_groovy"><a class="anchor" href="#_transforming_java_to_groovy"></a>Transforming Java to Groovy</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="java">public class UsingJava {
+<div class="content">
+<pre class="prettyprint java language-java"><code>public class UsingJava {
     private String name;
 
     public String getName() { return name; }
@@ -196,13 +314,14 @@ Set a <tt>GROOVY_HOME</tt> environment variable to the directory from the previo
 }</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_transforming_java_to_groovy_2">
-<h2>Transforming Java to Groovy</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_transforming_java_to_groovy_2"><a class="anchor" href="#_transforming_java_to_groovy_2"></a>Transforming Java to Groovy</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">class UsingJava {
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>class UsingJava {
     String name
 
     String toString() {
@@ -216,54 +335,72 @@ Set a <tt>GROOVY_HOME</tt> environment variable to the directory from the previo
 }</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_types">
-<h2>Types</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_types"><a class="anchor" href="#_types"></a>Types</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><p>Basic types</p>
+<li>
+<p>Basic types</p>
 <div class="ulist">
 <ul>
-<li>Primitive types like in Java, but (un)boxed automatically</li>
-<li>BigDecimal</li>
-</ul>
-</div></li>
-<li>Dynamic types</li>
+<li>
+<p>Primitive types like in Java, but (un)boxed automatically</p>
+</li>
+<li>
+<p>BigDecimal</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_string_variations_and_gstring">
-<h2>String variations and GString</h2>
-<div class="ulist">
-<ul>
-<li>Basic strings</li>
-<li>Multi-line strings</li>
-<li>GString</li>
+</li>
+<li>
+<p>Dynamic types</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_exercise">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_string_variations_and_gstring"><a class="anchor" href="#_string_variations_and_gstring"></a>String variations and GString</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Basic strings</p>
+</li>
+<li>
+<p>Multi-line strings</p>
+</li>
+<li>
+<p>GString</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Play around with different types in Groovy.
+<p>Play around with different types in Groovy.</p>
 </li>
 <li>
-Define a GString with an expression.
+<p>Define a GString with an expression.</p>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_exercise_2">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_2"><a class="anchor" href="#_exercise_2"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">// dynamic type
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>// dynamic type
 def s = 'Hello'
 assert s instanceof String
 s = 42
@@ -276,61 +413,81 @@ def greeting = "Hi, ${user}. Your name has ${user.size()} characters"
 assert greeting == 'Hi, mrhaki. Your name has 6 characters'</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_regular_expressions">
-<h2>Regular Expressions</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_regular_expressions"><a class="anchor" href="#_regular_expressions"></a>Regular Expressions</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Pattern operator (<tt>~</tt>)</li>
-<li>Find operator (<tt>=~</tt>)</li>
-<li>Match operator (<tt>==~</tt>)</li>
+<li>
+<p>Pattern operator (<code>~</code>)</p>
+</li>
+<li>
+<p>Find operator (<code>=~</code>)</p>
+</li>
+<li>
+<p>Match operator (<code>==~</code>)</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_objects">
-<h2>Objects</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objects"><a class="anchor" href="#_objects"></a>Objects</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>GroovyBeans</li>
-<li><p>Methods</p>
+<li>
+<p>GroovyBeans</p>
+</li>
+<li>
+<p>Methods</p>
 <div class="ulist">
 <ul>
-<li>Default arguments value</li>
-</ul>
-</div></li>
-<li>GPath</li>
-<li>Exceptions</li>
+<li>
+<p>Default arguments value</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_exercise_3">
-<h2>Exercise</h2>
+</li>
+<li>
+<p>GPath</p>
+</li>
+<li>
+<p>Exceptions</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_3"><a class="anchor" href="#_exercise_3"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Write a Groovy class with a <tt>String</tt> property username
+<p>Write a Groovy class with a <code>String</code> property username</p>
 </li>
 <li>
-Create an instance of the class and set and read a value for the username property.
+<p>Create an instance of the class and set and read a value for the username property.</p>
 </li>
 <li>
-Add a new method greeting that returns a salutation for the username, like Hi, mrhaki.
+<p>Add a new method greeting that returns a salutation for the username, like Hi, mrhaki.</p>
 </li>
 <li>
-Change the method signature and add a argument with a default value for the salutation, eg. the default is Hello
+<p>Change the method signature and add a argument with a default value for the salutation, eg. the default is Hello</p>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_exercise_4">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_4"><a class="anchor" href="#_exercise_4"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">class User {
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>class User {
   String username
 
   String greeting(salutation = 'Hello') {
@@ -348,86 +505,124 @@ assert user.greeting() == 'Hello, Hubert.'
 assert user.greeting('Hi') == 'Hi, Hubert.'</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_control_structures">
-<h2>Control structures</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_control_structures"><a class="anchor" href="#_control_structures"></a>Control structures</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Groovy truth</li>
-<li>Elvis operator</li>
-<li>Switch</li>
-<li><tt>for in</tt> loop</li>
+<li>
+<p>Groovy truth</p>
+</li>
+<li>
+<p>Elvis operator</p>
+</li>
+<li>
+<p>Switch</p>
+</li>
+<li>
+<p><code>for in</code> loop</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_operators">
-<h2>Operators</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_operators"><a class="anchor" href="#_operators"></a>Operators</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><a href="http://www.gr8labs.org/getting-groovy/index.html#_operator_overloading">Operator overloading</a></li>
-<li>Spaceship operator</li>
-<li>Spread-dot operator</li>
-<li>Spread operator</li>
+<li>
+<p><a href="http://www.gr8labs.org/getting-groovy/index.html#_operator_overloading">Operator overloading</a></p>
+</li>
+<li>
+<p>Spaceship operator</p>
+</li>
+<li>
+<p>Spread-dot operator</p>
+</li>
+<li>
+<p>Spread operator</p>
+</li>
 </ul>
 </div>
-</section>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_break"><a class="anchor" href="#_break"></a>Break</h2>
+<div class="sectionbody">
 
-<section class="slide" id="_break">
-<h2>Break</h2>
-
-</section>
-
-<section class="slide" id="_closures">
-<h2>Closures</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_closures"><a class="anchor" href="#_closures"></a>Closures</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><p>Basic</p>
+<li>
+<p>Basic</p>
 <div class="ulist">
 <ul>
-<li>Single argument (<tt>it</tt>)</li>
-<li>Multiple arguments</li>
-<li>No-argument</li>
-</ul>
-</div></li>
-<li>Methods into closures (<tt>.&amp;</tt>)</li>
-<li><p>Closures as method arguments</p>
-<div class="ulist">
-<ul>
-<li>Special syntax for last argument</li>
-</ul>
-</div></li>
-<li>Currying</li>
+<li>
+<p>Single argument (<code>it</code>)</p>
+</li>
+<li>
+<p>Multiple arguments</p>
+</li>
+<li>
+<p>No-argument</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_exercise_5">
-<h2>Exercise</h2>
+</li>
+<li>
+<p>Methods into closures (<code>.&amp;</code>)</p>
+</li>
+<li>
+<p>Closures as method arguments</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Special syntax for last argument</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Currying</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_5"><a class="anchor" href="#_exercise_5"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Write a 3-argument closure, where the third argument has a default value <em>gr8conf</em>. The closure result returns the concatenation of the 3 arguments.
+<p>Write a 3-argument closure, where the third argument has a default value <em>gr8conf</em>. The closure result returns the concatenation of the 3 arguments.</p>
 </li>
 <li>
-Print the value of the closure.
+<p>Print the value of the closure.</p>
 </li>
 <li>
-Make a second closure, that curries the first closure, so the 2nd argument is set to <em>love</em>.
+<p>Make a second closure, that curries the first closure, so the 2nd argument is set to <em>love</em>.</p>
 </li>
 <li>
-Make a method, taking two arguments: the closure and a String value, eg. <em>I</em>, <em>we</em> or <em>you</em>. The method should print out the result of the closure we created at the previous step.
+<p>Make a method, taking two arguments: the closure and a String value, eg. <em>I</em>, <em>we</em> or <em>you</em>. The method should print out the result of the closure we created at the previous step.</p>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_exercise_6">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_6"><a class="anchor" href="#_exercise_6"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">def gr8 = { arg1, arg2, arg3 = 'gr8conf' -&gt;
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>def gr8 = { arg1, arg2, arg3 = 'gr8conf' -&gt;
     "$arg1 $arg2 $arg3"
 }
 println gr8("I'm","going to")
@@ -441,69 +636,98 @@ def m(arg, closure) {
 m('I',cl)</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_collections">
-<h2>Collections</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_collections"><a class="anchor" href="#_collections"></a>Collections</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Ranges</li>
-<li>Lists</li>
-<li>Maps</li>
-<li><p>Looping</p>
+<li>
+<p>Ranges</p>
+</li>
+<li>
+<p>Lists</p>
+</li>
+<li>
+<p>Maps</p>
+</li>
+<li>
+<p>Looping</p>
 <div class="ulist">
 <ul>
-<li><tt>upTo</tt></li>
-<li><tt>times</tt></li>
-<li><tt>each/eachWithIndex</tt></li>
-</ul>
-</div></li>
-<li><p>Finding data</p>
-<div class="ulist">
-<ul>
-<li><tt>find/findAll/findIndexOf</tt></li>
-<li><tt>any/every</tt></li>
-</ul>
-</div></li>
-<li><p>Transforming data</p>
-<div class="ulist">
-<ul>
-<li><tt>collect</tt></li>
-</ul>
-</div></li>
-<li>Grouping elements</li>
+<li>
+<p><code>upTo</code></p>
+</li>
+<li>
+<p><code>times</code></p>
+</li>
+<li>
+<p><code>each/eachWithIndex</code></p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_exercise_7">
-<h2>Exercise</h2>
+</li>
+<li>
+<p>Finding data</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find/findAll/findIndexOf</code></p>
+</li>
+<li>
+<p><code>any/every</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Transforming data</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>collect</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Grouping elements</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_7"><a class="anchor" href="#_exercise_7"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Create a new list with String values, boolean values and numbers.
+<p>Create a new list with String values, boolean values and numbers.</p>
 </li>
 <li>
-Use a finder method to find all String values.
+<p>Use a finder method to find all String values.</p>
 </li>
 <li>
-Check if any String elements is at least 4 characters.
+<p>Check if any String elements is at least 4 characters.</p>
 </li>
 <li>
-Create a new Map with some keys and values.
+<p>Create a new Map with some keys and values.</p>
 </li>
 <li>
-Transform all key/value pairs to a new list where each element in the list is the concatenation of the key and value.
+<p>Transform all key/value pairs to a new list where each element in the list is the concatenation of the key and value.</p>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_exercise_8">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_8"><a class="anchor" href="#_exercise_8"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">def list = ['abc', 100, 'defg', false]
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>def list = ['abc', 100, 'defg', false]
 
 assert list.findAll { it instanceof String } == ['abc', 'defg']
 assert list.any { it instanceof String &amp;&amp; it.size() &gt;= 4 }
@@ -514,66 +738,92 @@ assert map.collect { key, value -&gt;
     "${key} = ${value}" } == ['key = value', 'otherKey = 42', 'name = mrhaki']</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_file_i_o">
-<h2>File I/O</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_file_i_o"><a class="anchor" href="#_file_i_o"></a>File I/O</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li><p>No boilerplate</p>
+<li>
+<p>No boilerplate</p>
 <div class="ulist">
 <ul>
-<li><tt>text</tt></li>
-<li><tt>write</tt></li>
-<li><tt>&lt;&lt;</tt></li>
-</ul>
-</div></li>
-<li>Resource handling</li>
-<li>Getting data from the net</li>
+<li>
+<p><code>text</code></p>
+</li>
+<li>
+<p><code>write</code></p>
+</li>
+<li>
+<p><code>&lt;&lt;</code></p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_xml">
-<h2>XML</h2>
-<div class="ulist">
-<ul>
-<li><p>Create XML</p>
-<div class="ulist">
-<ul>
-<li><tt>MarkupBuilder</tt></li>
-</ul>
-</div></li>
-<li><p>Read XML</p>
-<div class="ulist">
-<ul>
-<li><tt>XmlParser</tt></li>
-<li><tt>XmlSlurper</tt></li>
-</ul>
-</div></li>
+</li>
+<li>
+<p>Resource handling</p>
+</li>
+<li>
+<p>Getting data from the net</p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_exercise_9">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_xml"><a class="anchor" href="#_xml"></a>XML</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Create XML</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>MarkupBuilder</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Read XML</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>XmlParser</code></p>
+</li>
+<li>
+<p><code>XmlSlurper</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_9"><a class="anchor" href="#_exercise_9"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-Print the list of the book title from this url: <a href="http://mrhaki.com/books.xml">http://mrhaki.com/books.xml</a>
+<p>Print the list of the book title from this url: <a href="http://mrhaki.com/books.xml">http://mrhaki.com/books.xml</a></p>
 </li>
 <li>
-Get the title of the book with id == 2
+<p>Get the title of the book with id == 2</p>
 </li>
 </ol>
 </div>
-</section>
-
-<section class="slide" id="_exercise_10">
-<h2>Exercise</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise_10"><a class="anchor" href="#_exercise_10"></a>Exercise</h2>
+<div class="sectionbody">
 <div class="listingblock">
-<div class="content monospaced">
-<pre class="highlight"><code class="groovy">import groovy.xml.*
+<div class="content">
+<pre class="prettyprint groovy language-groovy"><code>import groovy.xml.*
 
 def url = "http://mrhaki.com/books.xml".toURL()
 
@@ -586,161 +836,142 @@ println xml.book.collect { it.title }
 println xml.book.find { it.@id == '2' }.title</code></pre>
 </div>
 </div>
-</section>
-
-<section class="slide" id="_ast_abstract_syntax_tree">
-<h2>AST (Abstract Syntax Tree)</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ast_abstract_syntax_tree"><a class="anchor" href="#_ast_abstract_syntax_tree"></a>AST (Abstract Syntax Tree)</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>What is it</li>
-<li><p>Examples of AST transformations</p>
+<li>
+<p>What is it</p>
+</li>
+<li>
+<p>Examples of AST transformations</p>
 <div class="ulist">
 <ul>
-<li><tt>@Delegate</tt></li>
-<li><tt>@Singleton</tt></li>
-<li><tt>@InheritConstructors</tt></li>
-<li><tt>@ToString</tt></li>
-<li><tt>@EqualsAndHashCode</tt></li>
-<li><tt>@ToString</tt></li>
-<li><tt>@Log</tt></li>
-</ul>
-</div></li>
+<li>
+<p><code>@Delegate</code></p>
+</li>
+<li>
+<p><code>@Singleton</code></p>
+</li>
+<li>
+<p><code>@InheritConstructors</code></p>
+</li>
+<li>
+<p><code>@ToString</code></p>
+</li>
+<li>
+<p><code>@EqualsAndHashCode</code></p>
+</li>
+<li>
+<p><code>@Immutable</code></p>
+</li>
+<li>
+<p><code>@Log</code></p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_metaprogramming">
-<h2>Metaprogramming</h2>
-<div class="ulist">
-<ul>
-<li>Category</li>
-<li>Mixin</li>
-<li><p>Non-existing methods/properties</p>
-<div class="ulist">
-<ul>
-<li><tt>invokeMethod/methodMissing</tt></li>
-<li><tt>getProperty/setProperty/propertyMissing</tt></li>
-</ul>
-</div></li>
-<li>MetaClass</li>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_groovy_ecosystem">
-<h2>Groovy ecosystem</h2>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_metaprogramming"><a class="anchor" href="#_metaprogramming"></a>Metaprogramming</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
-<li>Grails (web stack)</li>
-<li>Griffon (client GUI)</li>
-<li>Gradle (build automation)</li>
-<li>Spock (testing)</li>
-<li>GPars (concurrency)</li>
-<li>Gaelyk (Google App Engine)</li>
-<li>Ratpack (web stack)</li>
-<li><p>Embedded into</p>
+<li>
+<p>Category</p>
+</li>
+<li>
+<p>Mixin</p>
+</li>
+<li>
+<p>Non-existing methods/properties</p>
 <div class="ulist">
 <ul>
-<li>Jenkins</li>
-<li>SoapUI</li>
-<li>Spring</li>
-</ul>
-</div></li>
+<li>
+<p><code>invokeMethod/methodMissing</code></p>
+</li>
+<li>
+<p><code>getProperty/setProperty/propertyMissing</code></p>
+</li>
 </ul>
 </div>
-</section>
-
-<section class="slide" id="_thank_you">
-<h2>Thank you</h2>
-<div class="ulist">
-<ul>
-<li>Q &amp; A</li>
+</li>
+<li>
+<p>MetaClass</p>
+</li>
 </ul>
 </div>
-</section>
-
-<a class="deck-permalink" href="." title="Permalink to this slide">#</a>
-<script src="deck.js/jquery-1.7.2.min.js"></script>
-<script src="deck.js/core/deck.core.js"></script>
-<script src="deck.js/core/deck.core.js"></script>
-<script src="deck.js/extensions/hash/deck.hash.js"></script>
-<script src="deck.js/extensions/menu/deck.menu.js"></script>
-<script src="deck.js/extensions/goto/deck.goto.js"></script>
-<script src="deck.js/extensions/status/deck.status.js"></script>
-<script src="deck.js/extensions/navigation/deck.navigation.js"></script>
-<script src="deck.js/extensions/scale/deck.scale.js"></script>
-<script>
-  $(function() {
-    $.deck('.slide');
-  });
-</script>
-<style>
-  .slide.canvas-image {
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  display: -moz-box;
-  display: -webkit-box;
-  display: -ms-box;
-  display: box;
-  -moz-box-orient: vertical;
-  -webkit-box-orient: vertical;
-  -ms-box-orient: vertical;
-  box-orient: vertical;
-  -moz-box-align: start;
-  -webkit-box-align: start;
-  -ms-box-align: start;
-  box-align: start;
-  -moz-box-pack: start;
-  -webkit-box-pack: start;
-  -ms-box-pack: start;
-  box-pack: start;}
-  
-  .bottom-left {
-    left: 1%;
-    bottom: 20%; }
-  
-  .top-left {
-    left: 1%;
-    top: 20%; }
-  
-  .bottom-right {
-    right: 1%;
-    bottom: 20%; }
-  
-  .top-right {
-    right: 1%;
-    top: 20%; }
-  
-  .center-up {
-    right: 50%;
-    top: 1%;
-  }
-  
-  .center-down {
-    right: 50%;
-    bottom: 1%;
-  }
-  .canvas-image .canvas-caption p {
-    text-align: center;
-    padding-top: 0;
-    padding: 0;
-    -moz-transform: none;
-    -webkit-transform: none;
-    -o-transform: none;
-    -ms-transform: none;
-    transform: none;
-    display: inline;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.7);
-    font-weight: bold;
-    font-size: 58px;
-    -webkit-box-shadow: 2px 2px 2px #000;
-    -moz-box-shadow: 2px 2px 2px #000;
-    box-shadow: 2px 2px 2px #000;
-    padding: 1rem;
-    color: white; }
-</style>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_groovy_ecosystem"><a class="anchor" href="#_groovy_ecosystem"></a>Groovy ecosystem</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Grails (web stack)</p>
+</li>
+<li>
+<p>Griffon (client GUI)</p>
+</li>
+<li>
+<p>Gradle (build automation)</p>
+</li>
+<li>
+<p>Spock (testing)</p>
+</li>
+<li>
+<p>GPars (concurrency)</p>
+</li>
+<li>
+<p>Gaelyk (Google App Engine)</p>
+</li>
+<li>
+<p>Ratpack (web stack)</p>
+</li>
+<li>
+<p>Embedded into</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Jenkins</p>
+</li>
+<li>
+<p>SoapUI</p>
+</li>
+<li>
+<p>Spring</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_thank_you"><a class="anchor" href="#_thank_you"></a>Thank you</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Q &amp; A</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-06-02 13:07:39 CEST
+</div>
+</div>
 </body>
 </html>
