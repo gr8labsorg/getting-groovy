@@ -955,7 +955,7 @@ The following table shows all operators and their corresponding methods:
 |a % b
 |a.mod(b)
 
-|a | b
+|a \| b
 |a.or(b)
 
 |a & b
