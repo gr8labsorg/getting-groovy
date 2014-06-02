@@ -19,6 +19,7 @@ apply plugin: 'asciidoctor'
 
 task workshop(type: AsciidoctorTask) {
     dependsOn 'copyResourcesLabs'
+    sourceDocumentName = file('src/asciidoc/index.adoc')
     options = [
         attributes: [
             toc2: '',
@@ -52,7 +53,7 @@ task presentation(type: AsciidoctorTask) {
         attributes: [
             iconsdir: './icons',
             icons: 'font',
-            'source-highlighter': 'prettify',
+            'source-highlighter': 'highlightjs',
             encoding: 'utf-8',
             backend: 'deckjs',
             'deckjs_theme': 'swiss',

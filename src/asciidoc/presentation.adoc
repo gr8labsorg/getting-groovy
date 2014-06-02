@@ -206,7 +206,7 @@ assert user.greeting('Hi') == 'Hi, Hubert.'
 
 == Operators
 
-* http://www.gr8labs.org/getting-groovy/index.html#_operator_overloading[Operator overloading]
+* http://gr8labs.org/getting-groovy/index.html#_operator_overloading[Operator overloading]
 * Spaceship operator
 * Spread-dot operator
 * Spread operator
@@ -338,7 +338,7 @@ println xml.book.find { it.@id == '2' }.title
 ** +@InheritConstructors+
 ** +@ToString+
 ** +@EqualsAndHashCode+
-** +@ToString+
+** +@Immutable+
 ** +@Log+
 
 == Metaprogramming
