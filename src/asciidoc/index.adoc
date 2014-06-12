@@ -34,20 +34,19 @@ To install Groovy, follow these steps:
 . Add the +[GROOVY_HOME]\bin+ directory to your system path.
  * Windows: Use your computer's properties to set the environment variable +PATH+ and add +%GROOVY_HOME%\bin+
  * Linux/Mac OS X: open your shell and set the +PATH+ variable
-
- > export PATH=$PATH:$GROOVY_HOME/bin          
-
+[listing,role="console"]
+> export PATH=$PATH:$GROOVY_HOME/bin          
 
 To validate your installation, open a console or command prompt and type the following:
 
-[.console]
+[role="console"]
 ----
 > groovy -version
 ----
   
 You should see something like this:
 
-[.console,subs="attributes"]
+[role="console",subs="attributes"]
 ----
 > groovy -version
 Groovy Version: {groovyVersion} JVM: {jvmVersion}
@@ -83,6 +82,7 @@ println org.gr8conf.java.JavaObject.javaSays()
  
 We use the Groovy joined compiler, +groovyc+, to compile both Java and Groovy source files.
 
+[role="console"]
 ---- 
 > groovyc *.java *.groovy
 ----
@@ -90,13 +90,13 @@ We use the Groovy joined compiler, +groovyc+, to compile both Java and Groovy so
 Once we have the compiled classes we can use the Java command to execute our code. We only need to add the JAR file +groovy-all-{groovyVersion}.jar+ from the +GROOVY_HOME/embeddable+ directory to our classpath.
 
 .Windows
-[subs="attributes"]
+[role="console",subs="attributes"]
 ----
 > java -cp %GROOVY_HOME%/embeddable/groovy-all-{groovyVersion}.jar;. org.gr8conf.groovy.RunGroovy
 ----
 
 .Mac OSX / Linux
-[subs="attributes"]
+[role="console",subs="attributes"]
 ----
 > java -cp $GROOVY_HOME/embeddable/groovy-all-{groovyVersion}.jar:. org.gr8conf.groovy.RunGroovy
 ----
@@ -111,6 +111,7 @@ Let's create a simple script GroovyScript.groovy.
 println 'Hello ' + args[0]
 ----
 
+[role="console"]
 ----
 > groovy GroovyScript Java
 Hello Java
@@ -118,7 +119,7 @@ Hello Java
 
 We can even run code without creating a source file first. This is very useful for command line scripting.
 
-
+[role="console"]
 ----
 > groovy -e "println 'Hello ' + args[0]" Java
 Hello Java
@@ -128,6 +129,7 @@ Hello Java
 
 We can use the +groovysh+ command to experiment with Groovy features. It is easy to edit and run Groovy code without first creating a script file.
 
+[listing,role="console",indent="0",subs="attributes"]
   > groovysh
   Groovy Shell ({groovyVersion}, JVM: {jvmVersion})
   Type 'help' or '\h' for help.
@@ -136,6 +138,7 @@ We can use the +groovysh+ command to experiment with Groovy features. It is easy
 
 Let's type some code.
 
+[role="console"]
 ----
 groovy:000>message = "Hello Groovy"
 ==> Hello Groovy
@@ -148,13 +151,14 @@ Hello Groovy
 
 We can use the command +groovyConsole+ to start a graphical Groovy shell. We can type Groovy code in the textarea and execute the code and see the result.
 
+[role="console"]
 ----
 > groovyConsole
 ----
 
 === Groovy Web Console
 
-http://groovyconsole.appspot.com[Groovy Web Console]
+http://groovyconsole.appspot.com[Groovy Web Console^, role="external"]
 
 === IDE Support
 

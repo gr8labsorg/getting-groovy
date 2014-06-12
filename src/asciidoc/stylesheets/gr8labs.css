@@ -1,6 +1,6 @@
 @import url('asciidoctor.css');
 @import url(http://fonts.googleapis.com/css?family=Merriweather&subset=latin,latin-ext);
-@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:400,700&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Ek+Mukta:400,700&subset=latin,latin-ext);
 
 body {
 	font-family: 'Merriweather', serif;
@@ -10,7 +10,16 @@ body {
 	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
 }
 
-h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-family: 'Merriweather Sans', sans-serif; }
+h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6, #header > h1 { 
+	font-family: 'Ek Mukta', sans-serif; color: #92c111;
+}
+
+#content { padding-left: 3em;}
+
+@media only screen and (min-width: 1280px) {
+	#toc { background-color: rgb(60,60,60); }
+	#toc a { text-decoration: none;}	
+}
 
 .listingblock.console > .content > pre {
 	background-color: rgb(60,60,60);
@@ -19,7 +28,7 @@ h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-fami
 
 .listingblock > .content > pre.prettyprint { 
 	background-color: #fff; border: 1px solid #ccc; padding: 12px 24px; 
-	overflow-x: visible; 
+	overflow-x: visible; margin-bottom: 20px;
 }
 .listingblock > .content > pre.prettyprint {
     position: relative;
@@ -27,15 +36,14 @@ h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-fami
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 }
-.listingblock > .content > pre.prettyprint:before, 
-.listingblock > .content > pre.prettyprint:after {
+pre.prettyprint:before, 
+pre.prettyprint:after {
 	position: absolute;
 	width: 40%;
 	height: 10px;
-	content: ' ';
+	content: "";
 	left: 12px;
-	bottom: 12px;
-	background: transparent;
+	bottom: 15px;
 	-webkit-transform: skew(-5deg) rotate(-5deg);
 	-moz-transform: skew(-5deg) rotate(-5deg);
 	-ms-transform: skew(-5deg) rotate(-5deg);
@@ -44,9 +52,9 @@ h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { font-fami
 	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-	z-index: -1;
+	z-index: -2;
 }
-.listingblock > .content > pre.prettyprint:after {
+pre.prettyprint:after {
 	left: auto;
 	right: 12px;
 	-webkit-transform: skew(5deg) rotate(5deg);

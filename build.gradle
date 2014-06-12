@@ -38,7 +38,8 @@ task workshop(type: AsciidoctorTask) {
             groovyVersion: '2.3.2',
             jvmVersion: '1.7.0_51',
             sectanchors: '',
-            prewrap: ''
+            linkattrs: '',
+            //prewrap: ''
             //sectlinks: ''
             //'linkcss!': false
         ]
