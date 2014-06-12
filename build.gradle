@@ -29,7 +29,7 @@ task workshop(type: AsciidoctorTask) {
             iconsdir: './icons',
             scriptsdir: './js',
             sourcedir: './src/labs',
-            stylesheet: 'asciidoctor.css',
+            stylesheet: 'gr8labs.css',
             'source-highlighter': 'prettify',
             doctype: 'book',
             icons: 'font',

@@ -40,13 +40,14 @@ To install Groovy, follow these steps:
 
 To validate your installation, open a console or command prompt and type the following:
 
+[.console]
 ----
 > groovy -version
 ----
   
 You should see something like this:
 
-[subs="attributes"]
+[.console,subs="attributes"]
 ----
 > groovy -version
 Groovy Version: {groovyVersion} JVM: {jvmVersion}

@@ -1,9 +1,4 @@
-= Groovy Workshop Gr8Conf
-
-== Agenda
-
-* Introduction
-* Let's code and learn!
+= Gradle Goodness Gr8Conf 2014
 
 == Hubert Klein Ikkink (mrhaki)
 
@@ -13,6 +8,7 @@
 * Started with Groovy in 2008
 * http://mrhaki.blogspot.com blog about Groovy, Grails, Gradle and more
 * Twitter: @mrhaki
+* Code on https://github.com/mrhaki/gr8conf2014-gradle-goodness
 
 == Workshop structure
 
