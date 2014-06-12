@@ -193,7 +193,7 @@
 </li>
 <li>
 <p>Linux/Mac OS X: open your shell and set the <code>PATH</code> variable</p>
-<div class="literalblock">
+<div class="listingblock console">
 <div class="content">
 <pre>&gt; export PATH=$PATH:$GROOVY_HOME/bin</pre>
 </div>
@@ -253,7 +253,7 @@ println org.gr8conf.java.JavaObject.javaSays()</code></pre>
 <div class="paragraph">
 <p>We use the Groovy joined compiler, <code>groovyc</code>, to compile both Java and Groovy source files.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="content">
 <pre>&gt; groovyc *.java *.groovy</pre>
 </div>
@@ -261,13 +261,13 @@ println org.gr8conf.java.JavaObject.javaSays()</code></pre>
 <div class="paragraph">
 <p>Once we have the compiled classes we can use the Java command to execute our code. We only need to add the JAR file <code>groovy-all-2.3.2.jar</code> from the <code>GROOVY_HOME/embeddable</code> directory to our classpath.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="title">Windows</div>
 <div class="content">
 <pre>> java -cp %GROOVY_HOME%/embeddable/groovy-all-2.3.2.jar;. org.gr8conf.groovy.RunGroovy</pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="title">Mac OSX / Linux</div>
 <div class="content">
 <pre>> java -cp $GROOVY_HOME/embeddable/groovy-all-2.3.2.jar:. org.gr8conf.groovy.RunGroovy</pre>
@@ -285,7 +285,7 @@ Let&#8217;s create a simple script GroovyScript.groovy.</p>
 <pre class="prettyprint groovy language-groovy"><code>println 'Hello ' + args[0]</code></pre>
 </div>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="content">
 <pre>&gt; groovy GroovyScript Java
 Hello Java</pre>
@@ -294,7 +294,7 @@ Hello Java</pre>
 <div class="paragraph">
 <p>We can even run code without creating a source file first. This is very useful for command line scripting.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="content">
 <pre>&gt; groovy -e "println 'Hello ' + args[0]" Java
 Hello Java</pre>
@@ -306,19 +306,19 @@ Hello Java</pre>
 <div class="paragraph">
 <p>We can use the <code>groovysh</code> command to experiment with Groovy features. It is easy to edit and run Groovy code without first creating a script file.</p>
 </div>
-<div class="literalblock">
+<div class="listingblock console">
 <div class="content">
-<pre>&gt; groovysh
-Groovy Shell ({groovyVersion}, JVM: {jvmVersion})
+<pre>> groovysh
+Groovy Shell (2.3.2, JVM: 1.7.0_51)
 Type 'help' or '\h' for help.
 ------------------------------------------------------------
-groovy:000&gt;</pre>
+groovy:000></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s type some code.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="content">
 <pre>groovy:000&gt;message = "Hello Groovy"
 ==&gt; Hello Groovy
@@ -333,7 +333,7 @@ Hello Groovy
 <div class="paragraph">
 <p>We can use the command <code>groovyConsole</code> to start a graphical Groovy shell. We can type Groovy code in the textarea and execute the code and see the result.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console">
 <div class="content">
 <pre>&gt; groovyConsole</pre>
 </div>
@@ -342,7 +342,7 @@ Hello Groovy
 <div class="sect2">
 <h3 id="_groovy_web_console"><a class="anchor" href="#_groovy_web_console"></a>Groovy Web Console</h3>
 <div class="paragraph">
-<p><a href="http://groovyconsole.appspot.com">Groovy Web Console</a></p>
+<p><a href="http://groovyconsole.appspot.com" class="external" target="_blank">Groovy Web Console</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -3381,7 +3381,7 @@ println "LoudYellingExample".toSnakeCase(true)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-06-12 09:07:12 CEST
+Last updated 2014-06-12 10:37:04 CEST
 </div>
 </div>
 </body>
